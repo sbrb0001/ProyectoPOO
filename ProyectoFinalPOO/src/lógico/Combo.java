@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Combo {
 	
-	private String nombre; 
+	private String nombre;
 	private ArrayList<Componente> losComponentes;
 	
 	public Combo(ArrayList<Componente> losComponentes, String nombre) {
