@@ -12,7 +12,7 @@ public class TMadre extends Componente {
 		this.modelo = modelo;
 		this.tipoConector = tipoConector;
 		this.tipoRam = tipoRam;
-		this.conexiones = conexiones;
+		this.conexiones = new String [6];
 	}
 
 	public String getModelo() {
@@ -46,7 +46,23 @@ public class TMadre extends Componente {
 	public void setConexiones(String[] conexiones) {
 		this.conexiones = conexiones;
 	}
-	
-	
+
+	@Override
+	public String Dato1() {
+		// TODO Auto-generated method stub
+		return modelo;
+	}
+
+	@Override
+	public String Dato2() {
+		// TODO Auto-generated method stub
+		return tipoConector;
+	}
+
+	@Override
+	public String Dato3() {
+		// TODO Auto-generated method stub
+		return tipoRam;
+	}
 
 }

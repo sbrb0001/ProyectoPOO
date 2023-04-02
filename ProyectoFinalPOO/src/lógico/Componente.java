@@ -6,10 +6,11 @@ public abstract class Componente {
 	protected String numSerie;
 	protected int cant;
 	protected double precio;
+
 	
 	public Componente(String marca, String numSerie, int cant, double precio) {
 		super();
-		Marca = marca;
+		this.Marca = marca;
 		this.numSerie = numSerie;
 		this.cant = cant;
 		this.precio = precio;
@@ -46,5 +47,9 @@ public abstract class Componente {
 	public void setPrecio(double precio) {
 		this.precio = precio;
 	}
+	
+	public abstract String Dato1();
+	public abstract String Dato2();
+	public abstract String Dato3(); 
 	
 }

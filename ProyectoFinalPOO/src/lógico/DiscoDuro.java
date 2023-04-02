@@ -31,6 +31,23 @@ public class DiscoDuro extends Componente {
 	public void setTipoConector(String tipoConector) {
 		this.tipoConector = tipoConector;
 	}
-	
+
+	@Override
+	public String Dato1() {
+		// TODO Auto-generated method stub
+		return modelo;
+	}
+
+	@Override
+	public String Dato2() {
+		// TODO Auto-generated method stub
+		return String.valueOf(almacenamiento);
+	}
+
+	@Override
+	public String Dato3() {
+		// TODO Auto-generated method stub
+		return tipoConector;
+	}
 	
 }

@@ -3,18 +3,38 @@ package lógico;
 import java.util.ArrayList;
 
 public class TiendaComp {
+	
 	private ArrayList<Componente> misComponentes;
 	private ArrayList<Combo> cVendidos;
 	private ArrayList<Cliente> misClientes;
 	private ArrayList<Factura> MisFacturas;
+	public static TiendaComp tienda = null;
+	public String [] Carrito;
+	public String [] TMadres;
+	public String [] DiscosD;
+	public String [] Rams;
+	public String [] mProcesadores; 
+	public int [] cant1;
 	
-	public TiendaComp(ArrayList<Componente> misComponentes, ArrayList<Combo> cVendidos, ArrayList<Cliente> misClientes,
-			ArrayList<Factura> misFacturas) {
+	public TiendaComp() {
 		super();
-		this.misComponentes = new ArrayList<Componente>();
-		this.cVendidos = new ArrayList<Combo>();
-		this.misClientes = new ArrayList<Cliente>();
+		misComponentes = new ArrayList<Componente>();
+		cVendidos = new ArrayList<Combo>();
+		misClientes = new ArrayList<Cliente>();
 		MisFacturas = new ArrayList<Factura>();
+		this.Carrito = new String[100];
+		this.TMadres = new String[100];
+		this.DiscosD = new String[100];
+		this.Rams = new String[100];
+		this.mProcesadores = new String[100];
+		this.cant1 = new int [4];
+	}
+	
+	public static TiendaComp getInstance(){
+		if(tienda==null){
+			tienda = new TiendaComp();
+		}
+		return tienda;
 	}
 
 	public ArrayList<Componente> getMisComponentes() {
@@ -48,9 +68,305 @@ public class TiendaComp {
 	public void setMisFacturas(ArrayList<Factura> misFacturas) {
 		MisFacturas = misFacturas;
 	}
+
+	public String[] getCarrito() {
+		return Carrito;
+	}
+
+	public void setCarrito(String[] carrito) {
+		Carrito = carrito;
+	}
+
+	public String[] getTMadres() {
+		return TMadres;
+	}
+
+	public void setTMadres(String[] tMadres) {
+		TMadres = tMadres;
+	}
+
+	public String[] getDiscosD() {
+		return DiscosD;
+	}
+
+	public void setDiscosD(String[] discosD) {
+		DiscosD = discosD;
+	}
+
+	public String[] getRams() {
+		return Rams;
+	}
+
+	public void setRams(String[] rams) {
+		Rams = rams;
+	}
+
+	public String[] getmProcesadores() {
+		return mProcesadores;
+	}
+
+	public void setmProcesadores(String[] mProcesadores) {
+		this.mProcesadores = mProcesadores;
+	}
+	
+	public void InsertarComp(Componente componente) {
+		misComponentes.add(componente);
+	}
+	
+	public void GenerarComponentes() {    //Esta funcion es temporal, es solo para crear los compenentes y no tener que crealos cada vex que se corra el programa/
+		
+		MicroProcesador mProcesador = new MicroProcesador("Apple", "26", 5, 420, "rojo", "Inalambrica", 20); 
+		MicroProcesador mProcesador2 = new MicroProcesador("Tuyo", "80", 2, 663, "amarillo", "Inalambrica", 20);
+		Ram ram = new Ram ("Android", "23", 3, 500, 50, "grande");
+		DiscoDuro DiscoD = new DiscoDuro ("LT", "22", 3, 300, "azul", 64, "Fijo");
+		String[] string = {"usb", "rjo"};
+		TMadre tMadre = new TMadre("Merch", "33", 2, 500, "Verde", "Alambrico", "LT", string);
+		InsertarComp(mProcesador);
+		InsertarComp(mProcesador2);
+		InsertarComp(ram);
+		InsertarComp(DiscoD);
+		InsertarComp(tMadre);
+	}
+	
+	public String[] mProcesadoresList() {
+		
+		int ind=0, cantidad= 0;
+		
+		for(Componente componente : misComponentes ) {
+			if(componente instanceof MicroProcesador) {
+				if(componente.cant>0) {
+					cantidad = componente.cant;
+					mProcesadores[ind]="("+cantidad+") "+componente.Marca+" | "+componente.precio+" | "+componente.numSerie+" | "+componente.Dato1()+" | "+componente.Dato2()+" | "+ componente.Dato3();
+					ind++;
+				}
+			}
+		}
+		return mProcesadores;
+	}
+	
+	public String[] mRamList() {
+		
+		int ind=0, cantidad= 0;
+		
+		for(Componente componente : misComponentes ) {
+			if(componente instanceof Ram) {
+				if(componente.cant>0) {
+					cantidad = componente.cant;
+					Rams[ind]="("+cantidad+") "+componente.Marca+" | "+componente.precio+" | "+componente.numSerie+" | "+componente.Dato1()+" | "+componente.Dato2()+" | "+ componente.Dato3();
+					ind++;
+				}
+			}
+		}
+		return Rams;
+	}
+	
+	public String[] mDurosList() {
+		
+		int ind=0, cantidad= 0;
+		
+		for(Componente componente : misComponentes ) {
+			if(componente instanceof DiscoDuro) {
+				if(componente.cant>0) {
+					cantidad = componente.cant;
+					DiscosD[ind]="("+cantidad+") "+componente.Marca+" | "+componente.precio+" | "+componente.numSerie+" | "+componente.Dato1()+" | "+componente.Dato2()+" | "+ componente.Dato3();
+					ind++;
+				}
+			}
+		}
+		return DiscosD;
+	}
+	
+	public String[] mMadresList() {
+		
+		int ind=0, cantidad= 0;
+		
+		for(Componente componente : misComponentes ) {
+			if(componente instanceof TMadre) {
+				if(componente.cant>0) {
+					cantidad = componente.cant;
+					TMadres[ind]="("+cantidad+") "+componente.Marca+" | "+componente.precio+" | "+componente.numSerie+" | "+componente.Dato1()+" | "+componente.Dato2()+" | "+ componente.Dato3();
+					ind++;
+				}
+			}
+		}
+		return TMadres;
+	}
 	
 	
+	public String[] ComponentesEnListaCarrito(String string) {
+		
+		int ind=0, cont=0;
+		
+		for(Componente componente : misComponentes ) {
+			if(string.contains(componente.numSerie)) {
+				
+				for(ind=0; Carrito[ind]!=null; ind++) {
+					cont++;
+					if(Carrito[ind].contains(componente.numSerie)) {
+						//ind2 = ind;
+						if(componente instanceof MicroProcesador) {
+							cant1[0]++;
+							Carrito[ind]="("+cant1[0]+") "+componente.Marca+" | "+componente.precio+" | "+componente.numSerie+" | "+componente.Dato1()+" | "+componente.Dato2()+" | "+ componente.Dato3();
+							return Carrito;
+						}
+						else if(componente instanceof TMadre) {
+							cant1[1]++;
+							Carrito[ind]="("+cant1[1]+") "+componente.Marca+" | "+componente.precio+" | "+componente.numSerie+" | "+componente.Dato1()+" | "+componente.Dato2()+" | "+ componente.Dato3();
+							return Carrito;
+						}
+						else if(componente instanceof Ram) {
+							cant1[2]++;
+							Carrito[ind]="("+cant1[2]+") "+componente.Marca+" | "+componente.precio+" | "+componente.numSerie+" | "+componente.Dato1()+" | "+componente.Dato2()+" | "+ componente.Dato3();
+							return Carrito;
+						}
+						else if(componente instanceof DiscoDuro) {
+							cant1[3]++;
+							Carrito[ind]="("+cant1[3]+") "+componente.Marca+" | "+componente.precio+" | "+componente.numSerie+" | "+componente.Dato1()+" | "+componente.Dato2()+" | "+ componente.Dato3();
+							return Carrito;
+						}
+					}
+					
+				}
+				if(componente instanceof MicroProcesador) {
+					cant1[0]=1;
+				}
+				else if(componente instanceof TMadre) {
+					cant1[1]=1;
+				}
+				else if(componente instanceof Ram) {
+					cant1[2]=1;
+				}
+				else if(componente instanceof DiscoDuro) {
+					cant1[3]=1;
+				}
+				Carrito[cont]="("+1+") "+componente.Marca+" | "+componente.precio+" | "+componente.numSerie+" | "+componente.Dato1()+" | "+componente.Dato2()+" | "+ componente.Dato3();
+				Carrito[cont+1]=null;
+		
+				return Carrito;
+			}
+		}
+		return null;
+	}
 	
+	public void ActualizarListComp(String string, String[] lista) {
+		
+		for(Componente componente : misComponentes) {
+			
+			if(string.contains(componente.numSerie)) {
+				componente.cant--;
+				
+			}
+		}
+		for(int ind =0; lista[ind]!= null; ind++) {
+			
+			if(lista[ind].equalsIgnoreCase(string)) {
+				for(int indice = ind; lista[indice]!=null; indice++) {
+					lista[indice]=lista[indice+1];
+				}
+			}
+		}
+	}
 	
+	public String[] ActualizarListCarrito(String string) {
+		
+		int ind;
+		for(Componente componente : misComponentes) {
+			
+			if(string.contains(componente.numSerie)) {
+				componente.cant++;
+			}
+		}
+		for(Componente componente : misComponentes) {
+			for(ind=0; Carrito[ind]!=null; ind++) {
+				if(Carrito[ind].contains(componente.numSerie)) {
+					if(componente instanceof MicroProcesador) {
+						if(cant1[0]-1 != 0) {
+							cant1[0]--;
+							Carrito[ind]="("+cant1[0]+") "+componente.Marca+" | "+componente.precio+" | "+componente.numSerie+" | "+componente.Dato1()+" | "+componente.Dato2()+" | "+ componente.Dato3();
+							return Carrito;
+						}
+					}
+					else if(componente instanceof TMadre) {
+						if(cant1[1]-1 != 0) {
+							cant1[1]--;
+							Carrito[ind]="("+cant1[1]+") "+componente.Marca+" | "+componente.precio+" | "+componente.numSerie+" | "+componente.Dato1()+" | "+componente.Dato2()+" | "+ componente.Dato3();
+							return Carrito;
+						}
+					}
+					else if(componente instanceof Ram) {
+						if(cant1[2]-1 != 0) {
+							cant1[2]--;
+							Carrito[ind]="("+cant1[2]+") "+componente.Marca+" | "+componente.precio+" | "+componente.numSerie+" | "+componente.Dato1()+" | "+componente.Dato2()+" | "+ componente.Dato3();
+							return Carrito;
+						}
+					}
+					else if(componente instanceof DiscoDuro) {
+						if(cant1[3]-1 != 0) {
+							cant1[3]--;
+							Carrito[ind]="("+cant1[3]+") "+componente.Marca+" | "+componente.precio+" | "+componente.numSerie+" | "+componente.Dato1()+" | "+componente.Dato2()+" | "+ componente.Dato3();
+							return Carrito;
+						}
+					}
+				}
+			}
+		}
+		
+		for(int indi =0; Carrito[indi]!= null; indi++) {
+			
+			if(Carrito[indi].contains(string)) {
+				for(int indice = indi; Carrito[indice]!=null; indice++) {
+					Carrito[indice]=Carrito[indice+1];
+				}
+			}
+		}
+		return Carrito;
+	}
 	
+	public int DeDondeEs(String string) {
+		
+		for(Componente componente : misComponentes) {
+			if(string.contains(componente.numSerie)) {
+				if(componente instanceof Ram) {
+					return 0;
+				}
+				else if(componente instanceof MicroProcesador) {
+					return 1;
+				}
+				else if(componente instanceof TMadre) {
+					return 2;
+				}
+				else if(componente instanceof DiscoDuro) {
+					return 3;
+				}
+				
+			}
+		}
+		return 5;
+	}
+	
+	public String monto() {
+		
+		double total=0; 
+		for(int ind=0; Carrito[ind]!=null; ind++) {
+			
+			for(Componente componente : misComponentes) {
+				if(Carrito[ind].contains(Double.toString(componente.precio))){
+					total+=componente.precio;
+					if(componente instanceof MicroProcesador && cant1[0]!=0) {
+						total*=cant1[0];
+					}
+					else if(componente instanceof TMadre && cant1[1]!=0){
+						total*=cant1[1];
+					}
+					else if(componente instanceof Ram && cant1[2]!=0){
+						total*=cant1[2];
+					}
+					else if(componente instanceof DiscoDuro && cant1[3]!=0){
+						total*=cant1[3];
+					}
+				}
+			}
+		}	
+		return "$"+Double.toString(total);
+	}
 }

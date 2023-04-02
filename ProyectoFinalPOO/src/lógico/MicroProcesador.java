@@ -36,6 +36,24 @@ public class MicroProcesador extends Componente {
 	public void setVelocidad(double velocidad) {
 		this.velocidad = velocidad;
 	}
+
+	@Override
+	public String Dato1() {
+		// TODO Auto-generated method stub
+		return modelo;
+	}
+
+	@Override
+	public String Dato2() {
+		// TODO Auto-generated method stub
+		return tipiConexion;
+	}
+
+	@Override
+	public String Dato3() {
+		// TODO Auto-generated method stub
+		return String.valueOf(velocidad);
+	}
 	
 	
 	

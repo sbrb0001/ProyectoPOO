@@ -20,6 +20,20 @@ public class Ram extends Componente {
 	public void setTipoMemoria(String tipoMemoria) {
 		this.tipoMemoria = tipoMemoria;
 	}
-	
+	@Override
+	public String Dato1() {
+		// TODO Auto-generated method stub
+		return String.valueOf(memoria);
+	}
+	@Override
+	public String Dato2() {
+		// TODO Auto-generated method stub
+		return tipoMemoria;
+	}
+	@Override
+	public String Dato3() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }
