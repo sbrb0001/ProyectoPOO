@@ -2,10 +2,12 @@ package Visual;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.Toolkit;
 
 import javax.swing.AbstractListModel;
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.BevelBorder;
@@ -50,63 +52,81 @@ public class MenuVenta extends JDialog {
 	 * Create the dialog.
 	 */
 	public MenuVenta() {
+		setForeground(new Color(183, 255, 248));
 		TiendaComp.getInstance().GenerarComponentes();
-		
 		setBounds(100, 100, 533, 373);
-		dim = getToolkit().getScreenSize();
-		setSize(dim.width-700, dim.height-200);
+		setSize(650, 586);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setLocationRelativeTo(null);
+        JFrame frame = new JFrame("Ejemplo de diálogo centrado");
+        frame.setSize(300, 200);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        JPanel panel = new JPanel();
+        JLabel label = new JLabel("Este es un diálogo centrado");
+        panel.add(label);
+        frame.getContentPane().add(panel);
+		  JDialog dialogo = new JDialog(frame, "Diálogo centrado", true);
+	        dialogo.setSize(200, 100);
+	        dialogo.setResizable(false);
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+
+        int x = (screenSize.width - dialogo.getWidth()) / 2;
+        int y = (screenSize.height - dialogo.getHeight()) / 2;
+        dialogo.setLocation(x, y);
+
+        
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		{
-			JPanel panel = new JPanel();
-			panel.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-			panel.setBounds(10, 0, 630, 34);
-			contentPanel.add(panel);
-			panel.setLayout(null);
+			JPanel panel1 = new JPanel();
+			panel1.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+			panel1.setBounds(10, 6, 630, 34);
+			contentPanel.add(panel1);
+			panel1.setLayout(null);
 			{
 				JLabel lblMenuVentas = new JLabel("Componentes diponibles: ");
-				lblMenuVentas.setBounds(246, 11, 163, 14);
-				panel.add(lblMenuVentas);
+				lblMenuVentas.setBounds(246, 11, 173, 14);
+				panel1.add(lblMenuVentas);
 			}
 		}
 		{
-			JPanel panel = new JPanel();
-			panel.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-			panel.setBounds(10, 44, 630, 437);
-			contentPanel.add(panel);
-			panel.setLayout(null);
+			JPanel panel1 = new JPanel();
+			panel1.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+			panel1.setBounds(10, 44, 630, 465);
+			contentPanel.add(panel1);
+			panel1.setLayout(null);
 			{
 				JLabel lblNewLabel_3 = new JLabel("Memorias Ram:");
 				lblNewLabel_3.setBounds(506, 2, 114, 14);
-				panel.add(lblNewLabel_3);
+				panel1.add(lblNewLabel_3);
 			}
 			{
 				JLabel lblNewLabel_2 = new JLabel("Microprocesadores:");
-				lblNewLabel_2.setBounds(342, 2, 120, 14);
-				panel.add(lblNewLabel_2);
+				lblNewLabel_2.setBounds(325, 2, 127, 14);
+				panel1.add(lblNewLabel_2);
 			}
 			{
 				JLabel lblNewLabel_1 = new JLabel("Discos duros:");
 				lblNewLabel_1.setBounds(187, 2, 96, 14);
-				panel.add(lblNewLabel_1);
+				panel1.add(lblNewLabel_1);
 			}
 			{
 				JLabel lblNewLabel = new JLabel("Tarjetas madre:");
 				lblNewLabel.setBounds(34, 2, 96, 14);
-				panel.add(lblNewLabel);
+				panel1.add(lblNewLabel);
 			}
 			
 			JScrollPane scrollCarrito = new JScrollPane();
-			scrollCarrito.setBounds(248, 263, 137, 163);
-			panel.add(scrollCarrito);
+			scrollCarrito.setBounds(242, 286, 143, 163);
+			panel1.add(scrollCarrito);
 			JList listCarrito = new JList();
 			scrollCarrito.setViewportView(listCarrito);
 		
 			JScrollPane scrollTmadres = new JScrollPane();
 			scrollTmadres.setBounds(10, 27, 137, 180);
-			panel.add(scrollTmadres);
+			panel1.add(scrollTmadres);
 			
 			JList listTmadres = new JList();
 			scrollTmadres.setViewportView(listTmadres);
@@ -125,7 +145,7 @@ public class MenuVenta extends JDialog {
 			
 			JScrollPane scrollDuros = new JScrollPane();
 			scrollDuros.setBounds(166, 27, 137, 180);
-			panel.add(scrollDuros);
+			panel1.add(scrollDuros);
 			
 			JList listDiscosDuros = new JList();
 			scrollDuros.setViewportView(listDiscosDuros);
@@ -143,7 +163,7 @@ public class MenuVenta extends JDialog {
 		
 			JScrollPane scrollmProcesadores = new JScrollPane();
 			scrollmProcesadores.setBounds(325, 27, 137, 180);
-			panel.add(scrollmProcesadores);
+			panel1.add(scrollmProcesadores);
 			
 			JList listMicroprocesadores = new JList();
 			scrollmProcesadores.setViewportView(listMicroprocesadores);
@@ -161,7 +181,7 @@ public class MenuVenta extends JDialog {
 		
 			JScrollPane scrollRam = new JScrollPane();
 			scrollRam.setBounds(483, 27, 137, 180);
-			panel.add(scrollRam);
+			panel1.add(scrollRam);
 		
 			JList listMemoriaRam = new JList();
 			scrollRam.setViewportView(listMemoriaRam);
@@ -178,8 +198,8 @@ public class MenuVenta extends JDialog {
 			
 			textMonto = new JTextField();
 			textMonto.setEditable(false);
-			textMonto.setBounds(534, 406, 86, 20);
-			panel.add(textMonto);
+			textMonto.setBounds(506, 429, 86, 20);
+			panel1.add(textMonto);
 			textMonto.setColumns(10);
 		
 			
@@ -278,11 +298,11 @@ public class MenuVenta extends JDialog {
 				}
 			});
 			btnAgregarAlCarrito.setBounds(130, 218, 162, 23);
-			panel.add(btnAgregarAlCarrito);
+			panel1.add(btnAgregarAlCarrito);
 			{
-				JLabel lblNewLabel_4 = new JLabel("Carrito:");
-				lblNewLabel_4.setBounds(293, 245, 46, 14);
-				panel.add(lblNewLabel_4);
+				JLabel lblNewLabel_4 = new JLabel("Carrito de compra:");
+				lblNewLabel_4.setBounds(245, 269, 127, 14);
+				panel1.add(lblNewLabel_4);
 			}
 			
 			
@@ -379,11 +399,11 @@ public class MenuVenta extends JDialog {
 				}
 			});
 			btnEliminardeCarrito.setBounds(342, 218, 162, 23);
-			panel.add(btnEliminardeCarrito);
+			panel1.add(btnEliminardeCarrito);
 			
 			JLabel lblNewLabel_5 = new JLabel("Precio total:");
-			lblNewLabel_5.setBounds(443, 409, 81, 14);
-			panel.add(lblNewLabel_5);
+			lblNewLabel_5.setBounds(429, 432, 81, 14);
+			panel1.add(lblNewLabel_5);
 		}
 		{
 			JPanel buttonPane = new JPanel();
