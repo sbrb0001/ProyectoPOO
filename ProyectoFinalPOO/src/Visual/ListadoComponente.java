@@ -13,6 +13,7 @@ import javax.swing.border.TitledBorder;
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
+import java.awt.Color;
 
 public class ListadoComponente extends JDialog {
 
@@ -35,14 +36,18 @@ public class ListadoComponente extends JDialog {
 	 * Create the dialog.
 	 */
 	public ListadoComponente() {
+		setBackground(new Color(173, 216, 230));
+		setTitle("Componentes Disponibles");
 		setBounds(100, 100, 575, 376);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setBackground(new Color(240, 248, 255));
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(new BorderLayout(0, 0));
 		{
 			JPanel panel = new JPanel();
+			panel.setBackground(new Color(255, 250, 250));
 			panel.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 			contentPanel.add(panel, BorderLayout.NORTH);
 			panel.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 25));
@@ -58,30 +63,26 @@ public class ListadoComponente extends JDialog {
 		}
 		{
 			JPanel panel = new JPanel();
+			panel.setBackground(new Color(255, 250, 250));
 			panel.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 			contentPanel.add(panel, BorderLayout.CENTER);
 			panel.setLayout(new BorderLayout(0, 0));
 		}
 		{
 			JPanel buttonPane = new JPanel();
+			buttonPane.setBackground(new Color(240, 248, 255));
 			buttonPane.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton okButton = new JButton("OK");
-				okButton.setActionCommand("OK");
-				buttonPane.add(okButton);
-				getRootPane().setDefaultButton(okButton);
-			}
-			{
-				JButton cancelButton = new JButton("Cancelar");
-				cancelButton.addActionListener(new ActionListener() {
+				JButton salirButton = new JButton("Salir");
+				salirButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent arg0) {
 						dispose();
 					}
 				});
-				cancelButton.setActionCommand("Cancel");
-				buttonPane.add(cancelButton);
+				salirButton.setActionCommand("Cancel");
+				buttonPane.add(salirButton);
 			}
 		}
 	}

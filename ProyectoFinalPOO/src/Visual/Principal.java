@@ -17,6 +17,8 @@ import javax.swing.border.TitledBorder;
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JCheckBoxMenuItem;
+import javax.swing.JRadioButtonMenuItem;
 
 public class Principal extends JFrame {
 
@@ -88,6 +90,42 @@ public class Principal extends JFrame {
 			}
 		});
 		mnNewMenu_1.add(mntmNewMenuItem_1);
+		
+		JMenuItem mntmNewMenuItem = new JMenuItem("Combos Disponibles");
+		mnNewMenu_1.add(mntmNewMenuItem);
+		
+		JMenu mnNewMenu_3 = new JMenu("Ayuda");
+		menuBar.add(mnNewMenu_3);
+		
+		JMenu mnNewMenu_4 = new JMenu("Contáctanos");
+		mnNewMenu_3.add(mnNewMenu_4);
+		
+		JMenuItem mntmNewMenuItem_7 = new JMenuItem("Vias De Contacto");
+		mnNewMenu_4.add(mntmNewMenuItem_7);
+		
+		JMenuItem mntmNewMenuItem_9 = new JMenuItem("Chat Soporte");
+		mnNewMenu_4.add(mntmNewMenuItem_9);
+		
+		JMenuItem mntmNewMenuItem_8 = new JMenuItem("Acerca De ");
+		mnNewMenu_3.add(mntmNewMenuItem_8);
+		
+		JMenu mnNewMenu_2 = new JMenu("Administración");
+		menuBar.add(mnNewMenu_2);
+		
+		JMenuItem mntmNewMenuItem_2 = new JMenuItem("Crear Componente");
+		mnNewMenu_2.add(mntmNewMenuItem_2);
+		
+		JMenuItem mntmNewMenuItem_3 = new JMenuItem("Listado de Clientes");
+		mnNewMenu_2.add(mntmNewMenuItem_3);
+		
+		JMenuItem mntmNewMenuItem_4 = new JMenuItem("Listado de Facturas");
+		mnNewMenu_2.add(mntmNewMenuItem_4);
+		
+		JMenuItem mntmNewMenuItem_5 = new JMenuItem("Ganancias");
+		mnNewMenu_2.add(mntmNewMenuItem_5);
+		
+		JMenuItem mntmNewMenuItem_6 = new JMenuItem("Componentes Vendidos");
+		mnNewMenu_2.add(mntmNewMenuItem_6);
 
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(240, 248, 255));

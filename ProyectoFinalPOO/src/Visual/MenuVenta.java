@@ -52,11 +52,13 @@ public class MenuVenta extends JDialog {
 	 * Create the dialog.
 	 */
 	public MenuVenta() {
-		setForeground(new Color(183, 255, 248));
+		setBackground(new Color(173, 216, 230));
+		setForeground(new Color(173, 216, 230));
 		TiendaComp.getInstance().GenerarComponentes();
 		setBounds(100, 100, 533, 373);
 		setSize(650, 586);
 		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setBackground(new Color(240, 248, 255));
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setLocationRelativeTo(null);
         JFrame frame = new JFrame("Ejemplo de diálogo centrado");
@@ -81,6 +83,7 @@ public class MenuVenta extends JDialog {
 		contentPanel.setLayout(null);
 		{
 			JPanel panel1 = new JPanel();
+			panel1.setBackground(new Color(255, 255, 255));
 			panel1.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 			panel1.setBounds(10, 6, 630, 34);
 			contentPanel.add(panel1);
@@ -93,6 +96,7 @@ public class MenuVenta extends JDialog {
 		}
 		{
 			JPanel panel1 = new JPanel();
+			panel1.setBackground(new Color(255, 255, 255));
 			panel1.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 			panel1.setBounds(10, 44, 630, 465);
 			contentPanel.add(panel1);
@@ -119,7 +123,7 @@ public class MenuVenta extends JDialog {
 			}
 			
 			JScrollPane scrollCarrito = new JScrollPane();
-			scrollCarrito.setBounds(242, 286, 143, 163);
+			scrollCarrito.setBounds(253, 279, 143, 170);
 			panel1.add(scrollCarrito);
 			JList listCarrito = new JList();
 			scrollCarrito.setViewportView(listCarrito);
@@ -301,7 +305,7 @@ public class MenuVenta extends JDialog {
 			panel1.add(btnAgregarAlCarrito);
 			{
 				JLabel lblNewLabel_4 = new JLabel("Carrito de compra:");
-				lblNewLabel_4.setBounds(245, 269, 127, 14);
+				lblNewLabel_4.setBounds(269, 263, 127, 14);
 				panel1.add(lblNewLabel_4);
 			}
 			
@@ -407,6 +411,7 @@ public class MenuVenta extends JDialog {
 		}
 		{
 			JPanel buttonPane = new JPanel();
+			buttonPane.setBackground(new Color(255, 255, 255));
 			buttonPane.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
@@ -418,6 +423,11 @@ public class MenuVenta extends JDialog {
 			}
 			{
 				JButton cancelButton = new JButton("Cancelar");
+				cancelButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						dispose();
+					}
+				});
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
 			}
