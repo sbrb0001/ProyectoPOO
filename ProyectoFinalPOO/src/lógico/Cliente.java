@@ -1,53 +1,40 @@
 package lógico;
 
-public class Cliente {
+
+public class Cliente extends Persona{
+	protected String ocupacion;
+	protected int cantCompras; //esto es para realizarles descuentos si han hecho mas de 5 compras cada vez que se le hace un descuento la cantidad vuelve a cero
 	
-	private String Cedula;
-	private String Nombre;
-	private String direccion;
-	private String telefono;
 	
-	public Cliente(String cedula, String nombre, String direccion, String telefono) {
-		super();
-		Cedula = cedula;
-		Nombre = nombre;
-		this.direccion = direccion;
-		this.telefono = telefono;
+	public Cliente(String cedula, String nombre, String direccion, String telefono, boolean estado,
+			String usuarioString, String password, String ocupacion, int cantCompras) {
+		super(cedula, nombre, direccion, telefono, estado, usuarioString, password);
+		this.ocupacion = ocupacion;
+		this.cantCompras = 0;
 	}
-
-	public String getCedula() {
-		return Cedula;
+	
+	public double descuento(double totalCompra) {
+		double tot=0;
+		
+		if (cantCompras % 5==0) {//la cantidad de compra debe ser muktiplo de 5, porque el descuento solo se hace cada 5 compras
+			tot= totalCompra*0.2; //HandshakeCompletedEvent un 20 de descuento
+		}
+		
+		return tot;
 	}
-
-	public void setCedula(String cedula) {
-		Cedula = cedula;
+	public String getOcupacion() {
+		return ocupacion;
 	}
-
-	public String getNombre() {
-		return Nombre;
+	public void setOcupacion(String ocupacion) {
+		this.ocupacion = ocupacion;
 	}
-
-	public void setNombre(String nombre) {
-		Nombre = nombre;
+	public int getCantCompras() {
+		return cantCompras;
 	}
-
-	public String getDireccion() {
-		return direccion;
-	}
-
-	public void setDireccion(String direccion) {
-		this.direccion = direccion;
-	}
-
-	public String getTelefono() {
-		return telefono;
-	}
-
-	public void setTelefono(String telefono) {
-		this.telefono = telefono;
+	public void setCantCompras(int cantCompras) {
+		this.cantCompras = cantCompras;
 	}
 	
 	
 	
-
 }

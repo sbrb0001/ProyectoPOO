@@ -19,6 +19,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JRadioButtonMenuItem;
+import javax.swing.JSlider;
 
 public class Principal extends JFrame {
 
@@ -126,6 +127,13 @@ public class Principal extends JFrame {
 		
 		JMenuItem mntmNewMenuItem_6 = new JMenuItem("Componentes Vendidos");
 		mnNewMenu_2.add(mntmNewMenuItem_6);
+		
+		JMenuItem mntmNewMenuItem_10 = new JMenuItem("Chat Clientes");
+		mnNewMenu_2.add(mntmNewMenuItem_10);
+		
+		JMenuItem mntmNewMenuItem_11 = new JMenuItem("Salir");
+		mntmNewMenuItem_11.setSelected(true);
+		menuBar.add(mntmNewMenuItem_11);
 
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(240, 248, 255));
