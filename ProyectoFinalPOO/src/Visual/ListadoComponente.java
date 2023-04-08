@@ -52,7 +52,6 @@ public class ListadoComponente extends JDialog {
 	 */
 	public ListadoComponente() {
 		setBackground(new Color(173, 216, 230));
-		
 		setForeground(new Color(173, 216, 230));;
 		setBounds(100, 100, 671, 424);
 		setLocationRelativeTo(null);
