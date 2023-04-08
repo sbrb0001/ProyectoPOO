@@ -76,6 +76,11 @@ public class ListadoComponente extends JDialog {
 			}
 			{
 				JComboBox comboBox = new JComboBox();
+				comboBox.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent arg0) {
+						loadComponent(comboBox.getSelectedIndex());
+					}
+				});
 				comboBox.setModel(new DefaultComboBoxModel(new String[] {"<Todos>", "Targeta Madre", "Disco Duro", "Memoria Ram", "Microprocesador"}));
 				panel.add(comboBox);
 			}
@@ -125,15 +130,17 @@ public class ListadoComponente extends JDialog {
 			}
 		}
 		
-		loadComponent();
+		loadComponent(0);
 	}
 
-	private void loadComponent() {
+	private void loadComponent(int index) {
 		
 		model.setRowCount(0);
 		rows = new Object[model.getColumnCount()];
 		
-		for (Componente aux : TiendaComp.getInstance().getMisComponentes()) {
+		if(index==0) {
+			
+			for (Componente aux : TiendaComp.getInstance().getMisComponentes()) {
 			
 			rows[1]=aux.getMarca();
 			rows[2]=aux.getNumSerie();
@@ -159,7 +166,74 @@ public class ListadoComponente extends JDialog {
 			model.addRow(rows);
 			
 		}
-	
+			
+		}
+		
+		if(index==1) {
+			for (Componente aux : TiendaComp.getInstance().getMisComponentes()) {
+				
+			if(aux instanceof TMadre) {
+				rows[0]= "Targeta Madre";
+				rows[1]=aux.getMarca();
+				rows[2]=aux.getNumSerie();
+				rows[3]=aux.getCant();
+				rows[4]=aux.getPrecio();
+				model.addRow(rows);
+				
+			}
+				
+			}
+			
+		}
+		if(index==2) {
+			for (Componente aux : TiendaComp.getInstance().getMisComponentes()) {
+				
+			if(aux instanceof DiscoDuro) {
+				rows[0]= "Disco Duro";
+				rows[1]=aux.getMarca();
+				rows[2]=aux.getNumSerie();
+				rows[3]=aux.getCant();
+				rows[4]=aux.getPrecio();
+				model.addRow(rows);
+				
+			}
+				
+			}
+			
+		}
+		
+		if(index==3) {
+			for (Componente aux : TiendaComp.getInstance().getMisComponentes()) {
+				
+			if(aux instanceof Ram) {
+				rows[0]= "Memoria Ram";
+				rows[1]=aux.getMarca();
+				rows[2]=aux.getNumSerie();
+				rows[3]=aux.getCant();
+				rows[4]=aux.getPrecio();
+				model.addRow(rows);
+				
+			}
+				
+			}
+			
+		}
+		if(index==4) {
+			for (Componente aux : TiendaComp.getInstance().getMisComponentes()) {
+				
+			if(aux instanceof MicroProcesador) {
+				rows[0]= "Microprocesador";
+				rows[1]=aux.getMarca();
+				rows[2]=aux.getNumSerie();
+				rows[3]=aux.getCant();
+				rows[4]=aux.getPrecio();
+				model.addRow(rows);
+				
+			}
+				
+			}
+			
+		}
 		
 	}
 
