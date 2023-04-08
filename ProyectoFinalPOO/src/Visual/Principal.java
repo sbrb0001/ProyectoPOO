@@ -118,6 +118,13 @@ public class Principal extends JFrame {
 		menuBar.add(mnNewMenu_2);
 		
 		JMenuItem mntmNewMenuItem_2 = new JMenuItem("Crear Componente");
+		mntmNewMenuItem_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				RegistrarComponente menu = new RegistrarComponente();
+				menu.setModal(true);
+				menu.setVisible(true);
+			}
+		});
 		mnNewMenu_2.add(mntmNewMenuItem_2);
 		
 		JMenuItem mntmNewMenuItem_3 = new JMenuItem("Listado de Clientes");
