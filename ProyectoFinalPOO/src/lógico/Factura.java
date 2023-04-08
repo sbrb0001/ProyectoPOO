@@ -3,15 +3,17 @@ package lógico;
 import java.util.ArrayList;
 
 public class Factura {
-	private Cliente cliente;
+	private String codigo;
+	private Persona persona;
 	private ArrayList<Combo> cVendidos;
 	private ArrayList<Componente> misComponentes;
 	
-	public Factura(Cliente cliente, ArrayList<Combo> cVendidos, ArrayList<Componente> misComponentes) {
+	public Factura(String codigo, Persona persona, ArrayList<Combo> cVendidos, ArrayList<Componente> misComponentes) {
 		super();
-		this.cliente = cliente;
-		this.cVendidos = new ArrayList<Combo>();
-		this.misComponentes = new ArrayList<Componente>();
+		this.persona = persona;
+		this.cVendidos = cVendidos;
+		this.misComponentes = misComponentes;
+		this.codigo = codigo;
 	}
 	
 	public ArrayList<Combo> getcVendidos() {
@@ -27,12 +29,20 @@ public class Factura {
 		this.misComponentes = misComponentes;
 	}
 
-	public Cliente getCliente() {
-		return cliente;
+	public Persona getPersona() {
+		return persona;
 	}
 
-	public void setCliente(Cliente cliente) {
-		this.cliente = cliente;
+	public void setPersona(Persona persona) {
+		this.persona = persona;
+	}
+
+	public String getCodigo() {
+		return codigo;
+	}
+
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
 	}
 	
 	

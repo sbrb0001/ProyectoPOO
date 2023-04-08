@@ -6,7 +6,7 @@ public class TiendaComp {
 	
 	private ArrayList<Componente> misComponentes;
 	private ArrayList<Combo> cVendidos;
-	private ArrayList<Cliente> misClientes;
+	private ArrayList<Persona> misPersonas;
 	private ArrayList<Factura> MisFacturas;
 	public static TiendaComp tienda = null;
 	public String [] Carrito;
@@ -15,12 +15,13 @@ public class TiendaComp {
 	public String [] Rams;
 	public String [] mProcesadores; 
 	public int [] cant1;
+	public static int mCodigo =1; 
 	
 	public TiendaComp() {
 		super();
 		misComponentes = new ArrayList<Componente>();
 		cVendidos = new ArrayList<Combo>();
-		misClientes = new ArrayList<Cliente>();
+		misPersonas = new ArrayList<Persona>();
 		MisFacturas = new ArrayList<Factura>();
 		this.Carrito = new String[100];
 		this.TMadres = new String[100];
@@ -53,12 +54,12 @@ public class TiendaComp {
 		this.cVendidos = cVendidos;
 	}
 
-	public ArrayList<Cliente> getMisClientes() {
-		return misClientes;
+	public ArrayList<Persona> getMisPersonas() {
+		return misPersonas;
 	}
 
-	public void setMisClientes(ArrayList<Cliente> misClientes) {
-		this.misClientes = misClientes;
+	public void setMisPersonas(ArrayList<Persona> misPersonas) {
+		this.misPersonas = misPersonas;
 	}
 
 	public ArrayList<Factura> getMisFacturas() {
@@ -113,10 +114,18 @@ public class TiendaComp {
 		misComponentes.add(componente);
 	}
 	
+	public void InsertarFact(Factura factura) {
+		MisFacturas.add(factura);
+	}
+	
+	public void InsertarPersona(Persona persona) {
+		misPersonas.add(persona);
+	}
+	
 	public void GenerarComponentes() {    //Esta funcion es temporal, es solo para crear los compenentes y no tener que crealos cada vex que se corra el programa/
 		
 		MicroProcesador mProcesador = new MicroProcesador("Apple", "26", 5, 420, "rojo", "Inalambrica", 20); 
-		MicroProcesador mProcesador2 = new MicroProcesador("Tuyo", "80", 2, 663, "amarillo", "Inalambrica", 20);
+		MicroProcesador mProcesador2 = new MicroProcesador("Tuyo", "80", 3, 663, "amarillo", "Inalambrica", 20);
 		Ram ram = new Ram ("Android", "23", 3, 500, 50, "grande");
 		DiscoDuro DiscoD = new DiscoDuro ("LT", "22", 3, 300, "azul", 64, "Fijo");
 		String[] string = {"usb", "rjo"};
@@ -127,6 +136,20 @@ public class TiendaComp {
 		InsertarComp(DiscoD);
 		InsertarComp(tMadre);
 	}
+	
+	public void GenerarPersona() {    //Esta funcion es temporal, es solo para crear los clientes y no tener que crealos cada vex que se corra el programa/
+		
+		Cliente cliente = new Cliente("000", "Jose", "Micasa", "999", true,
+				"Jela", "jose01", "Estudiante", 0); 
+		
+		Cliente cliente2 = new Cliente("005", "Juan", "Micasa", "000", false,
+				"pepe", "juan00", "Empleado", 0); 
+		
+		InsertarPersona(cliente);
+		InsertarPersona(cliente2);
+
+	}
+	
 	
 	public String[] mProcesadoresList() {
 		
@@ -254,7 +277,6 @@ public class TiendaComp {
 			
 			if(string.contains(componente.numSerie)) {
 				componente.cant--;
-				
 			}
 		}
 		for(int ind =0; lista[ind]!= null; ind++) {
@@ -369,4 +391,69 @@ public class TiendaComp {
 		}	
 		return "$"+Double.toString(total);
 	}
+	
+	public ArrayList<Componente> AgregarCompFact(String [] carrito) {
+		
+		ArrayList<Componente> componente = new ArrayList<>();
+		String c = null;
+		for(int ind=0; carrito[ind]!= null; ind++) {	
+			for(Componente comp : misComponentes) {
+				if(carrito[ind].contains(comp.numSerie)){
+					for(int indice = 1; carrito[ind].charAt(indice) != ' '; indice++) {
+						
+							if(carrito[ind].charAt(indice)==')') {
+								//System.out.println(carrito[ind].charAt(indice));
+								c=carrito[ind].substring(1, indice);
+								//System.out.println(c);
+							}							
+					}
+					//comp.cant = Integer.valueOf(c);
+					componente.add(comp);
+					//System.out.println(comp.cant);
+					//c = null;
+					for(Componente compo : componente) {
+						if(carrito[ind].contains(compo.numSerie)) {
+							//System.out.println(c);
+							compo.setCant((Integer.valueOf(c)));
+							//componente.add(compo);
+						}
+					}
+					//System.out.println(comp.cant);
+					//c=null;
+				}
+
+			}
+		}
+		return componente;
+	}
+	
+	public Persona PersonaLogg() {
+		
+		for(Persona persona : misPersonas) {
+			if(persona.estado == true) {
+				return persona;
+			}
+		}
+		
+		
+		return null;
+	}
+	
+	public String CrearCodigoFact(String[] carrito) {
+		
+		String codigo = null;
+		
+		for(int ind=0; carrito[ind]!=null; ind++) {	
+			for(Componente componente : misComponentes) {
+				if(carrito[ind].contains(componente.numSerie)){
+					codigo = "F-"+ componente.numSerie + mCodigo;
+					mCodigo++;
+					return codigo;
+				}
+			}
+		}
+		return null;
+	}
+	
+	
 }

@@ -14,6 +14,9 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.border.TitledBorder;
+
+import lógico.TiendaComp;
+
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -55,6 +58,7 @@ public class Principal extends JFrame {
 	 * Create the frame.
 	 */
 	public Principal() {
+		TiendaComp.getInstance().GenerarComponentes();
 		setTitle("TecnoShop");
 		setBackground(new Color(176, 224, 230));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -82,15 +86,15 @@ public class Principal extends JFrame {
 		JMenu mnNewMenu_1 = new JMenu("Comprar");
 		menuBar.add(mnNewMenu_1);
 
-		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Comprar Componentes");
-		mntmNewMenuItem_1.addActionListener(new ActionListener() {
+		JMenuItem mntmComprarComp = new JMenuItem("Comprar Componentes");
+		mntmComprarComp.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				MenuVenta menu = new MenuVenta();
 				menu.setModal(true);
 				menu.setVisible(true);
 			}
 		});
-		mnNewMenu_1.add(mntmNewMenuItem_1);
+		mnNewMenu_1.add(mntmComprarComp);
 		
 		JMenuItem mntmNewMenuItem = new JMenuItem("Combos Disponibles");
 		mnNewMenu_1.add(mntmNewMenuItem);
@@ -119,8 +123,17 @@ public class Principal extends JFrame {
 		JMenuItem mntmNewMenuItem_3 = new JMenuItem("Listado de Clientes");
 		mnNewMenu_2.add(mntmNewMenuItem_3);
 		
-		JMenuItem mntmNewMenuItem_4 = new JMenuItem("Listado de Facturas");
-		mnNewMenu_2.add(mntmNewMenuItem_4);
+		JMenuItem mntmListaFact = new JMenuItem("Listado de Facturas");
+		
+		mntmListaFact.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				ListaFacturas menu = new ListaFacturas();
+				menu.setModal(true);
+				menu.setVisible(true);
+			}
+		});
+		mnNewMenu_2.add(mntmListaFact);
+		
 		
 		JMenuItem mntmNewMenuItem_5 = new JMenuItem("Ganancias");
 		mnNewMenu_2.add(mntmNewMenuItem_5);

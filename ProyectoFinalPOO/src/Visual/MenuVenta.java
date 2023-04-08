@@ -18,6 +18,10 @@ import java.awt.Dimension;
 import javax.swing.JLabel;
 import javax.swing.border.TitledBorder;
 
+import lógico.Combo;
+import lógico.Componente;
+import lógico.Factura;
+import lógico.Persona;
 import lógico.TiendaComp;
 
 import javax.swing.border.SoftBevelBorder;
@@ -27,6 +31,7 @@ import javax.swing.JList;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
 public class MenuVenta extends JDialog {
@@ -52,11 +57,13 @@ public class MenuVenta extends JDialog {
 	 * Create the dialog.
 	 */
 	public MenuVenta() {
+		//TiendaComp.getInstance().GenerarComponentes();
 		setBackground(new Color(173, 216, 230));
 		setForeground(new Color(173, 216, 230));
-		TiendaComp.getInstance().GenerarComponentes();
+//		TiendaComp.getInstance().GenerarComponentes();
+		TiendaComp.getInstance().GenerarPersona();
 		setBounds(100, 100, 533, 373);
-		setSize(650, 586);
+		setSize(662, 600);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(new Color(240, 248, 255));
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -85,40 +92,40 @@ public class MenuVenta extends JDialog {
 			JPanel panel1 = new JPanel();
 			panel1.setBackground(new Color(255, 255, 255));
 			panel1.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-			panel1.setBounds(10, 6, 630, 34);
+			panel1.setBounds(10, 11, 624, 32);
 			contentPanel.add(panel1);
 			panel1.setLayout(null);
 			{
 				JLabel lblMenuVentas = new JLabel("Componentes diponibles: ");
-				lblMenuVentas.setBounds(246, 11, 173, 14);
+				lblMenuVentas.setBounds(245, 11, 173, 14);
 				panel1.add(lblMenuVentas);
 			}
 		}
 		{
 			JPanel panel1 = new JPanel();
-			panel1.setBackground(new Color(255, 255, 255));
+			panel1.setBackground(Color.WHITE);
 			panel1.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-			panel1.setBounds(10, 44, 630, 465);
+			panel1.setBounds(10, 48, 624, 465);
 			contentPanel.add(panel1);
 			panel1.setLayout(null);
 			{
 				JLabel lblNewLabel_3 = new JLabel("Memorias Ram:");
-				lblNewLabel_3.setBounds(506, 2, 114, 14);
+				lblNewLabel_3.setBounds(506, 11, 114, 14);
 				panel1.add(lblNewLabel_3);
 			}
 			{
 				JLabel lblNewLabel_2 = new JLabel("Microprocesadores:");
-				lblNewLabel_2.setBounds(325, 2, 127, 14);
+				lblNewLabel_2.setBounds(335, 11, 127, 14);
 				panel1.add(lblNewLabel_2);
 			}
 			{
 				JLabel lblNewLabel_1 = new JLabel("Discos duros:");
-				lblNewLabel_1.setBounds(187, 2, 96, 14);
+				lblNewLabel_1.setBounds(184, 11, 96, 14);
 				panel1.add(lblNewLabel_1);
 			}
 			{
 				JLabel lblNewLabel = new JLabel("Tarjetas madre:");
-				lblNewLabel.setBounds(34, 2, 96, 14);
+				lblNewLabel.setBounds(35, 11, 96, 14);
 				panel1.add(lblNewLabel);
 			}
 			
@@ -305,7 +312,7 @@ public class MenuVenta extends JDialog {
 			panel1.add(btnAgregarAlCarrito);
 			{
 				JLabel lblNewLabel_4 = new JLabel("Carrito de compra:");
-				lblNewLabel_4.setBounds(269, 263, 127, 14);
+				lblNewLabel_4.setBounds(269, 254, 127, 14);
 				panel1.add(lblNewLabel_4);
 			}
 			
@@ -417,6 +424,23 @@ public class MenuVenta extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton okButton = new JButton("Comprar");
+				okButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						
+						Factura factura = new Factura(TiendaComp.getInstance().CrearCodigoFact(TiendaComp.getInstance().Carrito), TiendaComp.getInstance().PersonaLogg(), null, TiendaComp.getInstance().AgregarCompFact(TiendaComp.getInstance().Carrito));
+						TiendaComp.getInstance().InsertarFact(factura);
+						TiendaComp.getInstance().setCarrito(new String[100]);	
+						TiendaComp.getInstance().setDiscosD(new String[100]);	
+						TiendaComp.getInstance().setmProcesadores(new String[100]);
+						TiendaComp.getInstance().setRams(new String[100]);	
+						TiendaComp.getInstance().setTMadres(new String[100]);	
+						//System.out.println(factura.getMisComponentes());
+						//System.out.println(TiendaComp.getInstance().getMisComponentes());
+						dispose();
+					
+						
+					}
+				});
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
@@ -425,6 +449,7 @@ public class MenuVenta extends JDialog {
 				JButton cancelButton = new JButton("Cancelar");
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
+						TiendaComp.getInstance().setCarrito(new String[100]);
 						dispose();
 					}
 				});
