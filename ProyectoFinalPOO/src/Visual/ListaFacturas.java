@@ -123,19 +123,19 @@ public class ListaFacturas extends JDialog {
 			rows[0] = factura.getCodigo();
 			rows[1] = factura.getPersona().getNombre();
 			int cant1=0, cant2=0, cant3=0, cant4=0;
-			for(Componente componente : factura.getMisComponentes()) {
+			for(Componente componente : factura.getClon()) {
 				
 				if(componente instanceof MicroProcesador) {
-					cant1 += componente.getCant();;
+					cant1 = componente.getCant();;
 				}
 				else if(componente instanceof Ram) {
-					cant2 += componente.getCant();
+					cant2 = componente.getCant();
 				}
 				else if (componente instanceof TMadre){
-					cant3 += componente.getCant();
+					cant3 = componente.getCant();
 				}
 				else if (componente instanceof DiscoDuro){
-					cant4 += componente.getCant();
+					cant4 = componente.getCant();
 				}
 			}
 			rows[2] = cant4;

@@ -57,7 +57,7 @@ public class MenuVenta extends JDialog {
 	 * Create the dialog.
 	 */
 	public MenuVenta() {
-		TiendaComp.getInstance().GenerarComponentes();
+	//	TiendaComp.getInstance().GenerarComponentes();
 		TiendaComp.getInstance().GenerarPersona();
 		setBackground(new Color(173, 216, 230));
 		setForeground(new Color(173, 216, 230));
@@ -128,12 +128,6 @@ public class MenuVenta extends JDialog {
 				lblNewLabel.setBounds(35, 11, 96, 14);
 				panel1.add(lblNewLabel);
 			}
-			
-			JScrollPane scrollCarrito = new JScrollPane();
-			scrollCarrito.setBounds(253, 279, 143, 170);
-			panel1.add(scrollCarrito);
-			JList listCarrito = new JList();
-			scrollCarrito.setViewportView(listCarrito);
 		
 			JScrollPane scrollTmadres = new JScrollPane();
 			scrollTmadres.setBounds(10, 27, 137, 180);
@@ -142,7 +136,6 @@ public class MenuVenta extends JDialog {
 			JList listTmadres = new JList();
 			scrollTmadres.setViewportView(listTmadres);
 
-			scrollTmadres.setViewportView(listTmadres);
 			
 			listTmadres.setModel(new AbstractListModel() {
 				String[] values = TiendaComp.getInstance().mMadresList();
@@ -206,6 +199,12 @@ public class MenuVenta extends JDialog {
 					return values[index];
 				}
 			});
+			
+			JScrollPane scrollCarrito = new JScrollPane();
+			scrollCarrito.setBounds(253, 279, 143, 170);
+			panel1.add(scrollCarrito);
+			JList listCarrito = new JList();
+			scrollCarrito.setViewportView(listCarrito);
 			
 			textMonto = new JTextField();
 			textMonto.setEditable(false);
@@ -428,7 +427,12 @@ public class MenuVenta extends JDialog {
 					public void actionPerformed(ActionEvent e) {
 						
 						Factura factura = new Factura(TiendaComp.getInstance().CrearCodigoFact(TiendaComp.getInstance().Carrito), TiendaComp.getInstance().PersonaLogg(), null, TiendaComp.getInstance().AgregarCompFact(TiendaComp.getInstance().Carrito));
+					//	TiendaComp.getInstance().InsertarFact(factura);
+					//	factura.setMisComponentes(TiendaComp.getInstance().AgregarCompFact(TiendaComp.getInstance().Carrito));
+						//Error con los componentes de la factura, si se cambian en la factura, se cambian en la tienda.
+						TiendaComp.getInstance().ArreglarFact(factura, TiendaComp.getInstance().Carrito);
 						TiendaComp.getInstance().InsertarFact(factura);
+						
 						TiendaComp.getInstance().setCarrito(new String[100]);	
 						TiendaComp.getInstance().setDiscosD(new String[100]);	
 						TiendaComp.getInstance().setmProcesadores(new String[100]);

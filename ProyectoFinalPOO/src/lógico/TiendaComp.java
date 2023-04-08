@@ -153,13 +153,12 @@ public class TiendaComp {
 	
 	public String[] mProcesadoresList() {
 		
-		int ind=0, cantidad= 0;
+		int ind=0;
 		
 		for(Componente componente : misComponentes ) {
 			if(componente instanceof MicroProcesador) {
 				if(componente.cant>0) {
-					cantidad = componente.cant;
-					mProcesadores[ind]="("+cantidad+") "+componente.Marca+" | "+componente.precio+" | "+componente.numSerie+" | "+componente.Dato1()+" | "+componente.Dato2()+" | "+ componente.Dato3();
+					mProcesadores[ind]="("+componente.cant+") "+componente.Marca+" | "+componente.precio+" | "+componente.numSerie+" | "+componente.Dato1()+" | "+componente.Dato2()+" | "+ componente.Dato3();
 					ind++;
 				}
 			}
@@ -190,6 +189,7 @@ public class TiendaComp {
 		for(Componente componente : misComponentes ) {
 			if(componente instanceof DiscoDuro) {
 				if(componente.cant>0) {
+					System.out.println(componente.cant);
 					cantidad = componente.cant;
 					DiscosD[ind]="("+cantidad+") "+componente.Marca+" | "+componente.precio+" | "+componente.numSerie+" | "+componente.Dato1()+" | "+componente.Dato2()+" | "+ componente.Dato3();
 					ind++;
@@ -264,26 +264,28 @@ public class TiendaComp {
 				}
 				Carrito[cont]="("+1+") "+componente.Marca+" | "+componente.precio+" | "+componente.numSerie+" | "+componente.Dato1()+" | "+componente.Dato2()+" | "+ componente.Dato3();
 				Carrito[cont+1]=null;
-		
-				return Carrito;
 			}
 		}
-		return null;
+		return Carrito;
 	}
 	
 	public void ActualizarListComp(String string, String[] lista) {
 		
 		for(Componente componente : misComponentes) {
-			
 			if(string.contains(componente.numSerie)) {
 				componente.cant--;
 			}
-		}
-		for(int ind =0; lista[ind]!= null; ind++) {
-			
-			if(lista[ind].equalsIgnoreCase(string)) {
-				for(int indice = ind; lista[indice]!=null; indice++) {
-					lista[indice]=lista[indice+1];
+			if(componente.cant == 0) {
+				for(int ind =0; lista[ind]!= null; ind++) {
+					
+					if(lista[ind].equalsIgnoreCase(string)) {
+						for(int indice = ind; lista[indice]!=null;) {
+							lista[indice]=lista[indice+1];
+							componente.setCant(0);
+							//System.out.println(componente.cant);
+							return;
+						}
+					}
 				}
 			}
 		}
@@ -394,10 +396,44 @@ public class TiendaComp {
 	
 	public ArrayList<Componente> AgregarCompFact(String [] carrito) {
 		
-		ArrayList<Componente> componente = new ArrayList<>();
-		String c = null;
+		ArrayList<Componente> componente = new ArrayList<Componente>();
+		
+		String c=null;
 		for(int ind=0; carrito[ind]!= null; ind++) {	
 			for(Componente comp : misComponentes) {
+				if(carrito[ind].contains(comp.numSerie)) {
+						//comp.setCant((Integer.valueOf(c)));
+						//factura.getMisComponentes().add(comp);
+						//System.out.println("hola");
+						//c = null;
+						/*for(Componente compo : factura.getMisComponentes()) {
+							if(carrito[ind].contains(compo.numSerie)) {
+								//System.out.println(c);
+								compo.setCant((Integer.valueOf(c)));
+							//	System.out.println(compo.cant);
+								//componente.add(compo);
+							}
+						}*/
+						//comp.cant = Integer.valueOf(c);
+						componente.add(comp);
+						//System.out.println(comp.cant);
+						//c = null;
+						//System.out.println(comp.cant);
+						//c=null;
+					
+				}
+			}
+		}
+		
+		return componente;	
+		
+	}
+	
+	public void ArreglarFact(Factura factura, String[] carrito) {
+		
+		String c=null;
+		for(int ind=0; carrito[ind]!= null; ind++) {	
+			for(Componente comp : factura.getMisComponentes()) {
 				if(carrito[ind].contains(comp.numSerie)){
 					for(int indice = 1; carrito[ind].charAt(indice) != ' '; indice++) {
 						
@@ -407,14 +443,15 @@ public class TiendaComp {
 								//System.out.println(c);
 							}							
 					}
-					//comp.cant = Integer.valueOf(c);
-					componente.add(comp);
-					//System.out.println(comp.cant);
+					comp.setCant((Integer.valueOf(c)));;
+					//factura.getMisComponentes().add(comp);
+					//System.out.println("hola");
 					//c = null;
-					for(Componente compo : componente) {
+					for(Componente compo : factura.getClon()) {
 						if(carrito[ind].contains(compo.numSerie)) {
 							//System.out.println(c);
 							compo.setCant((Integer.valueOf(c)));
+						//	System.out.println(compo.cant);
 							//componente.add(compo);
 						}
 					}
@@ -424,8 +461,8 @@ public class TiendaComp {
 
 			}
 		}
-		return componente;
 	}
+	
 	
 	public Persona PersonaLogg() {
 		

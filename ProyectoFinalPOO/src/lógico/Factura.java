@@ -7,6 +7,7 @@ public class Factura {
 	private Persona persona;
 	private ArrayList<Combo> cVendidos;
 	private ArrayList<Componente> misComponentes;
+	private ArrayList<Componente> clon;
 	
 	public Factura(String codigo, Persona persona, ArrayList<Combo> cVendidos, ArrayList<Componente> misComponentes) {
 		super();
@@ -14,6 +15,8 @@ public class Factura {
 		this.cVendidos = cVendidos;
 		this.misComponentes = misComponentes;
 		this.codigo = codigo;
+		//ArrayList<Componente> clon = (ArrayList<Componente>)misComponentes.clone();
+		this.clon = (ArrayList<Componente>) misComponentes.clone();
 	}
 	
 	public ArrayList<Combo> getcVendidos() {
@@ -44,8 +47,16 @@ public class Factura {
 	public void setCodigo(String codigo) {
 		this.codigo = codigo;
 	}
+
+	public ArrayList<Componente> getClon() {
+		return clon;
+	}
+
+	public void setClon(ArrayList<Componente> clon) {
+		this.clon = clon;
+	}
 	
-	
+
 	
 	
 }
