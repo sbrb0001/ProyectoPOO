@@ -57,11 +57,11 @@ public class MenuVenta extends JDialog {
 	 * Create the dialog.
 	 */
 	public MenuVenta() {
-		//TiendaComp.getInstance().GenerarComponentes();
+		TiendaComp.getInstance().GenerarComponentes();
+		TiendaComp.getInstance().GenerarPersona();
 		setBackground(new Color(173, 216, 230));
 		setForeground(new Color(173, 216, 230));
 //		TiendaComp.getInstance().GenerarComponentes();
-		TiendaComp.getInstance().GenerarPersona();
 		setBounds(100, 100, 533, 373);
 		setSize(662, 600);
 		getContentPane().setLayout(new BorderLayout());
