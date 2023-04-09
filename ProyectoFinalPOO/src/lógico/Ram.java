@@ -35,7 +35,7 @@ public class Ram extends Componente {
 	@Override
 	public String Dato3() {
 		// TODO Auto-generated method stub
-		return null;
+		return tipoAlmacenamiemtoString;
 	}
 	public String getTipoAlmacenamiemtoString() {
 		return tipoAlmacenamiemtoString;

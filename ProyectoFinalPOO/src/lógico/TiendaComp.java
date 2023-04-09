@@ -128,7 +128,7 @@ public class TiendaComp {
 		
 		MicroProcesador mProcesador = new MicroProcesador("Apple", "26", 5, 420, "rojo", "Inalambrica", 20, null); 
 		MicroProcesador mProcesador2 = new MicroProcesador("Tuyo", "80", 3, 663, "amarillo", "Inalambrica", 20, null);
-		Ram ram = new Ram ("Android", "23", 3, 500, 50, "grande", null);
+		Ram ram = new Ram ("Android", "23", 3, 500, 50, "grande", "MB");
 		DiscoDuro DiscoD = new DiscoDuro ("LT", "22", 3, 300, "azul", 64, "Fijo");
 		String[] string = {"usb", "rjo"};
 		TMadre tMadre = new TMadre("Merch", "33", 2, 500, "Verde", "Alambrico", "LT", string);
