@@ -15,10 +15,13 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.border.TitledBorder;
 
+import lógico.Combo;
+import lógico.Componente;
 import lógico.TiendaComp;
 
 import java.awt.Color;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JRadioButtonMenuItem;
@@ -59,6 +62,9 @@ public class Principal extends JFrame {
 	 */
 	public Principal() {
 		TiendaComp.getInstance().GenerarComponentes();
+		ArrayList<Componente> losComponentes = TiendaComp.getInstance().getMisComponentes();
+		Combo combo = new Combo(losComponentes, "Vuelta a Clases", 1);
+		TiendaComp.getInstance().InsertarCombo(combo);
 		setTitle("TecnoShop");
 		setBackground(new Color(176, 224, 230));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -97,7 +103,18 @@ public class Principal extends JFrame {
 		mnNewMenu_1.add(mntmComprarComp);
 		
 		JMenuItem mntmNewMenuItem = new JMenuItem("Combos Disponibles");
+		mntmNewMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				VentaCombo menuCombo = new VentaCombo();
+				menuCombo.setModal(true);
+				menuCombo.setVisible(true);
+			}
+		});
+		
 		mnNewMenu_1.add(mntmNewMenuItem);
+		
+		
+		
 		
 		JMenu mnNewMenu_3 = new JMenu("Ayuda");
 		menuBar.add(mnNewMenu_3);

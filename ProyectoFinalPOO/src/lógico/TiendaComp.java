@@ -121,6 +121,9 @@ public class TiendaComp {
 	public void InsertarPersona(Persona persona) {
 		misPersonas.add(persona);
 	}
+	public void InsertarCombo(Combo combo) {
+		cVendidos.add(combo);
+	}
 	
 	
 	
@@ -191,7 +194,7 @@ public class TiendaComp {
 		for(Componente componente : misComponentes ) {
 			if(componente instanceof DiscoDuro) {
 				if(componente.cant>0) {
-					System.out.println(componente.cant);
+					//System.out.println(componente.cant);
 					cantidad = componente.cant;
 					DiscosD[ind]="("+cantidad+") "+componente.Marca+" | "+componente.precio+" | "+componente.numSerie+" | "+componente.Dato1()+" | "+componente.Dato2()+" | "+ componente.Dato3();
 					ind++;
