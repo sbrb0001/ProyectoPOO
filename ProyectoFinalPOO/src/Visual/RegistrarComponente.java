@@ -367,7 +367,9 @@ public class RegistrarComponente extends JDialog {
 				JButton okButton = new JButton("Agregar");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						Componente aux= null;
+						if(componenteCbx.getSelectedIndex()!=0) {
+							
+								Componente aux= null;
 						String marca= marcaTxt.getText();
 						double precio= Double.valueOf(precioSpn.getValue().toString());
 						String numSerie= numSerieTxt.getText();
@@ -441,6 +443,13 @@ public class RegistrarComponente extends JDialog {
 							
 						TiendaComp.getInstance().InsertarComp(aux);
 						JOptionPane.showMessageDialog(null, "Componente Agregado!", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+						}else
+						{
+							if(componenteCbx.getSelectedIndex()==0) {
+								JOptionPane.showMessageDialog(null, "Error, debe seleccionar un componente antes de registrar", "Error", JOptionPane.ERROR_MESSAGE);
+							}
+						}
+					
 						
 					}
 				});
