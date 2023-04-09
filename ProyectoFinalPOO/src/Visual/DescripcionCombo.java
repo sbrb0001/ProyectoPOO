@@ -1,22 +1,16 @@
 package Visual;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.FlowLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JTextField;
-import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.table.DefaultTableModel;
 
+import lógico.Combo;
 import lógico.Componente;
 import lógico.DiscoDuro;
 import lógico.Factura;
@@ -24,21 +18,30 @@ import lógico.MicroProcesador;
 import lógico.Ram;
 import lógico.TMadre;
 import lógico.TiendaComp;
+import javax.swing.JLabel;
+import javax.swing.JTextPane;
+import javax.swing.ListSelectionModel;
+import javax.swing.JTextField;
 import javax.swing.border.EtchedBorder;
+import javax.swing.table.DefaultTableModel;
 
-public class ListaFacturas extends JDialog {
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.Color;
+
+public class DescripcionCombo extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private JTable table;
 	private DefaultTableModel model;
 	private Object rows[];
-	
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public static void main(String args) {
 		try {
-			ListaFacturas dialog = new ListaFacturas();
+			DescripcionCombo dialog = new DescripcionCombo(args);
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -49,13 +52,15 @@ public class ListaFacturas extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public ListaFacturas() {
-		setTitle("Listado de Facturas");
-		setBounds(100, 100, 554, 379);
-		setSize(800, 400);
+	public DescripcionCombo(String string) {
+		setTitle("Descripción del Combo");
+		Combo combo = BuscarCombo(string);
+		
+		setBounds(100, 100, 528, 364);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
+		setSize(800, 400);
 		contentPanel.setLayout(null);
 		{
 			JPanel panel = new JPanel();
@@ -64,29 +69,24 @@ public class ListaFacturas extends JDialog {
 			panel.setLayout(null);
 			{
 				JPanel panel_1 = new JPanel();
-				panel_1.setBounds(10, 11, 765, 40);
+				panel_1.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
+				panel_1.setBounds(10, 11, 765, 32);
 				panel.add(panel_1);
 				panel_1.setLayout(null);
 				{
-					JPanel panel_2 = new JPanel();
-					panel_2.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-					panel_2.setBackground(Color.LIGHT_GRAY);
-					panel_2.setBounds(-12, 11, 780, 26);
-					panel_1.add(panel_2);
-					panel_2.setLayout(null);
-					{
-						JLabel lblFacturas = new JLabel("Facturas emitidas");
-						lblFacturas.setBounds(342, 7, 130, 14);
-						panel_2.add(lblFacturas);
-					}
+					JLabel lblNombreCombo = new JLabel("New label");
+					lblNombreCombo.setFont(new Font("Tahoma", Font.BOLD, 13));
+					lblNombreCombo.setBounds(319, 11, 100, 14);
+					panel_1.add(lblNombreCombo);
+					lblNombreCombo.setText(combo.getNombre());
 				}
 			}
 			{
 				JScrollPane scrollPane = new JScrollPane();
-				scrollPane.setBounds(10, 54, 765, 245);
+				scrollPane.setBounds(10, 54, 765, 256);
 				panel.add(scrollPane);
 				{
-					String[] headers = {"Factura","Comprador","Disco Duros", "Ram", "Microprocesador","Tarjetas Madre","Precio Total"};
+					String[] headers = {"Componentes","Marca","Numero de serie", "Precio"};
 
 					table = new JTable();
 					table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -98,7 +98,7 @@ public class ListaFacturas extends JDialog {
 					{
 						JPanel buttonPane = new JPanel();
 						buttonPane.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
-						buttonPane.setBounds(10, 313, 764, 37);
+						buttonPane.setBounds(10, 321, 764, 37);
 						contentPanel.add(buttonPane);
 						buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 						
@@ -112,43 +112,51 @@ public class ListaFacturas extends JDialog {
 						btnSalir.setEnabled(true);
 					}
 					
-					ListaFactura();
+					ListaComponentes(combo);
 				}
 			}
 		}
 	}
-	private void ListaFactura() {
+	private void ListaComponentes(Combo combo) {
 		model.setRowCount(0);
 		rows = new Object[model.getColumnCount()];
-		
-		for (Factura factura : TiendaComp.getInstance().getMisFacturas()) {
-			rows[0] = factura.getCodigo();
-			rows[1] = factura.getPersona().getNombre();
 			
-			int cant1=0, cant2=0, cant3=0, cant4=0;
+		for(Componente componente : combo.getLosComponentes()) {
 			
-			for(Componente componente : factura.getMisComponentes()) {
+			if(componente instanceof MicroProcesador) {
+				rows[0] = "Microprocesador";
 				
-				if(componente instanceof MicroProcesador) {
-					cant1++;
-				}
-				else if(componente instanceof Ram) {
-					cant2++;
-				}
-				else if (componente instanceof TMadre){
-					cant3++;
-				}
-				else if (componente instanceof DiscoDuro){
-					cant4++;
-				}
 			}
-			rows[2] = cant4;
-			rows[3] = cant2;
-			rows[4] = cant1;
-			rows[5] = cant3;
-		
-
+			else if(componente instanceof Ram) {
+				rows[0] = "Memoria Ram";
+				
+			}
+			else if (componente instanceof TMadre){
+				rows[0] = "Tarjeta Madre";
+				
+			}
+			else if (componente instanceof DiscoDuro){
+				rows[0] = "Disco Duro";
+				
+			}
+			rows[1] = componente.getMarca();
+			rows[2] = componente.getNumSerie();
+			rows[3] = componente.getPrecio();
 			model.addRow(rows);
 		}
+
+			//model.addRow(rows);
+		
+	}
+	public Combo BuscarCombo(String string) {
+		
+		for(Combo combo : TiendaComp.getInstance().getcVendidos()) {
+			if(string.contains(combo.getNombre())){
+				return combo;
+			}
+		}
+		
+		return null;
+		
 	}
 }

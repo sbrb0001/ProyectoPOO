@@ -6,11 +6,13 @@ public class Combo {
 	
 	private String nombre;
 	private ArrayList<Componente> losComponentes;
+	private int cant;
 	
-	public Combo(ArrayList<Componente> losComponentes, String nombre) {
+	public Combo(ArrayList<Componente> losComponentes, String nombre, int cant) {
 		super();
-		this.losComponentes = new ArrayList<Componente>();
+		this.losComponentes = losComponentes;
 		this.nombre = nombre;
+		this.cant = cant;
 	}
 
 	public ArrayList<Componente> getLosComponentes() {
@@ -27,6 +29,14 @@ public class Combo {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+
+	public int getCant() {
+		return cant;
+	}
+
+	public void setCant(int cant) {
+		this.cant = cant;
 	}
 	
 	
