@@ -445,6 +445,7 @@ public class RegistrarComponente extends JDialog {
 						JOptionPane.showMessageDialog(null, "Componente Agregado!", "Informacion", JOptionPane.INFORMATION_MESSAGE);
 						}else
 						{
+							//aqui tomamos uso de referencia de exepciones
 							if(componenteCbx.getSelectedIndex()==0) {
 								JOptionPane.showMessageDialog(null, "Error, debe seleccionar un componente antes de registrar", "Error", JOptionPane.ERROR_MESSAGE);
 							}
