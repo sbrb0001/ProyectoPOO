@@ -28,6 +28,7 @@ import javax.swing.border.SoftBevelBorder;
 import javax.swing.border.MatteBorder;
 import javax.swing.border.EtchedBorder;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import java.awt.event.ActionListener;
@@ -440,6 +441,7 @@ public class MenuVenta extends JDialog {
 						TiendaComp.getInstance().setTMadres(new String[100]);	
 						//System.out.println(factura.getMisComponentes());
 						//System.out.println(TiendaComp.getInstance().getMisComponentes());
+						JOptionPane.showMessageDialog(null, "Compra Satisfactoria!", "Informacion", JOptionPane.INFORMATION_MESSAGE);
 						dispose();
 					
 						

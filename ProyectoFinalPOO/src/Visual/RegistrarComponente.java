@@ -16,12 +16,14 @@ import org.omg.CORBA.PRIVATE_MEMBER;
 
 import lógico.Componente;
 import lógico.DiscoDuro;
+import lógico.MicroProcesador;
 import lógico.Ram;
 import lógico.TMadre;
 import lógico.TiendaComp;
 
 import javax.swing.JLabel;
 import javax.swing.JComboBox;
+import javax.swing.AbstractListModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
 import javax.swing.JTextField;
@@ -54,7 +56,8 @@ public class RegistrarComponente extends JDialog {
 	private JComboBox componenteCbx;
 	private JTextField conexiontxt;
 	private DefaultListModel modeloo = new DefaultListModel<>();
-	
+	private String [] strings = new String[100];
+	private int ind =0;
 	/**
 	 * Launch the application.
 	 */
@@ -74,6 +77,7 @@ public class RegistrarComponente extends JDialog {
 	public RegistrarComponente() {
 		
 		setBounds(100, 100, 525, 469);
+		setSize(540,480);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(new Color(224, 255, 255));
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -195,6 +199,8 @@ public class RegistrarComponente extends JDialog {
 		panel_2.add(scrollPane, BorderLayout.CENTER);
 		
 		JList list = new JList();
+
+		list.setValueIsAdjusting(true);
 		list.setFont(new Font("Lucida Grande", Font.PLAIN, 12));
 		scrollPane.setViewportView(list);
 		
@@ -212,7 +218,10 @@ public class RegistrarComponente extends JDialog {
 		JButton btnNewButton = new JButton("Agregar Conexión");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				modeloo.addElement(conexiontxt.getName());
+				
+				strings[ind]=conexiontxt.getText();
+				ind++;
+				modeloo.addElement(conexiontxt.getText());
 				list.setModel(modeloo);
 			}
 		});
@@ -349,8 +358,6 @@ public class RegistrarComponente extends JDialog {
 			{
 				JButton okButton = new JButton("Agregar");
 				okButton.addActionListener(new ActionListener() {
-					
-
 					public void actionPerformed(ActionEvent e) {
 						Componente aux= null;
 						String marca= marcaTxt.getText();
@@ -358,31 +365,62 @@ public class RegistrarComponente extends JDialog {
 						String numSerie= numSerieTxt.getText();
 						int cantidad= Integer.valueOf(cantidadSPN.getValue().toString());
 						if(componenteCbx.getSelectedIndex()==1) {
-							String modelo=modeloMadretxt.getName();
-							String modelo1=sockettxt.getName();
-							String modelo2=ramTxt.getName();
+							String modelo=modeloMadretxt.getText();
+							String modelo1=sockettxt.getText();
+							String modelo2=ramTxt.getText();
 				
-							aux= new TMadre(marca, numSerie, cantidad, precio, modelo, modelo1, modelo2, null);
-							
+							aux= new TMadre(marca, numSerie, cantidad, precio, modelo, modelo1, modelo2, strings);
+							strings = new String[100];
 						}
 						if(componenteCbx.getSelectedIndex()==2) {
-							String modelo= modeloDiscotxt.getName();
+							String modelo= modeloDiscotxt.getText();
 							double almacenamiento= Double.valueOf(capacidadspn.getValue().toString());
-							String tipoConector=conexioncbx.getName();
+							String tipoConector=null;
+							if(conexioncbx.getSelectedIndex()==1) {
+								tipoConector = "IDE";
+							}
+							else if(conexioncbx.getSelectedIndex()==2) {
+								tipoConector = "SATA";
+							}
+							else if(conexioncbx.getSelectedIndex()==3) {
+								tipoConector = "SATA-2";
+							}
+							else if(conexioncbx.getSelectedIndex()==4) {
+								tipoConector = "SATA-3";
+							}
+							
 							aux= new DiscoDuro(marca, numSerie, cantidad, precio, modelo, almacenamiento, tipoConector);
 							
 						}
 						if(componenteCbx.getSelectedIndex()==3) {
-							String tipoAlmacenamientoString = almecenamietoMemoriaRamcbx.getName();
+							String tipoAlmacenamientoString = null;
+							if(almecenamietoMemoriaRamcbx.getSelectedIndex()==1) {
+								tipoAlmacenamientoString = "GB";
+							}
+							else if(almecenamietoMemoriaRamcbx.getSelectedIndex()==2) {
+								tipoAlmacenamientoString = "MB";
+							}
+
 							String tipoMEMString= memoriaTipoCBX.getName();
+							if(memoriaTipoCBX.getSelectedIndex()==1) {
+								tipoMEMString = "DDR";
+							}
+							else if(memoriaTipoCBX.getSelectedIndex()==2) {
+								tipoMEMString = "DDR-2";
+							}
+							else if(memoriaTipoCBX.getSelectedIndex()==3) {
+								tipoMEMString = "DDR-3";
+							}
+							
 							double capacid= Double.valueOf(memoriaRamCapacidadspn.getValue().toString());
 							aux = new Ram(marca, numSerie, cantidad, precio, capacid, tipoMEMString, tipoAlmacenamientoString);
 						}
 						if(componenteCbx.getSelectedIndex()==4) {
-							String marcaString = marcaTxt.getName();
-							String modelString = modeloTXT.getName();
-							String tipoConexionString= microTipoconexiontxt.getName();
-							String tipoConectorString=tipoConectortxt.getName();
+						//	String marcaString = marcaTxt.getText();
+							String modelString = modeloTXT.getText();
+							String tipoConexionString= microTipoconexiontxt.getText();
+							String tipoConectorString=tipoConectortxt.getText();
+						//	aux = new MicroProcesador(marca, numSerie, cantidad, precio, modelString, tipoConexionString, precio, tipoConectorString);
 						}
 							
 						TiendaComp.getInstance().InsertarComp(aux);
