@@ -75,7 +75,7 @@ public class RegistrarComponente extends JDialog {
 		
 		setBounds(100, 100, 525, 469);
 		getContentPane().setLayout(new BorderLayout());
-		contentPanel.setBackground(new Color(224, 255, 255));
+		contentPanel.setBackground(new Color(240, 255, 255));
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
