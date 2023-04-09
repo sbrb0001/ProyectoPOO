@@ -2,15 +2,17 @@ package lógico;
 
 public class MicroProcesador extends Componente {
 	protected String modelo;
-	protected String tipiConexion;
+	protected String tipoConexion;
 	protected double velocidad;
+	protected String tipoAlmacenamiemtoString;
 	
 	public MicroProcesador(String marca, String numSerie, int cant, double precio, String modelo, String tipiConexion,
-			double velocidad) {
+			double velocidad,String tipoAlmacenamiemtoString) {
 		super(marca, numSerie, cant, precio);
 		this.modelo = modelo;
-		this.tipiConexion = tipiConexion;
+		this.tipoConexion = tipiConexion;
 		this.velocidad = velocidad;
+		this.tipoAlmacenamiemtoString=tipoAlmacenamiemtoString;
 	}
 
 	public String getModelo() {
@@ -22,11 +24,11 @@ public class MicroProcesador extends Componente {
 	}
 
 	public String getTipiConexion() {
-		return tipiConexion;
+		return tipoConexion;
 	}
 
 	public void setTipiConexion(String tipiConexion) {
-		this.tipiConexion = tipiConexion;
+		this.tipoConexion = tipiConexion;
 	}
 
 	public double getVelocidad() {
@@ -46,7 +48,7 @@ public class MicroProcesador extends Componente {
 	@Override
 	public String Dato2() {
 		// TODO Auto-generated method stub
-		return tipiConexion;
+		return tipoConexion;
 	}
 
 	@Override

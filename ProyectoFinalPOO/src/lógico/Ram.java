@@ -1,14 +1,16 @@
 package lógico;
 
 public class Ram extends Componente {
-	protected float memoria;
+	protected double memoria;
+	protected String tipoAlmacenamiemtoString;
 	protected String tipoMemoria;
-	public Ram(String marca, String numSerie, int cant, double precio, float memoria, String tipoMemoria) {
+	public Ram(String marca, String numSerie, int cant, double precio, double capacidad, String tipoMemoria,String tipoAlmacenamiemtoString) {
 		super(marca, numSerie, cant, precio);
-		this.memoria = memoria;
+		this.memoria = capacidad;
 		this.tipoMemoria = tipoMemoria;
+		this.tipoAlmacenamiemtoString=tipoAlmacenamiemtoString;
 	}
-	public float getMemoria() {
+	public double getMemoria() {
 		return memoria;
 	}
 	public void setMemoria(float memoria) {
@@ -34,6 +36,12 @@ public class Ram extends Componente {
 	public String Dato3() {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	public String getTipoAlmacenamiemtoString() {
+		return tipoAlmacenamiemtoString;
+	}
+	public void setTipoAlmacenamiemtoString(String tipoAlmacenamiemtoString) {
+		this.tipoAlmacenamiemtoString = tipoAlmacenamiemtoString;
 	}
 	
 }

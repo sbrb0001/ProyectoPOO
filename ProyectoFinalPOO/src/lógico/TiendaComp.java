@@ -122,11 +122,13 @@ public class TiendaComp {
 		misPersonas.add(persona);
 	}
 	
+	
+	
 	public void GenerarComponentes() {    //Esta funcion es temporal, es solo para crear los compenentes y no tener que crealos cada vex que se corra el programa/
 		
-		MicroProcesador mProcesador = new MicroProcesador("Apple", "26", 5, 420, "rojo", "Inalambrica", 20); 
-		MicroProcesador mProcesador2 = new MicroProcesador("Tuyo", "80", 3, 663, "amarillo", "Inalambrica", 20);
-		Ram ram = new Ram ("Android", "23", 3, 500, 50, "grande");
+		MicroProcesador mProcesador = new MicroProcesador("Apple", "26", 5, 420, "rojo", "Inalambrica", 20, null); 
+		MicroProcesador mProcesador2 = new MicroProcesador("Tuyo", "80", 3, 663, "amarillo", "Inalambrica", 20, null);
+		Ram ram = new Ram ("Android", "23", 3, 500, 50, "grande", null);
 		DiscoDuro DiscoD = new DiscoDuro ("LT", "22", 3, 300, "azul", 64, "Fijo");
 		String[] string = {"usb", "rjo"};
 		TMadre tMadre = new TMadre("Merch", "33", 2, 500, "Verde", "Alambrico", "LT", string);
