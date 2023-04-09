@@ -119,23 +119,26 @@ public class ListaFacturas extends JDialog {
 	private void ListaFactura() {
 		model.setRowCount(0);
 		rows = new Object[model.getColumnCount()];
+		String serie = null;
 		for (Factura factura : TiendaComp.getInstance().getMisFacturas()) {
 			rows[0] = factura.getCodigo();
 			rows[1] = factura.getPersona().getNombre();
+			
 			int cant1=0, cant2=0, cant3=0, cant4=0;
-			for(Componente componente : factura.getClon()) {
+			
+			for(Componente componente : factura.getMisComponentes()) {
 				
 				if(componente instanceof MicroProcesador) {
-					cant1 = componente.getCant();;
+					cant1++;
 				}
 				else if(componente instanceof Ram) {
-					cant2 = componente.getCant();
+					cant2++;
 				}
 				else if (componente instanceof TMadre){
-					cant3 = componente.getCant();
+					cant3++;
 				}
 				else if (componente instanceof DiscoDuro){
-					cant4 = componente.getCant();
+					cant4++;
 				}
 			}
 			rows[2] = cant4;

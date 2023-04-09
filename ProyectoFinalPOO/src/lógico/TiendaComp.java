@@ -225,7 +225,7 @@ public class TiendaComp {
 				
 				for(ind=0; Carrito[ind]!=null; ind++) {
 					cont++;
-					if(Carrito[ind].contains(componente.numSerie)) {
+					if(Carrito[ind].contains(componente.numSerie) && string.contains(componente.numSerie)) {
 						//ind2 = ind;
 						if(componente instanceof MicroProcesador) {
 							cant1[0]++;
@@ -295,45 +295,47 @@ public class TiendaComp {
 		
 		int ind;
 		for(Componente componente : misComponentes) {
-			
-			if(string.contains(componente.numSerie)) {
-				componente.cant++;
-			}
-		}
-		for(Componente componente : misComponentes) {
-			for(ind=0; Carrito[ind]!=null; ind++) {
-				if(Carrito[ind].contains(componente.numSerie)) {
-					if(componente instanceof MicroProcesador) {
-						if(cant1[0]-1 != 0) {
-							cant1[0]--;
-							Carrito[ind]="("+cant1[0]+") "+componente.Marca+" | "+componente.precio+" | "+componente.numSerie+" | "+componente.Dato1()+" | "+componente.Dato2()+" | "+ componente.Dato3();
-							return Carrito;
+				
+				for(ind=0; Carrito[ind]!=null; ind++) {
+				//	if(string.contains(componente.numSerie)) {
+				//		componente.cant++;
+					if(Carrito[ind].contains(componente.numSerie) && string.contains(componente.numSerie)) {
+						componente.cant++;
+						if(componente instanceof MicroProcesador) {
+							if(cant1[0]-1 != 0) {
+								cant1[0]--;
+								Carrito[ind]="("+cant1[0]+") "+componente.Marca+" | "+componente.precio+" | "+componente.numSerie+" | "+componente.Dato1()+" | "+componente.Dato2()+" | "+ componente.Dato3();
+								return Carrito;
+							}
 						}
-					}
-					else if(componente instanceof TMadre) {
-						if(cant1[1]-1 != 0) {
-							cant1[1]--;
-							Carrito[ind]="("+cant1[1]+") "+componente.Marca+" | "+componente.precio+" | "+componente.numSerie+" | "+componente.Dato1()+" | "+componente.Dato2()+" | "+ componente.Dato3();
-							return Carrito;
+						else if(componente instanceof TMadre) {
+							if(cant1[1]-1 != 0) {
+								cant1[1]--;
+								Carrito[ind]="("+cant1[1]+") "+componente.Marca+" | "+componente.precio+" | "+componente.numSerie+" | "+componente.Dato1()+" | "+componente.Dato2()+" | "+ componente.Dato3();
+								return Carrito;
+							}
 						}
-					}
-					else if(componente instanceof Ram) {
-						if(cant1[2]-1 != 0) {
-							cant1[2]--;
-							Carrito[ind]="("+cant1[2]+") "+componente.Marca+" | "+componente.precio+" | "+componente.numSerie+" | "+componente.Dato1()+" | "+componente.Dato2()+" | "+ componente.Dato3();
-							return Carrito;
+						else if(componente instanceof Ram) {
+							if(cant1[2]-1 != 0) {
+								cant1[2]--;
+								Carrito[ind]="("+cant1[2]+") "+componente.Marca+" | "+componente.precio+" | "+componente.numSerie+" | "+componente.Dato1()+" | "+componente.Dato2()+" | "+ componente.Dato3();
+								return Carrito;
+							}
 						}
-					}
-					else if(componente instanceof DiscoDuro) {
-						if(cant1[3]-1 != 0) {
-							cant1[3]--;
-							Carrito[ind]="("+cant1[3]+") "+componente.Marca+" | "+componente.precio+" | "+componente.numSerie+" | "+componente.Dato1()+" | "+componente.Dato2()+" | "+ componente.Dato3();
-							return Carrito;
+						else if(componente instanceof DiscoDuro) {
+							if(cant1[3]-1 != 0) {
+								cant1[3]--;
+								Carrito[ind]="("+cant1[3]+") "+componente.Marca+" | "+componente.precio+" | "+componente.numSerie+" | "+componente.Dato1()+" | "+componente.Dato2()+" | "+ componente.Dato3();
+								return Carrito;
+							}
 						}
 					}
 				}
 			}
-		}
+		
+		//for(Componente componente : misComponentes) {
+			
+	//	}
 		
 		for(int indi =0; Carrito[indi]!= null; indi++) {
 			
@@ -397,12 +399,20 @@ public class TiendaComp {
 	public ArrayList<Componente> AgregarCompFact(String [] carrito) {
 		
 		ArrayList<Componente> componente = new ArrayList<Componente>();
-		
 		String c=null;
 		for(int ind=0; carrito[ind]!= null; ind++) {	
 			for(Componente comp : misComponentes) {
 				if(carrito[ind].contains(comp.numSerie)) {
-						//comp.setCant((Integer.valueOf(c)));
+					
+					for(int indice = 1; carrito[ind].charAt(indice) != ' '; indice++) {
+						
+							if(carrito[ind].charAt(indice)==')') {
+								//System.out.println(carrito[ind].charAt(indice));
+								c=carrito[ind].substring(1, indice);
+								//System.out.println(c);
+							}							
+					}
+					//comp.setCant((Integer.valueOf(c)));;		//comp.setCant((Integer.valueOf(c)));
 						//factura.getMisComponentes().add(comp);
 						//System.out.println("hola");
 						//c = null;
@@ -415,7 +425,10 @@ public class TiendaComp {
 							}
 						}*/
 						//comp.cant = Integer.valueOf(c);
+					for(int indice=0; indice<Integer.valueOf(c); indice++) {
 						componente.add(comp);
+					}
+						
 						//System.out.println(comp.cant);
 						//c = null;
 						//System.out.println(comp.cant);
@@ -428,41 +441,6 @@ public class TiendaComp {
 		return componente;	
 		
 	}
-	
-	public void ArreglarFact(Factura factura, String[] carrito) {
-		
-		String c=null;
-		for(int ind=0; carrito[ind]!= null; ind++) {	
-			for(Componente comp : factura.getMisComponentes()) {
-				if(carrito[ind].contains(comp.numSerie)){
-					for(int indice = 1; carrito[ind].charAt(indice) != ' '; indice++) {
-						
-							if(carrito[ind].charAt(indice)==')') {
-								//System.out.println(carrito[ind].charAt(indice));
-								c=carrito[ind].substring(1, indice);
-								//System.out.println(c);
-							}							
-					}
-					comp.setCant((Integer.valueOf(c)));;
-					//factura.getMisComponentes().add(comp);
-					//System.out.println("hola");
-					//c = null;
-					for(Componente compo : factura.getClon()) {
-						if(carrito[ind].contains(compo.numSerie)) {
-							//System.out.println(c);
-							compo.setCant((Integer.valueOf(c)));
-						//	System.out.println(compo.cant);
-							//componente.add(compo);
-						}
-					}
-					//System.out.println(comp.cant);
-					//c=null;
-				}
-
-			}
-		}
-	}
-	
 	
 	public Persona PersonaLogg() {
 		
