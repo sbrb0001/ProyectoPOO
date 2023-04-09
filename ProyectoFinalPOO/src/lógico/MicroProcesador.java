@@ -4,15 +4,15 @@ public class MicroProcesador extends Componente {
 	protected String modelo;
 	protected String tipoConexion;
 	protected double velocidad;
-	protected String tipoAlmacenamiemtoString;
+	protected String tipoProcesamiento;
 	
 	public MicroProcesador(String marca, String numSerie, int cant, double precio, String modelo, String tipiConexion,
-			double velocidad,String tipoAlmacenamiemtoString) {
+			double velocidad,String tipoProcesamiento) {
 		super(marca, numSerie, cant, precio);
 		this.modelo = modelo;
 		this.tipoConexion = tipiConexion;
 		this.velocidad = velocidad;
-		this.tipoAlmacenamiemtoString=tipoAlmacenamiemtoString;
+		this.tipoProcesamiento=tipoProcesamiento;
 	}
 
 	public String getModelo() {

@@ -49,10 +49,8 @@ public class RegistrarComponente extends JDialog {
 	private JTextField sockettxt;
 	private JTextField ramTxt;
 	private JTextField modeloDiscotxt;
-	private JTextField marcaTXT;
 	private JTextField modeloTXT;
 	private JTextField microTipoconexiontxt;
-	private JTextField tipoConectortxt;
 	private JComboBox componenteCbx;
 	private JTextField conexiontxt;
 	private DefaultListModel modeloo = new DefaultListModel<>();
@@ -76,7 +74,15 @@ public class RegistrarComponente extends JDialog {
 	 */
 	public RegistrarComponente() {
 		
+		
+		JPanel panel_3 = new JPanel();
+		panel_3.setBackground(new Color(255, 255, 255));
+		panel_3.setBounds(6, 170, 528, 230);
+		contentPanel.add(panel_3);
+		panel_3.setLayout(null);
+		
 		setBounds(100, 100, 525, 469);
+		setLocationRelativeTo(null);
 		setSize(540,480);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(new Color(240, 255, 255));
@@ -89,7 +95,7 @@ public class RegistrarComponente extends JDialog {
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(255, 255, 255));
 		panel.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel.setBounds(6, 6, 513, 65);
+		panel.setBounds(6, 6, 528, 65);
 		contentPanel.add(panel);
 		panel.setLayout(null);
 		
@@ -107,7 +113,7 @@ public class RegistrarComponente extends JDialog {
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(new Color(255, 255, 255));
 		panel_1.setBorder(new TitledBorder(null, "Informaci\u00F3n General", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panel_1.setBounds(6, 72, 513, 97);
+		panel_1.setBounds(6, 72, 528, 97);
 		contentPanel.add(panel_1);
 		panel_1.setLayout(null);
 		
@@ -149,11 +155,54 @@ public class RegistrarComponente extends JDialog {
 		cantidadSPN.setBounds(364, 51, 124, 26);
 		panel_1.add(cantidadSPN);
 		
+		JPanel microprocesadorPanel = new JPanel();
+		microprocesadorPanel.setBackground(new Color(255, 255, 255));
+		microprocesadorPanel.setBorder(new TitledBorder(null, "Informaci\u00F3n de Microprocesador: ", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		microprocesadorPanel.setBounds(6, 170, 528, 194);
+		contentPanel.add(microprocesadorPanel);
+		microprocesadorPanel.setLayout(null);
+		
+		JLabel lblNewLabel_16 = new JLabel("Modelo: ");
+		lblNewLabel_16.setBounds(6, 30, 61, 16);
+		microprocesadorPanel.add(lblNewLabel_16);
+		
+		modeloTXT = new JTextField();
+		modeloTXT.setBounds(6, 47, 401, 26);
+		microprocesadorPanel.add(modeloTXT);
+		modeloTXT.setColumns(10);
+		
+		JLabel lblNewLabel_17 = new JLabel("Tipo de conexión: ");
+		lblNewLabel_17.setBounds(6, 82, 117, 16);
+		microprocesadorPanel.add(lblNewLabel_17);
+		
+		microTipoconexiontxt = new JTextField();
+		microTipoconexiontxt.setBounds(6, 104, 401, 26);
+		microprocesadorPanel.add(microTipoconexiontxt);
+		microTipoconexiontxt.setColumns(10);
+		
+		JLabel lblNewLabel_18 = new JLabel("Velocidad: ");
+		lblNewLabel_18.setBounds(6, 128, 82, 16);
+		microprocesadorPanel.add(lblNewLabel_18);
+		
+		JSpinner velocidadSPN = new JSpinner(model);
+		velocidadSPN.setEditor(new JSpinner.NumberEditor(velocidadSPN, "0.00"));
+		velocidadSPN.setBounds(6, 151, 167, 26);
+		microprocesadorPanel.add(velocidadSPN);
+		
+		JLabel lblNewLabel_15 = new JLabel("Tipo de Procesamiento:");
+		lblNewLabel_15.setBounds(245, 128, 179, 16);
+		microprocesadorPanel.add(lblNewLabel_15);
+		
+		JComboBox velocidadCBX = new JComboBox();
+		velocidadCBX.setModel(new DefaultComboBoxModel(new String[] {"<<Selección>>", "MHz ", "GHz"}));
+		velocidadCBX.setBounds(245, 152, 162, 27);
+		microprocesadorPanel.add(velocidadCBX);
+		
 		
 		JPanel tmadrePanel = new JPanel();
 		tmadrePanel.setBackground(new Color(255, 255, 255));
 		tmadrePanel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "Informaci\u00F3n de Tarjeta Madre: ", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-		tmadrePanel.setBounds(6, 170, 513, 230);
+		tmadrePanel.setBounds(6, 170, 528, 230);
 		contentPanel.add(tmadrePanel);
 		tmadrePanel.setLayout(null);
 		
@@ -191,7 +240,7 @@ public class RegistrarComponente extends JDialog {
 	
 		
 		JPanel panel_2 = new JPanel();
-		panel_2.setBounds(6, 160, 492, 64);
+		panel_2.setBounds(16, 151, 495, 62);
 		tmadrePanel.add(panel_2);
 		panel_2.setLayout(new BorderLayout(0, 0));
 		
@@ -227,126 +276,85 @@ public class RegistrarComponente extends JDialog {
 		});
 		btnNewButton.setBounds(354, 99, 144, 29);
 		tmadrePanel.add(btnNewButton);
-		
-		JPanel discoDuropanel = new JPanel();
-		discoDuropanel.setBackground(new Color(255, 255, 255));
-		discoDuropanel.setBounds(6, 170, 513, 230);
-		contentPanel.add(discoDuropanel);
-		discoDuropanel.setBorder(new TitledBorder(null, "Informaci\u00F3n de Disco Duro: ", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		discoDuropanel.setLayout(null);
-		
-		JLabel lblNewLabel_8 = new JLabel("Modelo:");
-		lblNewLabel_8.setBounds(6, 34, 61, 16);
-		discoDuropanel.add(lblNewLabel_8);
-		
-		modeloDiscotxt = new JTextField();
-		modeloDiscotxt.setBounds(6, 50, 391, 26);
-		discoDuropanel.add(modeloDiscotxt);
-		modeloDiscotxt.setColumns(10);
-		
-		JLabel lblNewLabel_9 = new JLabel("Tipo de Almacenamiento:");
-		lblNewLabel_9.setBounds(6, 88, 167, 16);
-		discoDuropanel.add(lblNewLabel_9);
-		
-		JComboBox discoDurocbx = new JComboBox();
-		discoDurocbx.setBounds(6, 116, 167, 27);
-		discoDurocbx.setModel(new DefaultComboBoxModel(new String[] {"<<Seleccionar>>", "Gigabytes", "Terabytes"}));
-		discoDuropanel.add(discoDurocbx);
-		
-		JLabel lblNewLabel_10 = new JLabel("Capacidad: ");
-		lblNewLabel_10.setBounds(254, 88, 85, 16);
-		discoDuropanel.add(lblNewLabel_10);
-		JSpinner capacidadspn = new JSpinner(model);
-		capacidadspn.setBounds(254, 115, 143, 26);
-		capacidadspn.setEditor(new JSpinner.NumberEditor(capacidadspn, "0.00"));
-		
-		discoDuropanel.add(capacidadspn);
-		
-		JLabel lblNewLabel_11 = new JLabel("Tipo de Conexión: ");
-		lblNewLabel_11.setBounds(6, 155, 126, 16);
-		discoDuropanel.add(lblNewLabel_11);
-		
-		JComboBox conexioncbx = new JComboBox();
-		conexioncbx.setBounds(6, 184, 398, 27);
-		conexioncbx.setModel(new DefaultComboBoxModel(new String[] {"<<Seleccionar>>", "IDE", "SATA", "SATA-2", "SATA-3"}));
-		discoDuropanel.add(conexioncbx);
 			
-			JPanel memoriaRamPanel = new JPanel();
-			memoriaRamPanel.setBackground(new Color(255, 255, 255));
-			memoriaRamPanel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "Informaci\u00F3n de Memoria Ram:", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
-			memoriaRamPanel.setBounds(6, 170, 513, 174);
-			contentPanel.add(memoriaRamPanel);
-			memoriaRamPanel.setLayout(null);
+			JPanel discoDuropanel = new JPanel();
+			discoDuropanel.setBackground(new Color(255, 255, 255));
+			discoDuropanel.setBounds(6, 170, 528, 230);
+			contentPanel.add(discoDuropanel);
+			discoDuropanel.setBorder(new TitledBorder(null, "Informaci\u00F3n de Disco Duro: ", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+			discoDuropanel.setLayout(null);
 			
-			JLabel lblNewLabel_12 = new JLabel("Tipo de Almacenamiento: ");
-			lblNewLabel_12.setBounds(6, 29, 164, 16);
-			memoriaRamPanel.add(lblNewLabel_12);
+			JLabel lblNewLabel_8 = new JLabel("Modelo:");
+			lblNewLabel_8.setBounds(6, 34, 61, 16);
+			discoDuropanel.add(lblNewLabel_8);
 			
-			JLabel lblNewLabel_13 = new JLabel("Capacidad: ");
-			lblNewLabel_13.setBounds(236, 29, 79, 16);
-			memoriaRamPanel.add(lblNewLabel_13);
+			modeloDiscotxt = new JTextField();
+			modeloDiscotxt.setBounds(6, 50, 391, 26);
+			discoDuropanel.add(modeloDiscotxt);
+			modeloDiscotxt.setColumns(10);
 			
-			JLabel lblNewLabel_14 = new JLabel("Tipo de Memoria: ");
-			lblNewLabel_14.setBounds(6, 97, 135, 16);
-			memoriaRamPanel.add(lblNewLabel_14);
+			JLabel lblNewLabel_9 = new JLabel("Tipo de Almacenamiento:");
+			lblNewLabel_9.setBounds(6, 88, 167, 16);
+			discoDuropanel.add(lblNewLabel_9);
 			
-				JSpinner memoriaRamCapacidadspn = new JSpinner(model);
-				memoriaRamCapacidadspn.setBounds(236, 56, 143, 26);
-				memoriaRamCapacidadspn.setEditor(new JSpinner.NumberEditor(memoriaRamCapacidadspn, "0.00"));
-				memoriaRamPanel.add(memoriaRamCapacidadspn);
+			JComboBox discoDurocbx = new JComboBox();
+			discoDurocbx.setBounds(6, 116, 167, 27);
+			discoDurocbx.setModel(new DefaultComboBoxModel(new String[] {"<<Seleccionar>>", "Gigabytes", "Terabytes"}));
+			discoDuropanel.add(discoDurocbx);
+			
+			JLabel lblNewLabel_10 = new JLabel("Capacidad: ");
+			lblNewLabel_10.setBounds(254, 88, 85, 16);
+			discoDuropanel.add(lblNewLabel_10);
+			JSpinner capacidadspn = new JSpinner(model);
+			capacidadspn.setBounds(254, 115, 143, 26);
+			capacidadspn.setEditor(new JSpinner.NumberEditor(capacidadspn, "0.00"));
+			
+			discoDuropanel.add(capacidadspn);
+			
+			JLabel lblNewLabel_11 = new JLabel("Tipo de Conexión: ");
+			lblNewLabel_11.setBounds(6, 155, 126, 16);
+			discoDuropanel.add(lblNewLabel_11);
+			
+			JComboBox conexioncbx = new JComboBox();
+			conexioncbx.setBounds(6, 184, 398, 27);
+			conexioncbx.setModel(new DefaultComboBoxModel(new String[] {"<<Seleccionar>>", "IDE", "SATA", "SATA-2", "SATA-3"}));
+			discoDuropanel.add(conexioncbx);
 				
-				JComboBox almecenamietoMemoriaRamcbx = new JComboBox();
-				almecenamietoMemoriaRamcbx.setModel(new DefaultComboBoxModel(new String[] {"<<Seleccionar>>", "GB", "MB"}));
-				almecenamietoMemoriaRamcbx.setBounds(6, 57, 164, 27);
-				memoriaRamPanel.add(almecenamietoMemoriaRamcbx);
+				JPanel memoriaRamPanel = new JPanel();
+				memoriaRamPanel.setBackground(new Color(255, 255, 255));
+				memoriaRamPanel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "Informaci\u00F3n de Memoria Ram:", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
+				memoriaRamPanel.setBounds(6, 170, 528, 174);
+				contentPanel.add(memoriaRamPanel);
+				memoriaRamPanel.setLayout(null);
 				
-				JComboBox memoriaTipoCBX = new JComboBox();
-				memoriaTipoCBX.setModel(new DefaultComboBoxModel(new String[] {"<<Seleccionar>>", "DDR", "DDR-2", "DDr-3"}));
-				memoriaTipoCBX.setBounds(6, 125, 164, 27);
-				memoriaRamPanel.add(memoriaTipoCBX);
+				JLabel lblNewLabel_12 = new JLabel("Tipo de Almacenamiento: ");
+				lblNewLabel_12.setBounds(6, 29, 164, 16);
+				memoriaRamPanel.add(lblNewLabel_12);
 				
-				JPanel microprocesadorPanel = new JPanel();
-				microprocesadorPanel.setBackground(new Color(255, 255, 255));
-				microprocesadorPanel.setBorder(new TitledBorder(null, "Informaci\u00F3n de Microprocesador: ", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-				microprocesadorPanel.setBounds(6, 170, 507, 185);
-				contentPanel.add(microprocesadorPanel);
-				microprocesadorPanel.setLayout(null);
+				JLabel lblNewLabel_13 = new JLabel("Capacidad: ");
+				lblNewLabel_13.setBounds(236, 29, 79, 16);
+				memoriaRamPanel.add(lblNewLabel_13);
 				
-				JLabel lblNewLabel_15 = new JLabel("Marca: ");
-				lblNewLabel_15.setBounds(6, 30, 61, 16);
-				microprocesadorPanel.add(lblNewLabel_15);
+				JLabel lblNewLabel_14 = new JLabel("Tipo de Memoria: ");
+				lblNewLabel_14.setBounds(6, 97, 135, 16);
+				memoriaRamPanel.add(lblNewLabel_14);
 				
-				marcaTXT = new JTextField();
-				marcaTXT.setBounds(50, 25, 411, 26);
-				microprocesadorPanel.add(marcaTXT);
-				marcaTXT.setColumns(10);
-				
-				JLabel lblNewLabel_16 = new JLabel("Modelo: ");
-				lblNewLabel_16.setBounds(6, 63, 61, 16);
-				microprocesadorPanel.add(lblNewLabel_16);
-				
-				modeloTXT = new JTextField();
-				modeloTXT.setBounds(60, 58, 401, 26);
-				microprocesadorPanel.add(modeloTXT);
-				modeloTXT.setColumns(10);
-				
-				JLabel lblNewLabel_17 = new JLabel("Tipo de conexión: ");
-				lblNewLabel_17.setBounds(6, 91, 117, 16);
-				microprocesadorPanel.add(lblNewLabel_17);
-				
-				microTipoconexiontxt = new JTextField();
-				microTipoconexiontxt.setBounds(123, 86, 338, 26);
-				microprocesadorPanel.add(microTipoconexiontxt);
-				microTipoconexiontxt.setColumns(10);
-				
-				JLabel lblNewLabel_18 = new JLabel("Tipo de Conector para Socket: ");
-				lblNewLabel_18.setBounds(6, 119, 193, 16);
-				microprocesadorPanel.add(lblNewLabel_18);
-				
-				tipoConectortxt = new JTextField();
-				tipoConectortxt.setBounds(6, 139, 455, 26);
-				microprocesadorPanel.add(tipoConectortxt);
-				tipoConectortxt.setColumns(10);
+					JSpinner memoriaRamCapacidadspn = new JSpinner(model);
+					memoriaRamCapacidadspn.setBounds(236, 56, 143, 26);
+					memoriaRamCapacidadspn.setEditor(new JSpinner.NumberEditor(memoriaRamCapacidadspn, "0.00"));
+					memoriaRamPanel.add(memoriaRamCapacidadspn);
+					
+					JComboBox almecenamietoMemoriaRamcbx = new JComboBox();
+					almecenamietoMemoriaRamcbx.setModel(new DefaultComboBoxModel(new String[] {"<<Seleccionar>>", "GB", "MB"}));
+					almecenamietoMemoriaRamcbx.setBounds(6, 57, 164, 27);
+					memoriaRamPanel.add(almecenamietoMemoriaRamcbx);
+					
+					JComboBox memoriaTipoCBX = new JComboBox();
+					memoriaTipoCBX.setModel(new DefaultComboBoxModel(new String[] {"<<Seleccionar>>", "DDR", "DDR-2", "DDr-3"}));
+					memoriaTipoCBX.setBounds(6, 125, 164, 27);
+					memoriaRamPanel.add(memoriaTipoCBX);
+					
+					
 			
 			
 		{
@@ -416,11 +424,19 @@ public class RegistrarComponente extends JDialog {
 							aux = new Ram(marca, numSerie, cantidad, precio, capacid, tipoMEMString, tipoAlmacenamientoString);
 						}
 						if(componenteCbx.getSelectedIndex()==4) {
-						//	String marcaString = marcaTxt.getText();
 							String modelString = modeloTXT.getText();
 							String tipoConexionString= microTipoconexiontxt.getText();
-							String tipoConectorString=tipoConectortxt.getText();
-						//	aux = new MicroProcesador(marca, numSerie, cantidad, precio, modelString, tipoConexionString, precio, tipoConectorString);
+							double velocida = Double.valueOf(velocidadSPN.getValue().toString());
+							String tipoVelocidadString=null;
+							if (velocidadCBX.getSelectedIndex()==1) {
+								tipoVelocidadString= "MHz";
+										
+							}if (velocidadCBX.getSelectedIndex()==2) {
+								tipoVelocidadString= "GHz";
+										
+							}
+							
+							aux = new MicroProcesador(marca, numSerie, cantidad, precio, modelString, tipoConexionString, velocida, tipoVelocidadString);//arreglar lo de tipro procesamiento
 						}
 							
 						TiendaComp.getInstance().InsertarComp(aux);
@@ -444,8 +460,7 @@ public class RegistrarComponente extends JDialog {
 			}
 			
 		}
-		
-		
+	
 		componenteCbx.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			int aux= componenteCbx.getSelectedIndex();
@@ -458,6 +473,7 @@ public class RegistrarComponente extends JDialog {
 					precioSpn.setEnabled(false);
 					memoriaRamPanel.setVisible(false);
 					microprocesadorPanel.setVisible(false);
+					panel_3.setVisible(true);
 				}
 				if (aux==1) {
 					tmadrePanel.setVisible(true);
@@ -467,6 +483,8 @@ public class RegistrarComponente extends JDialog {
 					precioSpn.setEnabled(true);
 					memoriaRamPanel.setVisible(false);
 					microprocesadorPanel.setVisible(false);
+					cantidadSPN.setEnabled(true);
+					panel_3.setVisible(false);
 					
 				}
 				if (aux==2) {
@@ -477,6 +495,8 @@ public class RegistrarComponente extends JDialog {
 					precioSpn.setEnabled(true);
 					memoriaRamPanel.setVisible(false);
 					microprocesadorPanel.setVisible(false);
+					panel_3.setVisible(false);
+					cantidadSPN.setEnabled(true);
 					
 				}
 				if (aux==3) {
@@ -487,6 +507,8 @@ public class RegistrarComponente extends JDialog {
 					precioSpn.setEnabled(true);
 					memoriaRamPanel.setVisible(true);
 					microprocesadorPanel.setVisible(false);
+					panel_3.setVisible(false);
+					cantidadSPN.setEnabled(true);
 					
 				}
 				if (aux==4) {
@@ -497,6 +519,8 @@ public class RegistrarComponente extends JDialog {
 					precioSpn.setEnabled(true);
 					memoriaRamPanel.setVisible(false);
 					microprocesadorPanel.setVisible(true);
+					panel_3.setVisible(false);
+					cantidadSPN.setEnabled(true);
 					
 				}
 				
