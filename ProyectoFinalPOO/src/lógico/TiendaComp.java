@@ -1,14 +1,18 @@
 package lógico;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class TiendaComp {
+import org.omg.PortableInterceptor.USER_EXCEPTION;
+
+public class TiendaComp implements Serializable{
 	
+	private static final long serialVersionUID = 1L;
 	private ArrayList<Componente> misComponentes;
 	private ArrayList<Combo> cVendidos;
 	private ArrayList<Persona> misPersonas;
 	private ArrayList<Factura> MisFacturas;
-	public static TiendaComp tienda = null;
+	public static TiendaComp tienda = null; // para manejar singelton
 	public String [] Carrito;
 	public String [] TMadres;
 	public String [] DiscosD;
@@ -16,6 +20,7 @@ public class TiendaComp {
 	public String [] mProcesadores; 
 	public int [] cant1;
 	public static int mCodigo =1; 
+	public static Persona personaLogeada; // para saber que persona se logeo' si un admin o otra persona
 	
 	public TiendaComp() {
 		super();
@@ -536,5 +541,41 @@ public class TiendaComp {
 		}
 		return componente;	
 		
+	}
+
+	public static TiendaComp getTienda() {
+		return tienda;
+	}
+
+	public static void setTienda(TiendaComp tienda) {
+		TiendaComp.tienda = tienda;
+	}
+
+	public int[] getCant1() {
+		return cant1;
+	}
+
+	public void setCant1(int[] cant1) {
+		this.cant1 = cant1;
+	}
+
+	public static int getmCodigo() {
+		return mCodigo;
+	}
+
+	public static void setmCodigo(int mCodigo) {
+		TiendaComp.mCodigo = mCodigo;
+	}
+
+	public static Persona getPersonaLogeada() {
+		return personaLogeada;
+	}
+
+	public static void setPersonaLogeada(Persona personaLogeada) {
+		TiendaComp.personaLogeada = personaLogeada;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 }

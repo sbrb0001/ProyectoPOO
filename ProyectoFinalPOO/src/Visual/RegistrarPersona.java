@@ -51,6 +51,7 @@ public class RegistrarPersona extends JDialog {
 		setBounds(100, 100, 547, 401);
 		setLocationRelativeTo(null);
 		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setBackground(new Color(240, 248, 255));
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -58,6 +59,7 @@ public class RegistrarPersona extends JDialog {
 		setBackground(new Color(173, 216, 230));
 		setForeground(new Color(173, 216, 230));;
 		JPanel panel = new JPanel();
+		panel.setBackground(new Color(255, 255, 255));
 		panel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null), "", TitledBorder.LEADING, TitledBorder.TOP, null, new Color(0, 0, 0)));
 		panel.setBounds(6, 6, 535, 57);
 		contentPanel.add(panel);
@@ -74,6 +76,7 @@ public class RegistrarPersona extends JDialog {
 		panel.add(tipoCuentaCBX);
 
 		JPanel panel_1 = new JPanel();
+		panel_1.setBackground(new Color(255, 255, 255));
 		panel_1.setBorder(new TitledBorder(null, "Informaci\u00F3n General:", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panel_1.setBounds(6, 62, 535, 185);
 		contentPanel.add(panel_1);
@@ -120,6 +123,7 @@ public class RegistrarPersona extends JDialog {
 		panel_1.add(lblNewLabel_5);
 
 		direcciontxt = new JTextField();
+		direcciontxt.setBackground(new Color(245, 245, 245));
 		direcciontxt.setBounds(6, 127, 523, 52);
 		panel_1.add(direcciontxt);
 		direcciontxt.setColumns(10);
@@ -133,8 +137,27 @@ public class RegistrarPersona extends JDialog {
 		usuariotxt.setBounds(370, 48, 159, 26);
 		panel_1.add(usuariotxt);
 		usuariotxt.setColumns(10);
+		
+				JPanel panelCliente = new JPanel();
+				panelCliente.setBackground(new Color(255, 255, 255));
+				panelCliente.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+				panelCliente.setBounds(6, 248, 535, 76);
+				contentPanel.add(panelCliente);
+				panelCliente.setLayout(null);
+				
+						JLabel lblNewLabel_7 = new JLabel("Ocupación: ");
+						lblNewLabel_7.setBounds(6, 28, 85, 16);
+						panelCliente.add(lblNewLabel_7);
+						
+								ocupaciontxt = new JTextField();
+								ocupaciontxt.setBounds(82, 23, 190, 26);
+								panelCliente.add(ocupaciontxt);
+								ocupaciontxt.setColumns(10);
+								
+								panelCliente.setVisible(false);
 
 		JPanel panelEmpleado = new JPanel();
+		panelEmpleado.setBackground(new Color(255, 255, 255));
 		panelEmpleado.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		panelEmpleado.setBounds(6, 248, 535, 76);
 		contentPanel.add(panelEmpleado);
@@ -148,23 +171,9 @@ public class RegistrarPersona extends JDialog {
 		cargotxt.setColumns(10);
 		cargotxt.setBounds(55, 23, 207, 26);
 		panelEmpleado.add(cargotxt);
-
-		JPanel panelCliente = new JPanel();
-		panelCliente.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-		panelCliente.setBounds(6, 248, 535, 76);
-		contentPanel.add(panelCliente);
-		panelCliente.setLayout(null);
-
-		JLabel lblNewLabel_7 = new JLabel("Ocupación: ");
-		lblNewLabel_7.setBounds(6, 28, 85, 16);
-		panelCliente.add(lblNewLabel_7);
-
-		ocupaciontxt = new JTextField();
-		ocupaciontxt.setBounds(82, 23, 190, 26);
-		panelCliente.add(ocupaciontxt);
-		ocupaciontxt.setColumns(10);
 		{
 			JPanel buttonPane = new JPanel();
+			buttonPane.setBackground(new Color(255, 255, 255));
 			buttonPane.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
@@ -194,8 +203,6 @@ public class RegistrarPersona extends JDialog {
 				buttonPane.add(cancelButton);
 			}
 		}
-		
-		panelCliente.setVisible(false);
 		panelEmpleado.setVisible(false);
 		nombretxt.setEnabled(false);
 		telefonotxt.setEnabled(false);

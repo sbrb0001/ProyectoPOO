@@ -51,5 +51,13 @@ public class DiscoDuro extends Componente {
 		// TODO Auto-generated method stub
 		return tipoConector;
 	}
+
+	public String getTipoAlmacenamieString() {
+		return tipoAlmacenamieString;
+	}
+
+	public void setTipoAlmacenamieString(String tipoAlmacenamieString) {
+		this.tipoAlmacenamieString = tipoAlmacenamieString;
+	}
 	
 }
