@@ -40,6 +40,7 @@ public class MenuVenta extends JDialog {
 	private final JPanel contentPanel = new JPanel();
 	private Dimension dim; 
 	private JTextField textMonto;
+	private Factura factura = new Factura (null, null, null, null);
 
 	/**
 	 * Launch the application.
@@ -58,6 +59,7 @@ public class MenuVenta extends JDialog {
 	 * Create the dialog.
 	 */
 	public MenuVenta() {
+	//	factura = null;
 		setTitle("Menú de Ventas");
 	//	TiendaComp.getInstance().GenerarComponentes();
 		TiendaComp.getInstance().GenerarPersona();
@@ -428,12 +430,32 @@ public class MenuVenta extends JDialog {
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						
-						Factura factura = new Factura(TiendaComp.getInstance().CrearCodigoFact(TiendaComp.getInstance().Carrito), TiendaComp.getInstance().PersonaLogg(), null, TiendaComp.getInstance().AgregarCompFact(TiendaComp.getInstance().Carrito));
+						if(factura.getCodigo()!=null) {
+							factura.setMisComponentes(TiendaComp.getInstance().AgregarCompFact(TiendaComp.getInstance().Carrito));
+							//TiendaComp.getInstance().EliminarFact(factura);
+							//TiendaComp.getInstance().InsertarFact(factura);
+							factura.setPersona(TiendaComp.getInstance().PersonaLogg());
+							//TiendaComp.getInstance().EliminarFact(factura);
+							JOptionPane.showMessageDialog(null, "Compra Satisfactoria!", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+							dispose();
+						}
+						else {
+							factura.setCodigo(TiendaComp.getInstance().CrearCodigoFact());
+							factura.setPersona(TiendaComp.getInstance().PersonaLogg());
+							factura.setMisComponentes(TiendaComp.getInstance().AgregarCompFact(TiendaComp.getInstance().Carrito));
+							factura.setcVendidos(null);
+							//TiendaComp.getInstance().EliminarFact(factura);
+							TiendaComp.getInstance().InsertarFact(factura);
+							JOptionPane.showMessageDialog(null, "Compra Satisfactoria!", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+							dispose();
+						}
+						//factura.setMisComponentes(TiendaComp.getInstance().AgregarCompFact(TiendaComp.getInstance().Carrito));
+						//factura = new Factura(TiendaComp.getInstance().CrearCodigoFact(TiendaComp.getInstance().Carrito), TiendaComp.getInstance().PersonaLogg(), null, TiendaComp.getInstance().AgregarCompFact(TiendaComp.getInstance().Carrito));
 					//	TiendaComp.getInstance().InsertarFact(factura);
 					//	factura.setMisComponentes(TiendaComp.getInstance().AgregarCompFact(TiendaComp.getInstance().Carrito));
 						
 					//	TiendaComp.getInstance().ArreglarFact(factura, TiendaComp.getInstance().Carrito);
-						TiendaComp.getInstance().InsertarFact(factura);
+					//	TiendaComp.getInstance().InsertarFact(factura);
 						
 						TiendaComp.getInstance().setCarrito(new String[100]);	
 						TiendaComp.getInstance().setDiscosD(new String[100]);	
@@ -442,12 +464,24 @@ public class MenuVenta extends JDialog {
 						TiendaComp.getInstance().setTMadres(new String[100]);	
 						//System.out.println(factura.getMisComponentes());
 						//System.out.println(TiendaComp.getInstance().getMisComponentes());
-						JOptionPane.showMessageDialog(null, "Compra Satisfactoria!", "Informacion", JOptionPane.INFORMATION_MESSAGE);
-						dispose();
+					//	JOptionPane.showMessageDialog(null, "Compra Satisfactoria!", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+					//	dispose();
 					
 						
 					}
 				});
+				
+				JButton btnCombos = new JButton("Ver combos");
+				btnCombos.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						VentaCombo list = new VentaCombo(factura);
+				//		TiendaComp.getInstance().InsertarFact(factura);
+						list.setModal(true);
+						list.setVisible(true);
+						//TiendaComp.getInstance().InsertarFact(factura);
+					}
+				});
+				buttonPane.add(btnCombos);
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
@@ -456,7 +490,6 @@ public class MenuVenta extends JDialog {
 				JButton cancelButton = new JButton("Cancelar");
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						TiendaComp.getInstance().setCarrito(new String[100]);
 						dispose();
 					}
 				});

@@ -17,6 +17,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+import lógico.Combo;
 import lógico.Componente;
 import lógico.DiscoDuro;
 import lógico.Factura;
@@ -32,6 +33,7 @@ public class ListaFacturas extends JDialog {
 	private JTable table;
 	private DefaultTableModel model;
 	private Object rows[];
+	private JTextField textField;
 	
 	/**
 	 * Launch the application.
@@ -86,7 +88,7 @@ public class ListaFacturas extends JDialog {
 				scrollPane.setBounds(10, 54, 765, 245);
 				panel.add(scrollPane);
 				{
-					String[] headers = {"Factura","Comprador","Disco Duros", "Ram", "Microprocesador","Tarjetas Madre","Precio Total"};
+					String[] headers = {"Factura","Comprador","Disco Duros", "Ram", "Microprocesador","Tarjetas Madre","Combos"};
 
 					table = new JTable();
 					table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
@@ -100,9 +102,22 @@ public class ListaFacturas extends JDialog {
 						buttonPane.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 						buttonPane.setBounds(10, 313, 764, 37);
 						contentPanel.add(buttonPane);
-						buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
+						{
+							JButton btnNewButton = new JButton("Datos de factura");
+							btnNewButton.setBounds(516, 7, 141, 23);
+							btnNewButton.addActionListener(new ActionListener() {
+								public void actionPerformed(ActionEvent e) {
+									DatosFactura list = new DatosFactura(textField.getText().toString());
+									list.setModal(true);
+									list.setVisible(true);
+								}
+							});
+							buttonPane.setLayout(null);
+							buttonPane.add(btnNewButton);
+						}
 						
 						JButton btnSalir = new JButton("Salir");
+						btnSalir.setBounds(689, 7, 68, 23);
 						buttonPane.add(btnSalir);
 						btnSalir.addActionListener(new ActionListener() {
 							public void actionPerformed(ActionEvent e) {
@@ -110,6 +125,15 @@ public class ListaFacturas extends JDialog {
 							}
 						});
 						btnSalir.setEnabled(true);
+						
+						JLabel lblNewLabel = new JLabel("Codigo de factura a revisar:");
+						lblNewLabel.setBounds(97, 11, 203, 14);
+						buttonPane.add(lblNewLabel);
+						
+						textField = new JTextField();
+						textField.setBounds(275, 8, 86, 20);
+						buttonPane.add(textField);
+						textField.setColumns(10);
 					}
 					
 					ListaFactura();
@@ -120,13 +144,14 @@ public class ListaFacturas extends JDialog {
 	private void ListaFactura() {
 		model.setRowCount(0);
 		rows = new Object[model.getColumnCount()];
-		
+		int ind=0;
+		String [] comb = new String [50];
 		for (Factura factura : TiendaComp.getInstance().getMisFacturas()) {
 			rows[0] = factura.getCodigo();
 			rows[1] = factura.getPersona().getNombre();
 			
 			int cant1=0, cant2=0, cant3=0, cant4=0;
-			
+			table.getSelectedRowCount();
 			for(Componente componente : factura.getMisComponentes()) {
 				
 				if(componente instanceof MicroProcesador) {
@@ -142,11 +167,21 @@ public class ListaFacturas extends JDialog {
 					cant4++;
 				}
 			}
+			if(factura.getcVendidos()!=null) {
+				
+				for(Combo combo : factura.getcVendidos()) {
+					if(combo !=null) {
+						//comb[ind]= combo.getNombre();
+						ind++;
+					}
+				}
+			}
 			rows[2] = cant4;
 			rows[3] = cant2;
 			rows[4] = cant1;
 			rows[5] = cant3;
-		
+			rows[6] = ind;
+			
 
 			model.addRow(rows);
 		}

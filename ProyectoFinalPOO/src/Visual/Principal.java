@@ -102,16 +102,16 @@ public class Principal extends JFrame {
 		});
 		mnNewMenu_1.add(mntmComprarComp);
 		
-		JMenuItem mntmNewMenuItem = new JMenuItem("Combos Disponibles");
+	/*	JMenuItem mntmNewMenuItem = new JMenuItem("Combos Disponibles");
 		mntmNewMenuItem.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				VentaCombo menuCombo = new VentaCombo();
 				menuCombo.setModal(true);
 				menuCombo.setVisible(true);
 			}
-		});
+		});*/
 		
-		mnNewMenu_1.add(mntmNewMenuItem);
+	//	mnNewMenu_1.add(mntmNewMenuItem);
 		
 		
 		

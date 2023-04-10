@@ -47,7 +47,7 @@ public class Combo {
 			precio += componente.precio;
 		}
 		
-		return precio;
+		return precio - precio*0.1;
 	}
 	
 	

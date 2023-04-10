@@ -13,12 +13,14 @@ import javax.swing.border.EtchedBorder;
 import lógico.Combo;
 import lógico.Componente;
 import lógico.DiscoDuro;
+import lógico.Factura;
 import lógico.MicroProcesador;
 import lógico.Ram;
 import lógico.TMadre;
 import lógico.TiendaComp;
 
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.AbstractListModel;
 import java.awt.Font;
@@ -33,9 +35,9 @@ public class VentaCombo extends JDialog {
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
+	public static void main(String[] args, Factura factura) {
 		try {
-			VentaCombo dialog = new VentaCombo();
+			VentaCombo dialog = new VentaCombo(factura);
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
 			dialog.setVisible(true);
 		} catch (Exception e) {
@@ -46,7 +48,7 @@ public class VentaCombo extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public VentaCombo() {
+	public VentaCombo(Factura factura) {
 
 		ComboList();
 		setTitle("Venta de Combos");
@@ -109,7 +111,16 @@ public class VentaCombo extends JDialog {
 				JButton okButton = new JButton("Comprar");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						ActualizarLista(listComp.getSelectedValue().toString());
+						String n = listComp.getSelectedValue().toString();
+						ActualizarLista(n);
+						//TiendaComp.getInstance().InsertarFact(factura);
+						
+						factura.setcVendidos(ComboFactura(n));
+						factura.setPersona(TiendaComp.getInstance().PersonaLogg());
+						factura.setCodigo(TiendaComp.getInstance().CrearCodigoFact());
+						//TiendaComp.getInstance().InsertarFact(factura);
+						JOptionPane.showMessageDialog(null, "Combo adquirido!", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+						TiendaComp.getInstance().InsertarFact(factura);
 						ListaCombo = new String[100];
 						dispose();
 					}
@@ -141,6 +152,18 @@ public class VentaCombo extends JDialog {
 			}
 		}
 		
+		return null;
+	}
+	
+	public ArrayList<Combo> ComboFactura(String string) {
+		
+		ArrayList<Combo> comboFact = new ArrayList<Combo>();
+		for(Combo combo : TiendaComp.getInstance().getcVendidos()) {
+			if(string.contains(combo.getNombre())) {
+				comboFact.add(combo);
+			    return comboFact;
+			}
+		}
 		return null;
 	}
 	

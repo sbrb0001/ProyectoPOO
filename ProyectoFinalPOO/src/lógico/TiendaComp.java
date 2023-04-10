@@ -130,6 +130,15 @@ public class TiendaComp implements Serializable{
 		cVendidos.add(combo);
 	}
 	
+	public void EliminarFact(Factura factura) {
+		
+		for(Factura fact : MisFacturas) {
+			if(factura.getCodigo().equalsIgnoreCase(fact.getCodigo())) {
+				fact=null;
+			}
+		}
+	}
+	
 	
 	
 	public void GenerarComponentes() {    //Esta funcion es temporal, es solo para crear los compenentes y no tener que crealos cada vex que se corra el programa/
@@ -464,19 +473,17 @@ public class TiendaComp implements Serializable{
 		return null;
 	}
 	
-	public String CrearCodigoFact(String[] carrito) {
+	public String CrearCodigoFact() {
 		
 		String codigo = null;
 		
-		for(int ind=0; carrito[ind]!=null; ind++) {	
-			for(Componente componente : misComponentes) {
-				if(carrito[ind].contains(componente.numSerie)){
-					codigo = "F-"+ componente.numSerie + mCodigo;
-					mCodigo++;
-					return codigo;
-				}
+		for(Componente componente : misComponentes) {
+				codigo = "F-" + mCodigo;
+				mCodigo++;
+				return codigo;
 			}
-		}
+			
+		
 		return null;
 	}
 	
