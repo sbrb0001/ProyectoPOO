@@ -464,6 +464,11 @@ public class CrearCombo extends JDialog {
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
 			}
+			TiendaComp.getInstance().setCarrito(new String[100]);	
+			TiendaComp.getInstance().setDiscosD(new String[100]);	
+			TiendaComp.getInstance().setmProcesadores(new String[100]);
+			TiendaComp.getInstance().setRams(new String[100]);	
+			TiendaComp.getInstance().setTMadres(new String[100]);
 		}
 	}
 }
