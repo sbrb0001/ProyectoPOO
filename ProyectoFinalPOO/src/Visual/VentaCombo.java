@@ -137,6 +137,7 @@ public class VentaCombo extends JDialog {
 		for(Combo combo : TiendaComp.getInstance().getcVendidos()) {
 			if(combo.getCant()>0) {
 				ListaCombo[ind]=combo.getNombre()+"   ||   "+String.valueOf(CantMadres(combo))+"  Tarjetas Madre"+"   |   "+String.valueOf(CantMicro(combo))+"  Microprocesadores"+"   |   "+String.valueOf(CantDiscos(combo))+"  Discos duros"+"   |   "+String.valueOf(CantRams(combo))+"  Memorias Ram"+" || "+" $"+String.valueOf(PrecioCombo(combo));
+				ind++;
 			}
 		}
 		

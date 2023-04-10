@@ -144,6 +144,17 @@ public class Principal extends JFrame {
 		});
 		mnNewMenu_2.add(mntmNewMenuItem_2);
 		
+		JMenuItem Crearcomb = new JMenuItem("Crear Combo");
+		Crearcomb.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				CrearCombo combo = new CrearCombo();
+				combo.setModal(true);
+				combo.setVisible(true);
+			}
+		});
+		mnNewMenu_2.add(Crearcomb);
+		
+		
 		JMenuItem mntmNewMenuItem_3 = new JMenuItem("Listado de Clientes");
 		mnNewMenu_2.add(mntmNewMenuItem_3);
 		

@@ -132,7 +132,7 @@ public class TiendaComp {
 		MicroProcesador mProcesador = new MicroProcesador("Apple", "26", 5, 420, "rojo", "Inalambrica", 20, null); 
 		MicroProcesador mProcesador2 = new MicroProcesador("Tuyo", "80", 3, 663, "amarillo", "Inalambrica", 20, null);
 		Ram ram = new Ram ("Android", "23", 3, 500, 50, "grande", "MB");
-		DiscoDuro DiscoD = new DiscoDuro ("LT", "22", 3, 300, "azul", 64, "Fijo","GB");
+		DiscoDuro DiscoD = new DiscoDuro ("LT", "22", 3, 300, "azul", 64, "Fijo", "GB");
 		String[] string = {"usb", "rjo"};
 		TMadre tMadre = new TMadre("Merch", "33", 2, 500, "Verde", "Alambrico", "LT", string);
 		InsertarComp(mProcesador);
@@ -475,5 +475,66 @@ public class TiendaComp {
 		return null;
 	}
 	
+	public boolean ComboValido(int cantidad, String [] carrito) {
+		
+		String c = null;
+		for(int ind=0; carrito[ind]!=null; ind++) {	
+			for(Componente componente : misComponentes) {
+				if(carrito[ind].contains(componente.numSerie)){
+					for(int indice = 1; carrito[ind].charAt(indice) != ' '; indice++) {
+						if(carrito[ind].charAt(indice)==')') {
+							c=carrito[ind].substring(1, indice);
+						}							
+					}
+					if(Integer.valueOf(c)+componente.cant<cantidad*Integer.valueOf(c)) {
+						return false;
+					}
+					
+				}
+			}
+		}
+		if(cantidad>1) {
+			for(int ind=0; carrito[ind]!=null; ind++) {	
+				for(Componente componente : misComponentes) {
+					if(carrito[ind].contains(componente.numSerie)){
+						for(int indice = 1; carrito[ind].charAt(indice) != ' '; indice++) {
+							if(carrito[ind].charAt(indice)==')') {
+								c=carrito[ind].substring(1, indice);
+							}							
+						}
+						componente.cant = componente.cant-Integer.valueOf(c)*cantidad;
+						componente.cant++;
+						
+					}
+				}
+			}
+			return true;
+		}
+
+		return true;
+	}
 	
+	public ArrayList<Componente> AgregarCompCombo(String [] carrito) {
+		
+		ArrayList<Componente> componente = new ArrayList<Componente>();
+		String c=null;
+		for(int ind=0; carrito[ind]!= null; ind++) {	
+			for(Componente comp : misComponentes) {
+				if(carrito[ind].contains(comp.numSerie)) {
+					
+					for(int indice = 1; carrito[ind].charAt(indice) != ' '; indice++) {
+						
+							if(carrito[ind].charAt(indice)==')') {
+								c=carrito[ind].substring(1, indice);
+							}							
+					}
+					for(int indice=0; indice<Integer.valueOf(c); indice++) {
+						componente.add(comp);
+					}					
+				}
+			}
+		}
+		return componente;	
+		
+	}
 }

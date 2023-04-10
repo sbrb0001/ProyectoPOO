@@ -39,5 +39,16 @@ public class Combo {
 		this.cant = cant;
 	}
 	
+	public double Precio() {
+		
+		double precio = 0;
+		
+		for(Componente componente : losComponentes) {
+			precio += componente.precio;
+		}
+		
+		return precio;
+	}
+	
 	
 }
