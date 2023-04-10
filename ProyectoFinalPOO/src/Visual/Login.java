@@ -19,6 +19,8 @@ import java.awt.BorderLayout;
 import javax.swing.border.TitledBorder;
 import java.awt.Color;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -125,6 +127,17 @@ public class Login extends JFrame {
 		panel.add(lblContrasea);
 		
 		JButton iniciarSesionBnt = new JButton("Iniciar Sesión");
+		iniciarSesionBnt.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(TiendaComp.getInstance().confirmLogin(usuariotxt.getText(), contrasenatxt.getName())) {
+					//confirma si el usuario existe, luego cuando se logea se entra a la pantalla principal
+					Principal jframe = new Principal();
+					dispose();
+					jframe.setVisible(true);
+			
+				}
+			}
+		});
 		iniciarSesionBnt.setBackground(new Color(255, 255, 255));
 		iniciarSesionBnt.setBounds(144, 179, 117, 29);
 		panel.add(iniciarSesionBnt);

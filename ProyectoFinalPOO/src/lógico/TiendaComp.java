@@ -139,7 +139,20 @@ public class TiendaComp implements Serializable{
 		}
 	}
 	
-	
+	public boolean confirmLogin(String usuario, String password) { //esto es para confirmar si lo que se digito son usuarios de verdad guardados
+		boolean login = false;
+		
+		for(Persona usuari: misPersonas) {
+			if(usuari.getUsuarioString().equals(usuario) && usuari.getPassword().equals(password)) {
+				personaLogeada = usuari;
+				login=true;
+				break;
+			}
+		}
+		
+		
+		return login;
+	}
 	
 	public void GenerarComponentes() {    //Esta funcion es temporal, es solo para crear los compenentes y no tener que crealos cada vex que se corra el programa/
 		

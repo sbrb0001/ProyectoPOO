@@ -131,8 +131,10 @@ public class Principal extends JFrame {
 		JMenuItem mntmNewMenuItem_8 = new JMenuItem("Acerca De ");
 		mnNewMenu_3.add(mntmNewMenuItem_8);
 		
-		JMenu mnNewMenu_2 = new JMenu("Administración");
-		menuBar.add(mnNewMenu_2);
+		JMenu administracionmeNu = new JMenu("Administración");
+		
+		//if(!TiendaComp.getPersonaLogeada().)
+		menuBar.add(administracionmeNu);
 		
 		JMenuItem mntmNewMenuItem_2 = new JMenuItem("Crear Componente");
 		mntmNewMenuItem_2.addActionListener(new ActionListener() {
@@ -142,7 +144,7 @@ public class Principal extends JFrame {
 				menu.setVisible(true);
 			}
 		});
-		mnNewMenu_2.add(mntmNewMenuItem_2);
+		administracionmeNu.add(mntmNewMenuItem_2);
 		
 		JMenuItem Crearcomb = new JMenuItem("Crear Combo");
 		Crearcomb.addActionListener(new ActionListener() {
@@ -152,11 +154,11 @@ public class Principal extends JFrame {
 				combo.setVisible(true);
 			}
 		});
-		mnNewMenu_2.add(Crearcomb);
+		administracionmeNu.add(Crearcomb);
 		
 		
 		JMenuItem mntmNewMenuItem_3 = new JMenuItem("Listado de Clientes");
-		mnNewMenu_2.add(mntmNewMenuItem_3);
+		administracionmeNu.add(mntmNewMenuItem_3);
 		
 		JMenuItem mntmListaFact = new JMenuItem("Listado de Facturas");
 		
@@ -167,19 +169,22 @@ public class Principal extends JFrame {
 				menu.setVisible(true);
 			}
 		});
-		mnNewMenu_2.add(mntmListaFact);
-		
-		
-		JMenuItem mntmNewMenuItem_5 = new JMenuItem("Ganancias");
-		mnNewMenu_2.add(mntmNewMenuItem_5);
+		administracionmeNu.add(mntmListaFact);
 		
 		JMenuItem mntmNewMenuItem_6 = new JMenuItem("Componentes Vendidos");
-		mnNewMenu_2.add(mntmNewMenuItem_6);
+		administracionmeNu.add(mntmNewMenuItem_6);
 		
 		JMenuItem mntmNewMenuItem_10 = new JMenuItem("Chat Clientes");
-		mnNewMenu_2.add(mntmNewMenuItem_10);
+		administracionmeNu.add(mntmNewMenuItem_10);
 		
-		JMenuItem mntmNewMenuItem_11 = new JMenuItem("Salir");
+		JMenuItem mntmNewMenuItem_11 = new JMenuItem("Cerrar Sesión");
+		mntmNewMenuItem_11.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Login login =new Login();
+				dispose();
+				login.setVisible(true);
+			}
+		});
 		mntmNewMenuItem_11.setSelected(true);
 		menuBar.add(mntmNewMenuItem_11);
 

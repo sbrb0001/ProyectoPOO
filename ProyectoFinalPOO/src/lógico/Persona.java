@@ -12,6 +12,7 @@ public class Persona implements Serializable{
 	protected boolean estado; 
 	protected String usuarioString;
 	protected String password;
+	
 	public Persona(String cedula, String nombre, String direccion, String telefono, boolean estado,
 			String usuarioString, String password) {
 		super();
