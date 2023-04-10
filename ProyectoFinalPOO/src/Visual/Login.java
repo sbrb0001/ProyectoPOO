@@ -22,6 +22,8 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Login extends JFrame {
 
@@ -137,6 +139,13 @@ public class Login extends JFrame {
 		panel.add(lblNewLabel_1);
 		
 		btnNewButton = new JButton("Crear Cuenta");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				RegistrarPersona persona = new RegistrarPersona();
+				persona.setModal(true);
+				persona.setVisible(true);
+			}
+		});
 		btnNewButton.setBounds(144, 275, 117, 29);
 		panel.add(btnNewButton);
 	}
