@@ -46,7 +46,7 @@ public class Login extends JFrame {
 				ObjectInputStream tiendaLeerObjectInputStream;
 				ObjectOutputStream tiendaescribirOutputStream;
 				try {
-					tiendaFileInputStream = new FileInputStream("tiendaFileInputStream.dat");
+					tiendaFileInputStream = new FileInputStream("tienda.dat");
 					tiendaLeerObjectInputStream = new ObjectInputStream(tiendaFileInputStream);
 					TiendaComp temp = (TiendaComp) tiendaLeerObjectInputStream.readObject();
 					TiendaComp.setTienda(temp);
@@ -55,7 +55,7 @@ public class Login extends JFrame {
 					
 				}catch (FileNotFoundException e) {
 					try {
-					tiendaFileOutputStream = new FileOutputStream("empresa.dat");
+					tiendaFileOutputStream = new FileOutputStream("tienda.dat");
 					tiendaescribirOutputStream = new ObjectOutputStream(tiendaFileOutputStream);
 					Persona aux = new Empleado(null,null,null,null,true, "Admin0","admin","Administrador");
 					TiendaComp.getInstance().InsertarPersona(aux);
