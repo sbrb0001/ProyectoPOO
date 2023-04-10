@@ -24,14 +24,15 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JPasswordField;
 
 public class Login extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
+	private JTextField usuariotxt;
 	private JLabel lblContrasea;
-	private JTextField textField_1;
-	private JButton btnNewButton;
+	private JButton crearCuentabtn;
+	private JPasswordField contrasenatxt;
 
 	
 	/**
@@ -57,7 +58,7 @@ public class Login extends JFrame {
 					try {
 					tiendaFileOutputStream = new FileOutputStream("tienda.dat");
 					tiendaescribirOutputStream = new ObjectOutputStream(tiendaFileOutputStream);
-					Persona aux = new Empleado(null,null,null,null,true, "Admin0","admin","Administrador");
+					Persona aux = new Empleado(null,null,null,null,true, "admin0","admin","Administrador");
 					TiendaComp.getInstance().InsertarPersona(aux);
 					tiendaescribirOutputStream.writeObject(TiendaComp.getInstance());
 					tiendaFileOutputStream.close(); 
@@ -113,20 +114,15 @@ public class Login extends JFrame {
 		lblNewLabel.setBounds(92, 35, 61, 16);
 		panel.add(lblNewLabel);
 		
-		textField = new JTextField();
-		textField.setBounds(92, 63, 225, 32);
-		panel.add(textField);
-		textField.setColumns(10);
+		usuariotxt = new JTextField();
+		usuariotxt.setBounds(92, 63, 225, 32);
+		panel.add(usuariotxt);
+		usuariotxt.setColumns(10);
 		
 		lblContrasea = new JLabel("Contraseña: ");
 		lblContrasea.setFont(new Font("Microsoft Sans Serif", Font.BOLD, 14));
 		lblContrasea.setBounds(92, 107, 106, 16);
 		panel.add(lblContrasea);
-		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
-		textField_1.setBounds(92, 135, 225, 32);
-		panel.add(textField_1);
 		
 		JButton iniciarSesionBnt = new JButton("Iniciar Sesión");
 		iniciarSesionBnt.setBackground(new Color(255, 255, 255));
@@ -138,15 +134,19 @@ public class Login extends JFrame {
 		lblNewLabel_1.setBounds(136, 258, 144, 16);
 		panel.add(lblNewLabel_1);
 		
-		btnNewButton = new JButton("Crear Cuenta");
-		btnNewButton.addActionListener(new ActionListener() {
+		crearCuentabtn = new JButton("Crear Cuenta");
+		crearCuentabtn.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				RegistrarPersona persona = new RegistrarPersona();
 				persona.setModal(true);
 				persona.setVisible(true);
 			}
 		});
-		btnNewButton.setBounds(144, 275, 117, 29);
-		panel.add(btnNewButton);
+		crearCuentabtn.setBounds(144, 275, 117, 29);
+		panel.add(crearCuentabtn);
+		
+		contrasenatxt = new JPasswordField();
+		contrasenatxt.setBounds(92, 135, 225, 32);
+		panel.add(contrasenatxt);
 	}
 }

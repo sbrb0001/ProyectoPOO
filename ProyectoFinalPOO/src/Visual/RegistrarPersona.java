@@ -17,6 +17,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JTextField;
+import javax.swing.JPasswordField;
 
 public class RegistrarPersona extends JDialog {
 
@@ -24,11 +25,11 @@ public class RegistrarPersona extends JDialog {
 	private JTextField cedulatxt;
 	private JTextField nombretxt;
 	private JTextField telefonotxt;
-	private JTextField contrasenatxt;
 	private JTextField direcciontxt;
 	private JTextField usuariotxt;
 	private JTextField ocupaciontxt;
 	private JTextField cargotxt;
+	private JPasswordField passwordtxt;
 
 	/**
 	 * Launch the application.
@@ -112,11 +113,6 @@ public class RegistrarPersona extends JDialog {
 		JLabel lblNewLabel_4 = new JLabel("Contreseña: ");
 		lblNewLabel_4.setBounds(6, 82, 89, 16);
 		panel_1.add(lblNewLabel_4);
-
-		contrasenatxt = new JTextField();
-		contrasenatxt.setBounds(82, 77, 447, 26);
-		panel_1.add(contrasenatxt);
-		contrasenatxt.setColumns(10);
 
 		JLabel lblNewLabel_5 = new JLabel("Dirección: ");
 		lblNewLabel_5.setBounds(6, 110, 77, 16);
@@ -203,12 +199,16 @@ public class RegistrarPersona extends JDialog {
 				buttonPane.add(cancelButton);
 			}
 		}
+		passwordtxt = new JPasswordField();
+		passwordtxt.setBounds(82, 77, 206, 26);
+		panel_1.add(passwordtxt);
 		panelEmpleado.setVisible(false);
 		nombretxt.setEnabled(false);
 		telefonotxt.setEnabled(false);
 		cedulatxt.setEnabled(false);
 		direcciontxt.setEnabled(false);
-		contrasenatxt.setEnabled(false);
+		passwordtxt.setEnabled(false);
+		
 
 		tipoCuentaCBX.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -220,7 +220,7 @@ public class RegistrarPersona extends JDialog {
 					telefonotxt.setEnabled(false);
 					cedulatxt.setEnabled(false);
 					direcciontxt.setEnabled(false);
-					contrasenatxt.setEnabled(false);
+					passwordtxt.setEnabled(false);
 
 				}
 				if(tipoCuentaCBX.getSelectedIndex()==1) {
@@ -230,7 +230,7 @@ public class RegistrarPersona extends JDialog {
 					telefonotxt.setEnabled(true);
 					cedulatxt.setEnabled(true);
 					direcciontxt.setEnabled(true);
-					contrasenatxt.setEnabled(true);
+					passwordtxt.setEnabled(true);
 
 				}
 				if(tipoCuentaCBX.getSelectedIndex()==2) {
@@ -240,7 +240,7 @@ public class RegistrarPersona extends JDialog {
 					telefonotxt.setEnabled(true);
 					cedulatxt.setEnabled(true);
 					direcciontxt.setEnabled(true);
-					contrasenatxt.setEnabled(true);
+					passwordtxt.setEnabled(true);
 				}
 
 			}
