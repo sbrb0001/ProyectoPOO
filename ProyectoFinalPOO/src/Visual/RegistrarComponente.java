@@ -210,11 +210,7 @@ public class RegistrarComponente extends JDialog {
 		tmadrePanel.add(btnNewButton);
 
 
-		JPanel panel_3 = new JPanel();
-		panel_3.setBackground(new Color(255, 255, 255));
-		panel_3.setBounds(6, 170, 528, 230);
-		contentPanel.add(panel_3);
-		panel_3.setLayout(null);
+	
 		JPanel panel = new JPanel();
 		panel.setBackground(new Color(255, 255, 255));
 		panel.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -229,7 +225,7 @@ public class RegistrarComponente extends JDialog {
 
 		JComboBox componenteCbx = new JComboBox();
 
-		componenteCbx.setModel(new DefaultComboBoxModel(new String[] {" <<Seleccionar>>", "Tarjeta Madre", "Disco Duro", "Memoria Ram", "Microprocedador"}));
+		componenteCbx.setModel(new DefaultComboBoxModel(new String[] {" <<Seleccionar>>", "Tarjeta Madre", "Disco Duro", "Memoria Ram", "Microprocesador"}));
 		componenteCbx.setBounds(142, 19, 171, 27);
 		panel.add(componenteCbx);
 
@@ -484,9 +480,9 @@ public class RegistrarComponente extends JDialog {
 						}else
 						{
 							//aqui tomamos uso de referencia de exepciones
-							if(componenteCbx.getSelectedIndex()==0) {
+							
 								JOptionPane.showMessageDialog(null, "Error, debe seleccionar un componente antes de registrar", "Error", JOptionPane.ERROR_MESSAGE);
-							}
+							
 						}
 
 
@@ -508,10 +504,23 @@ public class RegistrarComponente extends JDialog {
 			}
 
 		}
-
+		
+				//para que al abrir la ventana de regitrar no salga nada abajo
+				tmadrePanel.setVisible(false);
+				discoDuropanel.setVisible(false);
+				microprocesadorPanel.setVisible(false);
+				memoriaRamPanel.setVisible(false);
+				marcaTxt.setEditable(false);
+				numSerieTxt.setEditable(false);
+				cantidadSPN.setEnabled(false);
+				precioSpn.setEnabled(false);
 		componenteCbx.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				
 				int aux= componenteCbx.getSelectedIndex();
+				
+				
+		
 				if (aux<=0) {
 					tmadrePanel.setVisible(false);
 					discoDuropanel.setVisible(false);
@@ -521,7 +530,7 @@ public class RegistrarComponente extends JDialog {
 					precioSpn.setEnabled(false);
 					memoriaRamPanel.setVisible(false);
 					microprocesadorPanel.setVisible(false);
-					panel_3.setVisible(true);
+				
 				}
 				if (aux==1) {
 					tmadrePanel.setVisible(true);
@@ -532,7 +541,7 @@ public class RegistrarComponente extends JDialog {
 					memoriaRamPanel.setVisible(false);
 					microprocesadorPanel.setVisible(false);
 					cantidadSPN.setEnabled(true);
-					panel_3.setVisible(false);
+					
 
 				}
 				if (aux==2) {
@@ -543,7 +552,7 @@ public class RegistrarComponente extends JDialog {
 					precioSpn.setEnabled(true);
 					memoriaRamPanel.setVisible(false);
 					microprocesadorPanel.setVisible(false);
-					panel_3.setVisible(false);
+					
 					cantidadSPN.setEnabled(true);
 
 				}
@@ -555,7 +564,7 @@ public class RegistrarComponente extends JDialog {
 					precioSpn.setEnabled(true);
 					memoriaRamPanel.setVisible(true);
 					microprocesadorPanel.setVisible(false);
-					panel_3.setVisible(false);
+					
 					cantidadSPN.setEnabled(true);
 
 				}
@@ -567,7 +576,7 @@ public class RegistrarComponente extends JDialog {
 					precioSpn.setEnabled(true);
 					memoriaRamPanel.setVisible(false);
 					microprocesadorPanel.setVisible(true);
-					panel_3.setVisible(false);
+					
 					cantidadSPN.setEnabled(true);
 
 				}
