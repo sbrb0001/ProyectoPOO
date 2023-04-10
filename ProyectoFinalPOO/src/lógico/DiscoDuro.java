@@ -4,15 +4,15 @@ public class DiscoDuro extends Componente {
 	protected String modelo;
 	protected double almacenamiento;
 	protected String tipoConector;
-	protected String tipoAlmacenamieString;
+
 	
 	public DiscoDuro(String marca, String numSerie, int cant, double precio, String modelo, double almacenamiento,
-			String tipoConector,String tipoAlmacenamieString) {
+			String tipoConector) {
 		super(marca, numSerie, cant, precio);
 		this.modelo = modelo;
 		this.almacenamiento = almacenamiento;
 		this.tipoConector = tipoConector;
-		this.tipoAlmacenamieString=tipoAlmacenamieString;
+		
 	}
 	
 	public String getModelo() {
