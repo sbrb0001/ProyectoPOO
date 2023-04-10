@@ -395,7 +395,7 @@ public class RegistrarComponente extends JDialog {
 								String modelo= modeloDiscotxt.getText();
 								double almacenamiento= Double.valueOf(capacidadspn.getValue().toString());
 								String tipoConector=null;
-								
+								String tipoalmaString=null;
 								if(conexioncbx.getSelectedIndex()==1) {
 									tipoConector = "IDE";
 								}
@@ -409,13 +409,20 @@ public class RegistrarComponente extends JDialog {
 									tipoConector = "SATA-3";
 								}
 
-							
-								aux= new DiscoDuro(marca, numSerie, cantidad, precio, modelo, almacenamiento, tipoConector);
+								if (discoDurocbx.getSelectedIndex()==1) {
+
+									tipoalmaString="GB";
+								}
+								if (discoDurocbx.getSelectedIndex()==2) {
+
+									tipoalmaString="TB";
+								}
+								aux= new DiscoDuro(marca, numSerie, cantidad, precio, modelo, almacenamiento, tipoConector,tipoalmaString);
 
 								modeloDiscotxt.setText("");
 								
 								conexioncbx.setSelectedIndex(0);
-							
+								discoDurocbx.setSelectedIndex(0);
 								capacidadspn.setValue(0.00);
 
 
@@ -569,4 +576,3 @@ public class RegistrarComponente extends JDialog {
 		});
 	}
 }
-
