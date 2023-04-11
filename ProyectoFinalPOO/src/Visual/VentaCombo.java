@@ -50,7 +50,9 @@ public class VentaCombo extends JDialog {
 	 */
 	public VentaCombo(Factura factura) {
 
+		ListaCombo = new String[100];
 		ComboList();
+		//ListaCombo = new String[100];
 		setTitle("Venta de Combos");
 		setBounds(100, 100, 535, 365);
 		getContentPane().setLayout(new BorderLayout());
@@ -106,6 +108,9 @@ public class VentaCombo extends JDialog {
 					
 				}
 			});
+			factura.setCodigo(TiendaComp.getInstance().CrearCodigoFact());
+			TiendaComp.getInstance().InsertarFact(factura);
+			//TiendaComp.getInstance().InsertarFact(factura);
 			buttonPane.add(btnNewButton);
 			{
 				JButton okButton = new JButton("Comprar");
@@ -115,14 +120,26 @@ public class VentaCombo extends JDialog {
 						ActualizarLista(n);
 						//TiendaComp.getInstance().InsertarFact(factura);
 						
-						factura.setcVendidos(ComboFactura(n));
-						factura.setPersona(TiendaComp.getInstance().PersonaLogg());
-						factura.setCodigo(TiendaComp.getInstance().CrearCodigoFact());
-						//TiendaComp.getInstance().InsertarFact(factura);
+						if(BuscarFactura(factura.getCodigo())) {
+							factura.setcVendidos(ComboFactura(n));
+						}
+						else {
+							factura.setcVendidos(ComboFactura(n));
+						//	factura.setcVendidos(ComboFactura(n));
+							factura.setCodigo(TiendaComp.getInstance().CrearCodigoFact());
+							TiendaComp.getInstance().InsertarFact(factura);
+							factura.setPersona(TiendaComp.getInstance().PersonaLogg());
+							factura.setMisComponentes(null);
+						}
+						//factura.setcVendidos(ComboFactura(n));
+					//	factura.setPersona(TiendaComp.getInstance().PersonaLogg());
+					//	factura.setMisComponentes(null);
 						JOptionPane.showMessageDialog(null, "Combo adquirido!", "Informacion", JOptionPane.INFORMATION_MESSAGE);
-						TiendaComp.getInstance().InsertarFact(factura);
-						ListaCombo = new String[100];
-						dispose();
+						//
+						scrollPane.setViewportView(listComp);
+						//TiendaComp.getInstance().InsertarFact(factura);
+						
+					//	dispose();
 					}
 				});
 				okButton.setActionCommand("OK");
@@ -161,10 +178,9 @@ public class VentaCombo extends JDialog {
 		for(Combo combo : TiendaComp.getInstance().getcVendidos()) {
 			if(string.contains(combo.getNombre())) {
 				comboFact.add(combo);
-			    return comboFact;
 			}
 		}
-		return null;
+		return comboFact;
 	}
 	
 	public double PrecioCombo(Combo combo) {
@@ -233,18 +249,34 @@ public class VentaCombo extends JDialog {
 			}
 			if(combo.getCant() == 0) {
 				for(int ind =0; ListaCombo[ind]!= null; ind++) {
-					
 					if(ListaCombo[ind].equalsIgnoreCase(seleccionado)) {
 						for(int indice = ind; ListaCombo[indice]!=null;) {
 							ListaCombo[indice]=ListaCombo[indice+1];
 							//combo.setCant(0);
 							//System.out.println(componente.cant);
-							return;
+							
 						}
 					}
 				}
 			}
 		}
+		return;
+	}
+	
+	public boolean BuscarFactura(String codigo) {
+		
+		if(codigo == null) {
+			return false;
+		}
+		for(Factura factura : TiendaComp.getInstance().getMisFacturas()) {
+			if(codigo.equalsIgnoreCase(factura.getCodigo())) {
+				return true;
+			}
+		}
+		
+		return false;
 		
 	}
+	
+	
 }
