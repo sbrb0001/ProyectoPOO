@@ -25,21 +25,33 @@ import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.net.Socket;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JRadioButtonMenuItem;
 import javax.swing.JSlider;
+import javax.swing.JEditorPane;
 
 public class Principal extends JFrame {
 
 	private JPanel contentPane;
 	private  Dimension dim;
-
+	static Socket sfd = null;
+	static ObjectInputStream EntradaSocket;
+	static DataOutputStream SalidaSocket;
 	
 	FondoPanel fondo = new FondoPanel();
 	public void Principal ()
@@ -141,15 +153,76 @@ public class Principal extends JFrame {
 		
 		
 		JMenu mnNewMenu_3 = new JMenu("Ayuda");
+		
+		if (TiendaComp.getEmpleadoLogeado()!=null) {
+			if(TiendaComp.getEmpleadoLogeado().getCargo().equalsIgnoreCase("Administrador")) {
+				mnNewMenu_3.setVisible(false);
+			}else {
+				mnNewMenu_3.setVisible(true);	
+			}
+		}
+		if (TiendaComp.getClienteLogeado()!=null) {
+			
+			mnNewMenu_3.setVisible(true);	
+			
+		}
 		menuBar.add(mnNewMenu_3);
 		
 		JMenu mnNewMenu_4 = new JMenu("Contáctanos");
 		mnNewMenu_3.add(mnNewMenu_4);
 		
 		JMenuItem mntmNewMenuItem_7 = new JMenuItem("Vias De Contacto");
+		mntmNewMenuItem_7.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//en esta parte se utilizo archivos para leer la info de la tienda
+			}
+		});
 		mnNewMenu_4.add(mntmNewMenuItem_7);
 		
-		JMenuItem mntmNewMenuItem_9 = new JMenuItem("Chat Soporte");
+		JMenuItem mntmNewMenuItem_9 = new JMenuItem("Reportar Problema");
+		mntmNewMenuItem_9.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				try
+			    {
+					Reporte menu = new Reporte();
+					menu.setVisible(true);
+			      sfd = new Socket("122.0.0.1",6000);
+			      ObjectInputStream aux = new ObjectInputStream(new FileInputStream(new File("tienda.dat")));
+			      SalidaSocket = new DataOutputStream((sfd.getOutputStream()));
+			      
+			     //EntradaSocket= new ObjectInputStream((sfd.getInputStream()));
+			      //String ejemplo = new String("Esto es una prueba nueva");
+			      int bytes;
+			      try
+			      {
+			        //SalidaSocket.writeUTF(ejemplo);
+			       // SalidaSocket.flush();
+			    		while ((bytes=aux.read())!=-1) {
+			    			SalidaSocket.write(bytes);
+							SalidaSocket.flush();
+						}
+			      }
+			      catch (IOException ioe)
+			      {
+			        System.out.println("Error: "+ioe);
+			      }
+			    }
+			    catch (UnknownHostException uhe)
+			    {
+			      System.out.println("No se puede acceder al servidor.");
+			      System.exit(1);
+			    }
+			    catch (IOException ioe)
+			    {
+			      System.out.println("Comunicaci�n rechazada.");
+			      System.exit(1);
+			    }
+			
+			}
+			
+			
+			
+		});
 		mnNewMenu_4.add(mntmNewMenuItem_9);
 		
 		JMenuItem mntmNewMenuItem_8 = new JMenuItem("Acerca De ");
@@ -158,16 +231,7 @@ public class Principal extends JFrame {
 		JMenu administracionmeNu = new JMenu("Administración");
 		//pa que no vea un cliente o empleado que no sea administrador
 		
-		/**if(TiendaComp.getPersonaLogeada() instanceof Empleado) {
-	//arreglar		
-			Empleado empleado = (Empleado) TiendaComp.getPersonaLogeada();
-			if (!empleado.getCargo().equalsIgnoreCase("Administrador")){
-				administracionmeNu.setVisible(false);
-			}else {
-		
-				administracionmeNu.setVisible(true);
-			}	
-		}*/
+	
 		
 		if (TiendaComp.getEmpleadoLogeado()!=null) {
 			if(TiendaComp.getEmpleadoLogeado().getCargo().equalsIgnoreCase("Administrador")) {
@@ -190,6 +254,7 @@ public class Principal extends JFrame {
 				menu.setModal(true);
 				menu.setVisible(true);
 			}
+		
 		});
 		administracionmeNu.add(mntmNewMenuItem_2);
 		
@@ -228,8 +293,19 @@ public class Principal extends JFrame {
 		JMenuItem mntmNewMenuItem_6 = new JMenuItem("Componentes Vendidos");
 		administracionmeNu.add(mntmNewMenuItem_6);
 		
-		JMenuItem mntmNewMenuItem_10 = new JMenuItem("Chat Clientes");
-		administracionmeNu.add(mntmNewMenuItem_10);
+		JMenu mnNewMenu_2 = new JMenu("Configuracion Soporte");
+		administracionmeNu.add(mnNewMenu_2);
+		
+		JMenuItem mntmNewMenuItem = new JMenuItem("Reportes");
+		mnNewMenu_2.add(mntmNewMenuItem);
+		
+		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Modificar Información");
+		mntmNewMenuItem_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {	
+				
+			}
+		});
+		mnNewMenu_2.add(mntmNewMenuItem_1);
 		
 		JMenuItem mntmNewMenuItem_11 = new JMenuItem("Cerrar Sesión");
 		mntmNewMenuItem_11.addActionListener(new ActionListener() {
@@ -243,14 +319,16 @@ public class Principal extends JFrame {
 		menuBar.add(mntmNewMenuItem_11);
 
 		contentPane = new JPanel();
-		contentPane.setBackground(new Color(240, 248, 255));
+		contentPane.setBackground(new Color(255, 255, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
 
 		JPanel panel = new JPanel();
+		panel.setBackground(new Color(240, 248, 255));
 		panel.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		contentPane.add(panel, BorderLayout.CENTER);
+		panel.setLayout(null);
 	}
 	public class FondoPanel extends JPanel{
 		private Image imagen;

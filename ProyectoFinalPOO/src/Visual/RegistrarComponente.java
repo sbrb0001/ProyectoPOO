@@ -469,12 +469,14 @@ public class RegistrarComponente extends JDialog {
 								velocidadSPN.setValue(0.00);
 								microTipoconexiontxt.setText("");
 								modeloTXT.setText("");
+								
 							}
 
 							marcaTxt.setText("");
 							precioSpn.setValue(0.00);
 							numSerieTxt.setText("");
 							cantidadSPN.setValue(0.00);
+							
 							TiendaComp.getInstance().InsertarComp(aux);
 							JOptionPane.showMessageDialog(null, "Componente Agregado!", "Informacion", JOptionPane.INFORMATION_MESSAGE);
 						}else

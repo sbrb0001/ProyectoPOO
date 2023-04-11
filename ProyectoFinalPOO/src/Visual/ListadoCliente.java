@@ -105,6 +105,7 @@ public class ListadoCliente extends JDialog {
 				rows[1]= aux.getNombre();
 				rows[2]= aux.getTelefono();
 				rows[3]= aux.getUsuarioString();
+				rows[3]= aux.getDireccion();
 				
 				model.addRow(rows);
 			}

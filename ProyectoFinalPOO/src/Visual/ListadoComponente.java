@@ -112,10 +112,36 @@ public class ListadoComponente extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton btnNewButton_1 = new JButton("Eliminar");
+				
+				if (TiendaComp.getEmpleadoLogeado()!=null) {
+					if(TiendaComp.getEmpleadoLogeado().getCargo().equalsIgnoreCase("Administrador")) {
+						btnNewButton_1.setVisible(true);
+					}else {
+						btnNewButton_1.setVisible(false);	
+					}
+				}
+				if (TiendaComp.getClienteLogeado()!=null) {
+					
+					btnNewButton_1.setVisible(false);	
+					
+				}
 				buttonPane.add(btnNewButton_1);
 			}
 			{
 				JButton btnNewButton = new JButton("Modificar");
+				if (TiendaComp.getEmpleadoLogeado()!=null) {
+					if(TiendaComp.getEmpleadoLogeado().getCargo().equalsIgnoreCase("Administrador")) {
+						btnNewButton.setVisible(true);
+					}else {
+						btnNewButton.setVisible(false);	
+					}
+				}
+				if (TiendaComp.getClienteLogeado()!=null) {
+					
+					btnNewButton.setVisible(false);	
+					
+				}
+				
 				buttonPane.add(btnNewButton);
 			}
 			{
