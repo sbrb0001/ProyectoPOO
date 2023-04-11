@@ -205,6 +205,13 @@ public class Principal extends JFrame {
 		
 		
 		JMenuItem mntmNewMenuItem_3 = new JMenuItem("Listado de Clientes");
+		mntmNewMenuItem_3.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ListadoCliente menu = new ListadoCliente();
+				menu.setModal(true);
+				menu.setVisible(true);
+			}
+		});
 		administracionmeNu.add(mntmNewMenuItem_3);
 		
 		JMenuItem mntmListaFact = new JMenuItem("Listado de Facturas");

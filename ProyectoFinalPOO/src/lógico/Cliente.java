@@ -2,7 +2,8 @@ package lógico;
 
 import java.io.Serializable;
 
-public class Cliente extends Persona implements Serializable{
+public class Cliente extends Persona {
+
 	private static final long serialVersionUID = 1L;
 	protected String ocupacion;
 	protected int cantCompras; //esto es para realizarles descuentos si han hecho mas de 5 compras cada vez que se le hace un descuento la cantidad vuelve a cero
@@ -36,6 +37,8 @@ public class Cliente extends Persona implements Serializable{
 	public void setCantCompras(int cantCompras) {
 		this.cantCompras = cantCompras;
 	}
+
+	
 	
 	
 	

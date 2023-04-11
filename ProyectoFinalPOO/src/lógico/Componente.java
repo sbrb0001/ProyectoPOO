@@ -1,7 +1,10 @@
 package lógico;
 
-public abstract class Componente {
+import java.io.Serializable;
 
+public abstract class Componente implements Serializable{
+
+	protected static final long serialVersionUID = 1L;
 	protected String Marca;
 	protected String numSerie;
 	protected int cant;
@@ -50,6 +53,10 @@ public abstract class Componente {
 	
 	public abstract String Dato1();
 	public abstract String Dato2();
-	public abstract String Dato3(); 
+	public abstract String Dato3();
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	} 
 	
 }

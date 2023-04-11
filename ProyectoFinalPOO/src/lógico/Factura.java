@@ -1,8 +1,10 @@
 package lógico;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Factura {
+public class Factura implements Serializable{
+	private static final long serialVersionUID = 1L;
 	private String codigo;
 	private Persona persona;
 	private ArrayList<Combo> cVendidos;
@@ -45,6 +47,10 @@ public class Factura {
 
 	public void setCodigo(String codigo) {
 		this.codigo = codigo;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 	
 }

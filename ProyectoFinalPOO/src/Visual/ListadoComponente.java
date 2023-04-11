@@ -51,6 +51,7 @@ public class ListadoComponente extends JDialog {
 	 * Create the dialog.
 	 */
 	public ListadoComponente() {
+		setTitle("Listado de Clientes");
 		setBackground(new Color(173, 216, 230));
 		setForeground(new Color(173, 216, 230));;
 		setBounds(100, 100, 671, 424);

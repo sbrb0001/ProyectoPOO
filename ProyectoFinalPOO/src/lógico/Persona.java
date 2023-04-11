@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class Persona implements Serializable{
 	
-	private static final long serialVersionUID = 1L;
+	protected static final long serialVersionUID = 1L;//para que persista en el fichero, ojom com eso
 	protected String Cedula;
 	protected String Nombre;
 	protected String direccion;
@@ -13,6 +13,7 @@ public class Persona implements Serializable{
 	protected String usuarioString;
 	protected String password;
 	
+
 	public Persona(String cedula, String nombre, String direccion, String telefono, boolean estado,
 			String usuarioString, String password) {
 		super();
@@ -65,6 +66,9 @@ public class Persona implements Serializable{
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 }

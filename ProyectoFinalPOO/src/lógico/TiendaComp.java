@@ -149,16 +149,18 @@ public class TiendaComp implements Serializable{
 			if (usuari instanceof Empleado) {
 				if(usuari.getUsuarioString().equals(usuario) && usuari.getPassword().equals(pass)) {
 					empleadoLogeado = (Empleado) usuari;
+					usuari.setEstado(true);
 					login=true;
-
+					break;
 				}
 			}
 			if(usuari instanceof Cliente){
 
 				if(usuari.getUsuarioString().equals(usuario) && usuari.getPassword().equals(pass)) {
 					clienteLogeado = (Cliente) usuari;
+					usuari.setEstado(true);
 					login=true;
-
+					break;
 				}
 			}
 

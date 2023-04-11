@@ -48,9 +48,9 @@ public class Login extends JFrame {
 				FileOutputStream tienda2;
 				ObjectInputStream tiendaRead;
 				ObjectOutputStream tiendaWrite;
-				try {
-					tienda = new FileInputStream("tienda.dat");
-					tiendaRead = new ObjectInputStream(tienda);
+				try {//trato de leer
+					tienda = new FileInputStream("tienda.dat");//esto se lee
+					tiendaRead = new ObjectInputStream(tienda);// se envuelve en un objet input
 					TiendaComp temp = (TiendaComp) tiendaRead.readObject();
 					TiendaComp.setTienda(temp);
 					tienda.close();
@@ -60,7 +60,7 @@ public class Login extends JFrame {
 					try {
 					tienda2 = new FileOutputStream("tienda.dat");
 					tiendaWrite = new ObjectOutputStream(tienda2);
-					Persona aux = new Empleado(null,null,null,null,true, "admin","admin","Administrador");
+					Persona aux = new Empleado("","","","",false, "admin","admin","Administrador");
 					TiendaComp.getInstance().InsertarPersona(aux);
 					tiendaWrite.writeObject(TiendaComp.getInstance());
 					tienda2.close(); 

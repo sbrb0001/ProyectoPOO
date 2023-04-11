@@ -12,6 +12,7 @@ import javax.swing.border.TitledBorder;
 import lógico.Cliente;
 import lógico.Empleado;
 import lógico.Persona;
+import lógico.TiendaComp;
 
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -196,17 +197,19 @@ public class RegistrarPersona extends JDialog {
 							if (tipoCuentaCBX.getSelectedIndex()==1) {
 								String carg= ocupaciontxt.getText();
 								aux= new Cliente(cedula, nombre, direcion, telefono, false, user, password, carg, ABORT);
-								
+								JOptionPane.showMessageDialog(null, "Cuenta Agregada!", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+								//para salis despues que se cree la cuenta
+								dispose();
 
 							}
 							if (tipoCuentaCBX.getSelectedIndex()==2) {
 								String carg2= cargotxt.getText();
 								aux= new Empleado(cedula, nombre, direcion, telefono, false, user, password, carg2);
-
+								JOptionPane.showMessageDialog(null, "Cuenta Agregada!", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+								//para salis despues que se cree la cuenta
+								dispose();
 							}
-							JOptionPane.showMessageDialog(null, "Cuenta Agregada!", "Informacion", JOptionPane.INFORMATION_MESSAGE);
-							//para salis despues que se cree la cuenta
-							dispose();
+							TiendaComp.getInstance().InsertarPersona(aux);
 
 						}else {
 							JOptionPane.showMessageDialog(null, "Error, debe seleccionar un tipo de cuenta antes de registrarse", "Error", JOptionPane.ERROR_MESSAGE);
