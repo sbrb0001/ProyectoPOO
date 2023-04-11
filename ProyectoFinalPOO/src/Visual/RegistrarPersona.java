@@ -8,6 +8,11 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
+
+import lógico.Cliente;
+import lógico.Empleado;
+import lógico.Persona;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.border.EtchedBorder;
@@ -132,24 +137,24 @@ public class RegistrarPersona extends JDialog {
 		usuariotxt.setBounds(370, 48, 159, 26);
 		panel_1.add(usuariotxt);
 		usuariotxt.setColumns(10);
-		
-				JPanel panelCliente = new JPanel();
-				panelCliente.setBackground(new Color(255, 255, 255));
-				panelCliente.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
-				panelCliente.setBounds(6, 248, 535, 76);
-				contentPanel.add(panelCliente);
-				panelCliente.setLayout(null);
-				
-						JLabel lblNewLabel_7 = new JLabel("Ocupación: ");
-						lblNewLabel_7.setBounds(6, 28, 85, 16);
-						panelCliente.add(lblNewLabel_7);
-						
-								ocupaciontxt = new JTextField();
-								ocupaciontxt.setBounds(82, 23, 190, 26);
-								panelCliente.add(ocupaciontxt);
-								ocupaciontxt.setColumns(10);
-								
-								panelCliente.setVisible(false);
+
+		JPanel panelCliente = new JPanel();
+		panelCliente.setBackground(new Color(255, 255, 255));
+		panelCliente.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+		panelCliente.setBounds(6, 248, 535, 76);
+		contentPanel.add(panelCliente);
+		panelCliente.setLayout(null);
+
+		JLabel lblNewLabel_7 = new JLabel("Ocupación: ");
+		lblNewLabel_7.setBounds(6, 28, 85, 16);
+		panelCliente.add(lblNewLabel_7);
+
+		ocupaciontxt = new JTextField();
+		ocupaciontxt.setBounds(82, 23, 190, 26);
+		panelCliente.add(ocupaciontxt);
+		ocupaciontxt.setColumns(10);
+
+		panelCliente.setVisible(false);
 
 		JPanel panelEmpleado = new JPanel();
 		panelEmpleado.setBackground(new Color(255, 255, 255));
@@ -177,7 +182,32 @@ public class RegistrarPersona extends JDialog {
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						if(tipoCuentaCBX.getSelectedIndex()!=0) {
+							Persona aux = null;
+							String cedula= cedulatxt.getText();
+							String nombre= nombretxt.getText();
+							String direcion=direcciontxt.getText();
+							String telefono= telefonotxt.getText();
+							String user= usuariotxt.getText();
+							char[] pass = passwordtxt.getPassword();
+							String password = new String(pass);
 							
+							
+
+							if (tipoCuentaCBX.getSelectedIndex()==1) {
+								String carg= ocupaciontxt.getText();
+								aux= new Cliente(cedula, nombre, direcion, telefono, false, user, password, carg, ABORT);
+								
+
+							}
+							if (tipoCuentaCBX.getSelectedIndex()==2) {
+								String carg2= cargotxt.getText();
+								aux= new Empleado(cedula, nombre, direcion, telefono, false, user, password, carg2);
+
+							}
+							JOptionPane.showMessageDialog(null, "Cuenta Agregada!", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+							//para salis despues que se cree la cuenta
+							dispose();
+
 						}else {
 							JOptionPane.showMessageDialog(null, "Error, debe seleccionar un tipo de cuenta antes de registrarse", "Error", JOptionPane.ERROR_MESSAGE);
 						}
@@ -207,7 +237,7 @@ public class RegistrarPersona extends JDialog {
 		cedulatxt.setEnabled(false);
 		direcciontxt.setEnabled(false);
 		passwordtxt.setEnabled(false);
-		
+
 
 		tipoCuentaCBX.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

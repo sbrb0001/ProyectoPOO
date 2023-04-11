@@ -158,8 +158,8 @@ public class Principal extends JFrame {
 		JMenu administracionmeNu = new JMenu("Administración");
 		//pa que no vea un cliente o empleado que no sea administrador
 		
-		if(TiendaComp.getPersonaLogeada() instanceof Empleado) {
-			
+		/**if(TiendaComp.getPersonaLogeada() instanceof Empleado) {
+	//arreglar		
 			Empleado empleado = (Empleado) TiendaComp.getPersonaLogeada();
 			if (!empleado.getCargo().equalsIgnoreCase("Administrador")){
 				administracionmeNu.setVisible(false);
@@ -167,8 +167,20 @@ public class Principal extends JFrame {
 		
 				administracionmeNu.setVisible(true);
 			}	
-		}
+		}*/
 		
+		if (TiendaComp.getEmpleadoLogeado()!=null) {
+			if(TiendaComp.getEmpleadoLogeado().getCargo().equalsIgnoreCase("Administrador")) {
+				administracionmeNu.setVisible(true);
+			}else {
+				administracionmeNu.setVisible(false);	
+			}
+		}
+		if (TiendaComp.getClienteLogeado()!=null) {
+			
+				administracionmeNu.setVisible(false);	
+			
+		}
 		menuBar.add(administracionmeNu);
 		
 		JMenuItem mntmNewMenuItem_2 = new JMenuItem("Crear Componente");

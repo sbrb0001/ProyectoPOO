@@ -129,12 +129,18 @@ public class Login extends JFrame {
 		JButton iniciarSesionBnt = new JButton("Iniciar Sesión");
 		iniciarSesionBnt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(TiendaComp.getInstance().confirmLogin(usuariotxt.getText(), contrasenatxt.getPassword())) {
+				char[] pass = contrasenatxt.getPassword();
+				String password = new String(pass);
+				
+				if(TiendaComp.getInstance().confirmLogin(usuariotxt.getText(), password)) {
+		
 					//confirma si el usuario existe, luego cuando se logea se entra a la pantalla principal
 					Principal jframe = new Principal();
 					dispose();
 					jframe.setVisible(true);
 			
+				}else {
+					JOptionPane.showMessageDialog(null, "La cuenta no pertenece al sistema!", "Informacion", JOptionPane.INFORMATION_MESSAGE);
 				}
 			}
 		});

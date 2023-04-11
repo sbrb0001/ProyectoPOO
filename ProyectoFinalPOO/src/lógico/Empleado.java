@@ -1,7 +1,9 @@
 package lógico;
 
-public class Empleado extends Persona {
+import java.io.Serializable;
 
+public class Empleado extends Persona implements Serializable{
+	private static final long serialVersionUID = 1L;//para que persista en el fichero, ojom com eso
 	protected String cargo;
 
 	public Empleado(String cedula, String nombre, String direccion, String telefono, boolean estado,
