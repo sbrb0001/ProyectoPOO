@@ -145,7 +145,6 @@ public class ListaFacturas extends JDialog {
 		model.setRowCount(0);
 		rows = new Object[model.getColumnCount()];
 		int ind=0;
-		String [] comb = new String [50];
 		for (Factura factura : TiendaComp.getInstance().getMisFacturas()) {
 			rows[0] = factura.getCodigo();
 			rows[1] = factura.getPersona().getNombre();
@@ -170,10 +169,11 @@ public class ListaFacturas extends JDialog {
 			if(factura.getcVendidos()!=null) {
 				
 				for(Combo combo : factura.getcVendidos()) {
-					if(combo !=null) {
+					//if(combo !=null) {
 						//comb[ind]= combo.getNombre();
 						ind++;
-					}
+					//}
+					
 				}
 			}
 			rows[2] = cant4;
@@ -181,6 +181,7 @@ public class ListaFacturas extends JDialog {
 			rows[4] = cant1;
 			rows[5] = cant3;
 			rows[6] = ind;
+			ind=0;
 			
 
 			model.addRow(rows);

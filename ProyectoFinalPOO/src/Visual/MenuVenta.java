@@ -40,7 +40,6 @@ public class MenuVenta extends JDialog {
 	private final JPanel contentPanel = new JPanel();
 	private Dimension dim; 
 	private JTextField textMonto;
-	private Factura factura = new Factura (null, null, null, null);
 
 	/**
 	 * Launch the application.
@@ -48,7 +47,7 @@ public class MenuVenta extends JDialog {
 	public static void main(String[] args) {
 		try {
 			MenuVenta dialog = new MenuVenta();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			dialog.setDefaultCloseOperation(0);
 			dialog.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -60,6 +59,7 @@ public class MenuVenta extends JDialog {
 	 */
 	public MenuVenta() {
 	//	factura = null;
+		Factura factura = new Factura (null, null, null, null);
 		setTitle("Menú de Ventas");
 	//	TiendaComp.getInstance().GenerarComponentes();
 		TiendaComp.getInstance().GenerarPersona();
@@ -429,33 +429,34 @@ public class MenuVenta extends JDialog {
 				JButton okButton = new JButton("Comprar");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						
-						if(factura.getCodigo()!=null) {
+					//	TiendaComp.getInstance().InsertarFact(factura);
+						if(factura.getcVendidos()!=null && TiendaComp.getInstance().Carrito!=null) {
 							factura.setMisComponentes(TiendaComp.getInstance().AgregarCompFact(TiendaComp.getInstance().Carrito));
 							//TiendaComp.getInstance().EliminarFact(factura);
 							//TiendaComp.getInstance().InsertarFact(factura);
 							factura.setPersona(TiendaComp.getInstance().PersonaLogg());
 							//TiendaComp.getInstance().EliminarFact(factura);
+							//TiendaComp.getInstance().InsertarFact(factura);
 							JOptionPane.showMessageDialog(null, "Compra Satisfactoria!", "Informacion", JOptionPane.INFORMATION_MESSAGE);
 							dispose();
 						}
-						else {
+						else if (factura.getcVendidos()==null) {
 							factura.setCodigo(TiendaComp.getInstance().CrearCodigoFact());
 							factura.setPersona(TiendaComp.getInstance().PersonaLogg());
 							factura.setMisComponentes(TiendaComp.getInstance().AgregarCompFact(TiendaComp.getInstance().Carrito));
-							factura.setcVendidos(null);
-							//TiendaComp.getInstance().EliminarFact(factura);
+						//	factura.setcVendidos(null);
 							TiendaComp.getInstance().InsertarFact(factura);
 							JOptionPane.showMessageDialog(null, "Compra Satisfactoria!", "Informacion", JOptionPane.INFORMATION_MESSAGE);
 							dispose();
 						}
+						
 						//factura.setMisComponentes(TiendaComp.getInstance().AgregarCompFact(TiendaComp.getInstance().Carrito));
 						//factura = new Factura(TiendaComp.getInstance().CrearCodigoFact(TiendaComp.getInstance().Carrito), TiendaComp.getInstance().PersonaLogg(), null, TiendaComp.getInstance().AgregarCompFact(TiendaComp.getInstance().Carrito));
 					//	TiendaComp.getInstance().InsertarFact(factura);
 					//	factura.setMisComponentes(TiendaComp.getInstance().AgregarCompFact(TiendaComp.getInstance().Carrito));
 						
 					//	TiendaComp.getInstance().ArreglarFact(factura, TiendaComp.getInstance().Carrito);
-					//	TiendaComp.getInstance().InsertarFact(factura);
+						
 						
 						TiendaComp.getInstance().setCarrito(new String[100]);	
 						TiendaComp.getInstance().setDiscosD(new String[100]);	
@@ -477,6 +478,7 @@ public class MenuVenta extends JDialog {
 						VentaCombo list = new VentaCombo(factura);
 				//		TiendaComp.getInstance().InsertarFact(factura);
 						list.setModal(true);
+						//TiendaComp.getInstance().InsertarFact(factura);
 						list.setVisible(true);
 						//TiendaComp.getInstance().InsertarFact(factura);
 					}
@@ -490,7 +492,18 @@ public class MenuVenta extends JDialog {
 				JButton cancelButton = new JButton("Cancelar");
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						dispose();
+						//TiendaComp.getInstance().InsertarFact(factura);
+						if(factura.getcVendidos()!=null && TiendaComp.getInstance().Carrito!=null) {
+							factura.setMisComponentes(TiendaComp.getInstance().AgregarCompFact(TiendaComp.getInstance().Carrito));
+							//TiendaComp.getInstance().EliminarFact(factura);
+							//TiendaComp.getInstance().InsertarFact(factura);
+							factura.setPersona(TiendaComp.getInstance().PersonaLogg());
+							//TiendaComp.getInstance().EliminarFact(factura);
+							//TiendaComp.getInstance().InsertarFact(factura);
+							JOptionPane.showMessageDialog(null, "Compra Satisfactoria!", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+							dispose();
+						}
+
 					}
 				});
 				cancelButton.setActionCommand("Cancel");
