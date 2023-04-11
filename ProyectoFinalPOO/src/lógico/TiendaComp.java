@@ -2,6 +2,7 @@ package lógico;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import org.omg.PortableInterceptor.USER_EXCEPTION;
 
@@ -139,11 +140,14 @@ public class TiendaComp implements Serializable{
 		}
 	}
 	
-	public boolean confirmLogin(String usuario, String password) { //esto es para confirmar si lo que se digito son usuarios de verdad guardados
+	public boolean confirmLogin(String usuario, char[] cs) { //esto es para confirmar si lo que se digito son usuarios de verdad guardados
 		boolean login = false;
 		
+		String pssString =cs.toString();
+		
+		
 		for(Persona usuari: misPersonas) {
-			if(usuari.getUsuarioString().equals(usuario) && usuari.getPassword().equals(password)) {
+			if(usuari.getUsuarioString().equals(usuario) && usuari.getPassword().equals(pssString)) {
 				personaLogeada = usuari;
 				login=true;
 				break;

@@ -44,27 +44,27 @@ public class Login extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				
-				FileInputStream tiendaFileInputStream;
-				FileOutputStream tiendaFileOutputStream;
-				ObjectInputStream tiendaLeerObjectInputStream;
-				ObjectOutputStream tiendaescribirOutputStream;
+				FileInputStream tienda;
+				FileOutputStream tienda2;
+				ObjectInputStream tiendaRead;
+				ObjectOutputStream tiendaWrite;
 				try {
-					tiendaFileInputStream = new FileInputStream("tienda.dat");
-					tiendaLeerObjectInputStream = new ObjectInputStream(tiendaFileInputStream);
-					TiendaComp temp = (TiendaComp) tiendaLeerObjectInputStream.readObject();
+					tienda = new FileInputStream("tienda.dat");
+					tiendaRead = new ObjectInputStream(tienda);
+					TiendaComp temp = (TiendaComp) tiendaRead.readObject();
 					TiendaComp.setTienda(temp);
-					tiendaFileInputStream.close();
-					tiendaLeerObjectInputStream.close();
+					tienda.close();
+					tiendaRead.close();
 					
 				}catch (FileNotFoundException e) {
 					try {
-					tiendaFileOutputStream = new FileOutputStream("tienda.dat");
-					tiendaescribirOutputStream = new ObjectOutputStream(tiendaFileOutputStream);
-					Persona aux = new Empleado(null,null,null,null,true, "admin0","admin","Administrador");
+					tienda2 = new FileOutputStream("tienda.dat");
+					tiendaWrite = new ObjectOutputStream(tienda2);
+					Persona aux = new Empleado(null,null,null,null,true, "admin","admin","Administrador");
 					TiendaComp.getInstance().InsertarPersona(aux);
-					tiendaescribirOutputStream.writeObject(TiendaComp.getInstance());
-					tiendaFileOutputStream.close(); 
-					tiendaescribirOutputStream.close();
+					tiendaWrite.writeObject(TiendaComp.getInstance());
+					tienda2.close(); 
+					tiendaWrite.close();
 						
 					}catch (FileNotFoundException e1) {
 					}catch (IOException e1) {
@@ -129,7 +129,7 @@ public class Login extends JFrame {
 		JButton iniciarSesionBnt = new JButton("Iniciar Sesión");
 		iniciarSesionBnt.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if(TiendaComp.getInstance().confirmLogin(usuariotxt.getText(), contrasenatxt.getName())) {
+				if(TiendaComp.getInstance().confirmLogin(usuariotxt.getText(), contrasenatxt.getPassword())) {
 					//confirma si el usuario existe, luego cuando se logea se entra a la pantalla principal
 					Principal jframe = new Principal();
 					dispose();

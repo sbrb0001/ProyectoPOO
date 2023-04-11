@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Window;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -17,10 +18,17 @@ import javax.swing.border.TitledBorder;
 
 import lógico.Combo;
 import lógico.Componente;
+import lógico.Empleado;
 import lógico.TiendaComp;
 
 import java.awt.Color;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import javax.swing.JCheckBoxMenuItem;
@@ -61,6 +69,22 @@ public class Principal extends JFrame {
 	 * Create the frame.
 	 */
 	public Principal() {
+		addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent e) {
+				FileOutputStream tienda2;
+				ObjectOutputStream tiendaWrite;
+				try {
+					tienda2 = new FileOutputStream("tienda.dat");
+					tiendaWrite = new ObjectOutputStream(tienda2);
+					tiendaWrite.writeObject(TiendaComp.getInstance());
+				}catch (FileNotFoundException e1) {
+					e1.printStackTrace();
+				}catch (IOException e1) {
+					e1.printStackTrace();
+				}
+			}
+ 			
+		});
 		TiendaComp.getInstance().GenerarComponentes();
 		ArrayList<Componente> losComponentes = TiendaComp.getInstance().getMisComponentes();
 		Combo combo = new Combo(losComponentes, "Vuelta a Clases", 1);
@@ -132,8 +156,19 @@ public class Principal extends JFrame {
 		mnNewMenu_3.add(mntmNewMenuItem_8);
 		
 		JMenu administracionmeNu = new JMenu("Administración");
+		//pa que no vea un cliente o empleado que no sea administrador
 		
-		//if(!TiendaComp.getPersonaLogeada().)
+		if(TiendaComp.getPersonaLogeada() instanceof Empleado) {
+			
+			Empleado empleado = (Empleado) TiendaComp.getPersonaLogeada();
+			if (!empleado.getCargo().equalsIgnoreCase("Administrador")){
+				administracionmeNu.setVisible(false);
+			}else {
+		
+				administracionmeNu.setVisible(true);
+			}	
+		}
+		
 		menuBar.add(administracionmeNu);
 		
 		JMenuItem mntmNewMenuItem_2 = new JMenuItem("Crear Componente");

@@ -129,7 +129,6 @@ public class RegistrarPersona extends JDialog {
 		panel_1.add(lblNewLabel_6);
 
 		usuariotxt = new JTextField();
-		usuariotxt.setEditable(false);
 		usuariotxt.setBounds(370, 48, 159, 26);
 		panel_1.add(usuariotxt);
 		usuariotxt.setColumns(10);
