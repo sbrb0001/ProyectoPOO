@@ -27,6 +27,7 @@ import java.awt.Font;
 import java.util.ArrayList;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Color;
 
 public class VentaCombo extends JDialog {
 
@@ -50,6 +51,7 @@ public class VentaCombo extends JDialog {
 	 * Create the dialog.
 	 */
 	public VentaCombo(Factura factura) {
+		setBackground(new Color(173, 216, 230));
 
 		ListaCombo = new String[100];
 		ComboList();
@@ -57,6 +59,7 @@ public class VentaCombo extends JDialog {
 		setTitle("Venta de Combos");
 		setBounds(100, 100, 535, 365);
 		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setBackground(new Color(240, 248, 255));
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
@@ -85,6 +88,7 @@ public class VentaCombo extends JDialog {
 		scrollPane.setViewportView(listComp);
 		
 		JPanel panel_1 = new JPanel();
+		panel_1.setBackground(new Color(255, 255, 255));
 		panel_1.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 		panel_1.setBounds(10, 11, 664, 35);
 		contentPanel.add(panel_1);
@@ -96,6 +100,7 @@ public class VentaCombo extends JDialog {
 		panel_1.add(lblNewLabel);
 		{
 			JPanel buttonPane = new JPanel();
+			buttonPane.setBackground(new Color(255, 255, 255));
 			buttonPane.setBorder(new EtchedBorder(EtchedBorder.LOWERED, null, null));
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);

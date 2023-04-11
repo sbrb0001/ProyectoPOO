@@ -3,11 +3,15 @@ package servidor;
 import java.io.*;
 import java.net.*;
 
+import Visual.LecturaRep;
+import Visual.Principal;
+
 public class Server extends Thread//esta clase es un hilo
 {
 	
 public static void main (String args[])
   {
+	LecturaRep mandarTextoPrincipal=null;
     ServerSocket sfd = null;
     try
     {
@@ -27,23 +31,19 @@ public static void main (String args[])
         System.out.println("Conexion aceptada de: "+nsfd.getInetAddress());
         ObjectInputStream FlujoLectura = new ObjectInputStream(nsfd.getInputStream());
         ObjectOutputStream esc= new ObjectOutputStream(new FileOutputStream(new File("tienda_respaldo.dat")));
-        ////String linea = FlujoLectura.readUTF();
-        ////String text = "";//esta parte has que se mande a reporte de clientes
-        /*if (!linea.equals(""))
- 	     {
-          text = text+" "+ linea;
-          
-          System.out.println(text);
-  	   }*/
-        
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+       
         int bytes;
         
         try {
         	while ((bytes=FlujoLectura.read())!=-1) {
 				esc.write(bytes);
+				buffer.write(bytes);
 				FlujoLectura.close();
 				esc.close();
 			}
+        	String data = buffer.toString();
+        	mandarTextoPrincipal.reportesss(data);
         } catch(IOException e)
         {
             System.out.println("Error: "+e);

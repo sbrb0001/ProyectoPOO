@@ -133,6 +133,14 @@ public class TiendaComp implements Serializable{
 		cVendidos.add(combo);
 	}
 
+	public void EliminarComp(Componente com) {
+
+		for(Componente aux : misComponentes) {
+			if(com.getNumSerie().equalsIgnoreCase(aux.getNumSerie())) {
+				aux=null;
+			}
+		}
+	}
 	public void EliminarFact(Factura factura) {
 
 		for(Factura fact : MisFacturas) {

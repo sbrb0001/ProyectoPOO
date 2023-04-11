@@ -50,7 +50,7 @@ public class Principal extends JFrame {
 	private JPanel contentPane;
 	private  Dimension dim;
 	static Socket sfd = null;
-	static ObjectInputStream EntradaSocket;
+	static DataInputStream EntradaSocket;
 	static DataOutputStream SalidaSocket;
 	
 	FondoPanel fondo = new FondoPanel();
@@ -97,10 +97,10 @@ public class Principal extends JFrame {
 			}
  			
 		});
-		TiendaComp.getInstance().GenerarComponentes();
-		ArrayList<Componente> losComponentes = TiendaComp.getInstance().getMisComponentes();
-		Combo combo = new Combo(losComponentes, "Vuelta a Clases", 1);
-		TiendaComp.getInstance().InsertarCombo(combo);
+		//TiendaComp.getInstance().GenerarComponentes();
+		//ArrayList<Componente> losComponentes = TiendaComp.getInstance().getMisComponentes();
+		//Combo combo = new Combo(losComponentes, "Vuelta a Clases", 1);
+		//TiendaComp.getInstance().InsertarCombo(combo);
 		setTitle("TecnoShop");
 		setBackground(new Color(176, 224, 230));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -175,6 +175,18 @@ public class Principal extends JFrame {
 		mntmNewMenuItem_7.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				//en esta parte se utilizo archivos para leer la info de la tienda
+				ViaContacto list;
+				try {
+					list = new ViaContacto();
+					list.setModal(true);
+					list.setVisible(true);
+					
+				} catch (FileNotFoundException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+				
 			}
 		});
 		mnNewMenu_4.add(mntmNewMenuItem_7);
@@ -182,51 +194,15 @@ public class Principal extends JFrame {
 		JMenuItem mntmNewMenuItem_9 = new JMenuItem("Reportar Problema");
 		mntmNewMenuItem_9.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				try
-			    {
-					Reporte menu = new Reporte();
-					menu.setVisible(true);
-			      sfd = new Socket("122.0.0.1",6000);
-			      ObjectInputStream aux = new ObjectInputStream(new FileInputStream(new File("tienda.dat")));
-			      SalidaSocket = new DataOutputStream((sfd.getOutputStream()));
-			      
-			     //EntradaSocket= new ObjectInputStream((sfd.getInputStream()));
-			      //String ejemplo = new String("Esto es una prueba nueva");
-			      int bytes;
-			      try
-			      {
-			        //SalidaSocket.writeUTF(ejemplo);
-			       // SalidaSocket.flush();
-			    		while ((bytes=aux.read())!=-1) {
-			    			SalidaSocket.write(bytes);
-							SalidaSocket.flush();
-						}
-			      }
-			      catch (IOException ioe)
-			      {
-			        System.out.println("Error: "+ioe);
-			      }
-			    }
-			    catch (UnknownHostException uhe)
-			    {
-			      System.out.println("No se puede acceder al servidor.");
-			      System.exit(1);
-			    }
-			    catch (IOException ioe)
-			    {
-			      System.out.println("Comunicaci�n rechazada.");
-			      System.exit(1);
-			    }
-			
+				 Reporte rep = new Reporte();
+				  getContentPane().add(rep); 
+				 
 			}
 			
 			
 			
 		});
 		mnNewMenu_4.add(mntmNewMenuItem_9);
-		
-		JMenuItem mntmNewMenuItem_8 = new JMenuItem("Acerca De ");
-		mnNewMenu_3.add(mntmNewMenuItem_8);
 		
 		JMenu administracionmeNu = new JMenu("Administración");
 		//pa que no vea un cliente o empleado que no sea administrador
@@ -297,12 +273,21 @@ public class Principal extends JFrame {
 		administracionmeNu.add(mnNewMenu_2);
 		
 		JMenuItem mntmNewMenuItem = new JMenuItem("Reportes");
+		mntmNewMenuItem.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				LecturaRep menuLecturaRep = new LecturaRep();
+				menuLecturaRep.setModal(true);
+				menuLecturaRep.setVisible(true);
+			}
+		});
 		mnNewMenu_2.add(mntmNewMenuItem);
 		
 		JMenuItem mntmNewMenuItem_1 = new JMenuItem("Modificar Información");
 		mntmNewMenuItem_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {	
-				
+				ModifInfo menu = new ModifInfo();
+				menu.setModal(true);
+				menu.setVisible(true);
 			}
 		});
 		mnNewMenu_2.add(mntmNewMenuItem_1);
@@ -329,7 +314,9 @@ public class Principal extends JFrame {
 		panel.setBorder(new TitledBorder(null, "", TitledBorder.LEADING, TitledBorder.TOP, null, null));
 		contentPane.add(panel, BorderLayout.CENTER);
 		panel.setLayout(null);
+
 	}
+
 	public class FondoPanel extends JPanel{
 		private Image imagen;
 		@Override

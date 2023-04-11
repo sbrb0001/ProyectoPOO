@@ -47,7 +47,7 @@ public class MenuVenta extends JDialog {
 	public static void main(String[] args) {
 		try {
 			MenuVenta dialog = new MenuVenta();
-			dialog.setDefaultCloseOperation(0);
+			//dialog.setDefaultCloseOperation(0);
 			dialog.setVisible(true);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -58,39 +58,39 @@ public class MenuVenta extends JDialog {
 	 * Create the dialog.
 	 */
 	public MenuVenta() {
-	//	factura = null;
+		//	factura = null;
 		factura = new Factura ((TiendaComp.getInstance().CrearCodigoFact()), null, null, null);
 		TiendaComp.getInstance().InsertarFact(factura);
 		setTitle("Menú de Ventas");
-	//	TiendaComp.getInstance().GenerarComponentes();
-		TiendaComp.getInstance().GenerarPersona();
+		//	TiendaComp.getInstance().GenerarComponentes();
+		//TiendaComp.getInstance().GenerarPersona();
 		setBackground(new Color(173, 216, 230));
 		setForeground(new Color(173, 216, 230));
-//		TiendaComp.getInstance().GenerarComponentes();
+		//		TiendaComp.getInstance().GenerarComponentes();
 		setBounds(100, 100, 533, 373);
 		setSize(662, 600);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBackground(new Color(240, 248, 255));
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setLocationRelativeTo(null);
-        JFrame frame = new JFrame("Ejemplo de diálogo centrado");
-        frame.setSize(300, 200);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		JFrame frame = new JFrame("Ejemplo de diálogo centrado");
+		frame.setSize(300, 200);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        JPanel panel = new JPanel();
-        JLabel label = new JLabel("Este es un diálogo centrado");
-        panel.add(label);
-        frame.getContentPane().add(panel);
-		  JDialog dialogo = new JDialog(frame, "Diálogo centrado", true);
-	        dialogo.setSize(200, 100);
-	        dialogo.setResizable(false);
-        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		JPanel panel = new JPanel();
+		JLabel label = new JLabel("Este es un diálogo centrado");
+		panel.add(label);
+		frame.getContentPane().add(panel);
+		JDialog dialogo = new JDialog(frame, "Diálogo centrado", true);
+		dialogo.setSize(200, 100);
+		dialogo.setResizable(false);
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 
-        int x = (screenSize.width - dialogo.getWidth()) / 2;
-        int y = (screenSize.height - dialogo.getHeight()) / 2;
-        dialogo.setLocation(x, y);
+		int x = (screenSize.width - dialogo.getWidth()) / 2;
+		int y = (screenSize.height - dialogo.getHeight()) / 2;
+		dialogo.setLocation(x, y);
 
-        
+
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
 		contentPanel.setLayout(null);
 		{
@@ -133,15 +133,15 @@ public class MenuVenta extends JDialog {
 				lblNewLabel.setBounds(35, 11, 96, 14);
 				panel1.add(lblNewLabel);
 			}
-		
+
 			JScrollPane scrollTmadres = new JScrollPane();
 			scrollTmadres.setBounds(10, 27, 137, 180);
 			panel1.add(scrollTmadres);
-			
+
 			JList listTmadres = new JList();
 			scrollTmadres.setViewportView(listTmadres);
 
-			
+
 			listTmadres.setModel(new AbstractListModel() {
 				String[] values = TiendaComp.getInstance().mMadresList();
 				public int getSize() {
@@ -151,14 +151,14 @@ public class MenuVenta extends JDialog {
 					return values[index];
 				}
 			});
-			
+
 			JScrollPane scrollDuros = new JScrollPane();
 			scrollDuros.setBounds(166, 27, 137, 180);
 			panel1.add(scrollDuros);
-			
+
 			JList listDiscosDuros = new JList();
 			scrollDuros.setViewportView(listDiscosDuros);
-			
+
 			listDiscosDuros.setModel(new AbstractListModel() {
 				String[] values = TiendaComp.getInstance().mDurosList();
 				public int getSize() {
@@ -168,15 +168,15 @@ public class MenuVenta extends JDialog {
 					return values[index];
 				}
 			});
-		
-		
+
+
 			JScrollPane scrollmProcesadores = new JScrollPane();
 			scrollmProcesadores.setBounds(325, 27, 137, 180);
 			panel1.add(scrollmProcesadores);
-			
+
 			JList listMicroprocesadores = new JList();
 			scrollmProcesadores.setViewportView(listMicroprocesadores);
-		
+
 			listMicroprocesadores.setModel(new AbstractListModel() {
 				String[] values = TiendaComp.getInstance().mProcesadoresList();
 				public int getSize() {
@@ -186,15 +186,15 @@ public class MenuVenta extends JDialog {
 					return values[index];
 				}
 			});
-		
-		
+
+
 			JScrollPane scrollRam = new JScrollPane();
 			scrollRam.setBounds(483, 27, 137, 180);
 			panel1.add(scrollRam);
-		
+
 			JList listMemoriaRam = new JList();
 			scrollRam.setViewportView(listMemoriaRam);
-			
+
 			listMemoriaRam.setModel(new AbstractListModel() {
 				String[] values = TiendaComp.getInstance().mRamList();
 				public int getSize() {
@@ -204,20 +204,20 @@ public class MenuVenta extends JDialog {
 					return values[index];
 				}
 			});
-			
+
 			JScrollPane scrollCarrito = new JScrollPane();
 			scrollCarrito.setBounds(253, 279, 143, 170);
 			panel1.add(scrollCarrito);
 			JList listCarrito = new JList();
 			scrollCarrito.setViewportView(listCarrito);
-			
+
 			textMonto = new JTextField();
 			textMonto.setEditable(false);
 			textMonto.setBounds(506, 429, 86, 20);
 			panel1.add(textMonto);
 			textMonto.setColumns(10);
-		
-			
+
+
 			JButton btnAgregarAlCarrito = new JButton("Agregar al carrito");
 			btnAgregarAlCarrito.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
@@ -243,7 +243,7 @@ public class MenuVenta extends JDialog {
 							}
 						});
 					}
-					
+
 					else if(listTmadres.getSelectedValue()!= null) {
 						listCarrito.setModel(new AbstractListModel() {
 							String[] values = TiendaComp.getInstance().ComponentesEnListaCarrito(listTmadres.getSelectedValue().toString());
@@ -319,12 +319,12 @@ public class MenuVenta extends JDialog {
 				lblNewLabel_4.setBounds(269, 254, 127, 14);
 				panel1.add(lblNewLabel_4);
 			}
-			
-			
+
+
 			JButton btnEliminardeCarrito = new JButton("Eliminar de carrito");
 			btnEliminardeCarrito.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
-					
+
 					if (TiendaComp.getInstance().DeDondeEs(listCarrito.getSelectedValue().toString())==0){
 						listCarrito.setModel(new AbstractListModel() {
 							String[] values = TiendaComp.getInstance().ActualizarListCarrito(listCarrito.getSelectedValue().toString());
@@ -335,7 +335,7 @@ public class MenuVenta extends JDialog {
 								return values[index];
 							}
 						});
-						
+
 						listMemoriaRam.setModel(new AbstractListModel() {
 							String[] values = TiendaComp.getInstance().mRamList();
 							public int getSize() {
@@ -347,7 +347,7 @@ public class MenuVenta extends JDialog {
 						});	
 					}
 					else if (TiendaComp.getInstance().DeDondeEs(listCarrito.getSelectedValue().toString())==1){
-						
+
 						listCarrito.setModel(new AbstractListModel() {
 							String[] values = TiendaComp.getInstance().ActualizarListCarrito(listCarrito.getSelectedValue().toString());
 							public int getSize() {
@@ -357,7 +357,7 @@ public class MenuVenta extends JDialog {
 								return values[index];
 							}
 						});
-						
+
 						listMicroprocesadores.setModel(new AbstractListModel() {
 							String[] values = TiendaComp.getInstance().mProcesadoresList();
 							public int getSize() {
@@ -378,7 +378,7 @@ public class MenuVenta extends JDialog {
 								return values[index];
 							}
 						});
-						
+
 						listTmadres.setModel(new AbstractListModel() {
 							String[] values = TiendaComp.getInstance().mMadresList();
 							public int getSize() {
@@ -399,7 +399,7 @@ public class MenuVenta extends JDialog {
 								return values[index];
 							}
 						});
-						
+
 						listDiscosDuros.setModel(new AbstractListModel() {
 							String[] values = TiendaComp.getInstance().mDurosList();
 							public int getSize() {
@@ -415,7 +415,7 @@ public class MenuVenta extends JDialog {
 			});
 			btnEliminardeCarrito.setBounds(342, 218, 162, 23);
 			panel1.add(btnEliminardeCarrito);
-			
+
 			JLabel lblNewLabel_5 = new JLabel("Precio total:");
 			lblNewLabel_5.setBounds(429, 432, 81, 14);
 			panel1.add(lblNewLabel_5);
@@ -430,7 +430,7 @@ public class MenuVenta extends JDialog {
 				JButton okButton = new JButton("Comprar");
 				okButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-					//	TiendaComp.getInstance().InsertarFact(factura);
+						//	TiendaComp.getInstance().InsertarFact(factura);
 						if(factura.getcVendidos()!=null && TiendaComp.getInstance().Carrito!=null) {
 							factura.setMisComponentes(TiendaComp.getInstance().AgregarCompFact(TiendaComp.getInstance().Carrito));
 							//TiendaComp.getInstance().EliminarFact(factura);
@@ -442,23 +442,23 @@ public class MenuVenta extends JDialog {
 							dispose();
 						}
 						else if (factura.getcVendidos()==null) {
-						//	factura.setCodigo(TiendaComp.getInstance().CrearCodigoFact());
+							//	factura.setCodigo(TiendaComp.getInstance().CrearCodigoFact());
 							factura.setPersona(TiendaComp.getInstance().PersonaLogg());
 							factura.setMisComponentes(TiendaComp.getInstance().AgregarCompFact(TiendaComp.getInstance().Carrito));
-						//	factura.setcVendidos(null);
-						//	TiendaComp.getInstance().InsertarFact(factura);
+							//	factura.setcVendidos(null);
+							//	TiendaComp.getInstance().InsertarFact(factura);
 							JOptionPane.showMessageDialog(null, "Compra Satisfactoria!", "Informacion", JOptionPane.INFORMATION_MESSAGE);
 							dispose();
 						}
-						
+
 						//factura.setMisComponentes(TiendaComp.getInstance().AgregarCompFact(TiendaComp.getInstance().Carrito));
 						//factura = new Factura(TiendaComp.getInstance().CrearCodigoFact(TiendaComp.getInstance().Carrito), TiendaComp.getInstance().PersonaLogg(), null, TiendaComp.getInstance().AgregarCompFact(TiendaComp.getInstance().Carrito));
-					//	TiendaComp.getInstance().InsertarFact(factura);
-					//	factura.setMisComponentes(TiendaComp.getInstance().AgregarCompFact(TiendaComp.getInstance().Carrito));
-						
-					//	TiendaComp.getInstance().ArreglarFact(factura, TiendaComp.getInstance().Carrito);
-						
-						
+						//	TiendaComp.getInstance().InsertarFact(factura);
+						//	factura.setMisComponentes(TiendaComp.getInstance().AgregarCompFact(TiendaComp.getInstance().Carrito));
+
+						//	TiendaComp.getInstance().ArreglarFact(factura, TiendaComp.getInstance().Carrito);
+
+
 						TiendaComp.getInstance().setCarrito(new String[100]);	
 						TiendaComp.getInstance().setDiscosD(new String[100]);	
 						TiendaComp.getInstance().setmProcesadores(new String[100]);
@@ -466,18 +466,18 @@ public class MenuVenta extends JDialog {
 						TiendaComp.getInstance().setTMadres(new String[100]);	
 						//System.out.println(factura.getMisComponentes());
 						//System.out.println(TiendaComp.getInstance().getMisComponentes());
-					//	JOptionPane.showMessageDialog(null, "Compra Satisfactoria!", "Informacion", JOptionPane.INFORMATION_MESSAGE);
-					//	dispose();
-					
-						
+						//	JOptionPane.showMessageDialog(null, "Compra Satisfactoria!", "Informacion", JOptionPane.INFORMATION_MESSAGE);
+						//	dispose();
+
+
 					}
 				});
-				
+
 				JButton btnCombos = new JButton("Ver combos");
 				btnCombos.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
 						VentaCombo list = new VentaCombo(factura);
-				//		TiendaComp.getInstance().InsertarFact(factura);
+						//		TiendaComp.getInstance().InsertarFact(factura);
 						list.setModal(true);
 						//TiendaComp.getInstance().InsertarFact(factura);
 						list.setVisible(true);
@@ -493,18 +493,9 @@ public class MenuVenta extends JDialog {
 				JButton cancelButton = new JButton("Cancelar");
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						//TiendaComp.getInstance().InsertarFact(factura);
-						if(factura.getcVendidos()!=null && TiendaComp.getInstance().Carrito!=null) {
-							factura.setMisComponentes(TiendaComp.getInstance().AgregarCompFact(TiendaComp.getInstance().Carrito));
-							//TiendaComp.getInstance().EliminarFact(factura);
-							//TiendaComp.getInstance().InsertarFact(factura);
-							factura.setPersona(TiendaComp.getInstance().PersonaLogg());
-							//TiendaComp.getInstance().EliminarFact(factura);
-							//TiendaComp.getInstance().InsertarFact(factura);
-							JOptionPane.showMessageDialog(null, "Compra Satisfactoria!", "Informacion", JOptionPane.INFORMATION_MESSAGE);
-							dispose();
-						}
+					//TiendaComp.getInstance().EliminarFact(factura);
 
+						dispose();
 					}
 				});
 				cancelButton.setActionCommand("Cancel");

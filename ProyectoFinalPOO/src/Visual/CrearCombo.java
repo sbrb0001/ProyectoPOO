@@ -51,7 +51,7 @@ public class CrearCombo extends JDialog {
 	 */
 	public CrearCombo() {
 		setTitle("Creación de combo");
-		setTitle("Menú de Ventas");
+		
 	//	TiendaComp.getInstance().GenerarComponentes();
 		TiendaComp.getInstance().GenerarPersona();
 		setBackground(new Color(173, 216, 230));

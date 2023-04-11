@@ -21,6 +21,7 @@ import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
@@ -112,6 +113,20 @@ public class ListadoComponente extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton btnNewButton_1 = new JButton("Eliminar");
+				btnNewButton_1.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+
+						if (btnNewButton_1.getSelectedIcon() != null) {
+							int option = JOptionPane.showConfirmDialog(null, "Está seguro que desea eliminar este componente " , "Eliminar Componente", JOptionPane.OK_CANCEL_OPTION);
+							if (option == JOptionPane.OK_OPTION) {
+								
+								model.removeRow(table.getSelectedRow());
+							}
+						} else {
+							JOptionPane.showMessageDialog(null, "Seleccione un queso para eliminar");
+						}
+					}
+				});
 				
 				if (TiendaComp.getEmpleadoLogeado()!=null) {
 					if(TiendaComp.getEmpleadoLogeado().getCargo().equalsIgnoreCase("Administrador")) {
@@ -128,21 +143,7 @@ public class ListadoComponente extends JDialog {
 				buttonPane.add(btnNewButton_1);
 			}
 			{
-				JButton btnNewButton = new JButton("Modificar");
-				if (TiendaComp.getEmpleadoLogeado()!=null) {
-					if(TiendaComp.getEmpleadoLogeado().getCargo().equalsIgnoreCase("Administrador")) {
-						btnNewButton.setVisible(true);
-					}else {
-						btnNewButton.setVisible(false);	
-					}
-				}
-				if (TiendaComp.getClienteLogeado()!=null) {
-					
-					btnNewButton.setVisible(false);	
-					
-				}
-				
-				buttonPane.add(btnNewButton);
+			
 			}
 			{
 				JButton cancelButton = new JButton("Salir");

@@ -34,7 +34,7 @@ public class ListaFacturas extends JDialog {
 	private DefaultTableModel model;
 	private Object rows[];
 	private JTextField textField;
-	
+
 	/**
 	 * Launch the application.
 	 */
@@ -52,6 +52,7 @@ public class ListaFacturas extends JDialog {
 	 * Create the dialog.
 	 */
 	public ListaFacturas() {
+		setBackground(new Color(135, 206, 235));
 		setTitle("Listado de Facturas");
 		setBounds(100, 100, 554, 379);
 		setSize(800, 400);
@@ -61,6 +62,7 @@ public class ListaFacturas extends JDialog {
 		contentPanel.setLayout(null);
 		{
 			JPanel panel = new JPanel();
+			panel.setBackground(new Color(240, 248, 255));
 			panel.setBounds(0, 0, 892, 310);
 			contentPanel.add(panel);
 			panel.setLayout(null);
@@ -115,7 +117,7 @@ public class ListaFacturas extends JDialog {
 							buttonPane.setLayout(null);
 							buttonPane.add(btnNewButton);
 						}
-						
+
 						JButton btnSalir = new JButton("Salir");
 						btnSalir.setBounds(689, 7, 68, 23);
 						buttonPane.add(btnSalir);
@@ -125,17 +127,17 @@ public class ListaFacturas extends JDialog {
 							}
 						});
 						btnSalir.setEnabled(true);
-						
+
 						JLabel lblNewLabel = new JLabel("Codigo de factura a revisar:");
 						lblNewLabel.setBounds(97, 11, 203, 14);
 						buttonPane.add(lblNewLabel);
-						
+
 						textField = new JTextField();
 						textField.setBounds(275, 8, 86, 20);
 						buttonPane.add(textField);
 						textField.setColumns(10);
 					}
-					
+
 					ListaFactura();
 				}
 			}
@@ -146,45 +148,52 @@ public class ListaFacturas extends JDialog {
 		rows = new Object[model.getColumnCount()];
 		int ind=0;
 		for (Factura factura : TiendaComp.getInstance().getMisFacturas()) {
-			rows[0] = factura.getCodigo();
-			rows[1] = factura.getPersona().getNombre();
-			
-			int cant1=0, cant2=0, cant3=0, cant4=0;
-			table.getSelectedRowCount();
-			for(Componente componente : factura.getMisComponentes()) {
-				
-				if(componente instanceof MicroProcesador) {
-					cant1++;
+			if(factura!=null) {
+				rows[0] = factura.getCodigo();
+				rows[1] = factura.getPersona().getNombre();
+
+				int cant1=0, cant2=0, cant3=0, cant4=0;
+				table.getSelectedRowCount();
+				for(Componente componente : factura.getMisComponentes()) {
+
+					if(componente instanceof MicroProcesador) {
+						cant1++;
+					}
+					else if(componente instanceof Ram) {
+						cant2++;
+					}
+					else if (componente instanceof TMadre){
+						cant3++;
+					}
+					else if (componente instanceof DiscoDuro){
+						cant4++;
+					}
 				}
-				else if(componente instanceof Ram) {
-					cant2++;
-				}
-				else if (componente instanceof TMadre){
-					cant3++;
-				}
-				else if (componente instanceof DiscoDuro){
-					cant4++;
-				}
-			}
-			if(factura.getcVendidos()!=null) {
-				
-				for(Combo combo : factura.getcVendidos()) {
-					//if(combo !=null) {
+
+				if(factura.getcVendidos()!=null) {
+
+					for(Combo combo : factura.getcVendidos()) {
+						//if(combo !=null) {
 						//comb[ind]= combo.getNombre();
 						ind++;
-					//}
-					
-				}
-			}
-			rows[2] = cant4;
-			rows[3] = cant2;
-			rows[4] = cant1;
-			rows[5] = cant3;
-			rows[6] = ind;
-			ind=0;
-			
+						//}
 
-			model.addRow(rows);
+					}
+					rows[2] = cant4;
+					rows[3] = cant2;
+					rows[4] = cant1;
+					rows[5] = cant3;
+					rows[6] = ind;
+					ind=0;
+
+
+					model.addRow(rows);
+				}
+			
+			}
+
 		}
 	}
+
+
 }
