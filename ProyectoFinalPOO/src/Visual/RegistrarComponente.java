@@ -385,6 +385,8 @@ public class RegistrarComponente extends JDialog {
 								modeloMadretxt.setText("");
 								sockettxt.setText("");
 								ramTxt.setText("");
+								modeloo = new DefaultListModel<>();
+								list.setModel(modeloo);
 
 							}
 							if(componenteCbx.getSelectedIndex()==2) {

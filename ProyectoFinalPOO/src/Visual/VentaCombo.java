@@ -32,6 +32,7 @@ public class VentaCombo extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private String [] ListaCombo = new String[100];
+	ArrayList<Combo> comboFact = new ArrayList<Combo>();
 	/**
 	 * Launch the application.
 	 */
@@ -108,8 +109,8 @@ public class VentaCombo extends JDialog {
 					
 				}
 			});
-			factura.setCodigo(TiendaComp.getInstance().CrearCodigoFact());
-			TiendaComp.getInstance().InsertarFact(factura);
+			//factura.setCodigo(TiendaComp.getInstance().CrearCodigoFact());
+			
 			//TiendaComp.getInstance().InsertarFact(factura);
 			buttonPane.add(btnNewButton);
 			{
@@ -126,8 +127,8 @@ public class VentaCombo extends JDialog {
 						else {
 							factura.setcVendidos(ComboFactura(n));
 						//	factura.setcVendidos(ComboFactura(n));
-							factura.setCodigo(TiendaComp.getInstance().CrearCodigoFact());
-							TiendaComp.getInstance().InsertarFact(factura);
+					//		factura.setCodigo(TiendaComp.getInstance().CrearCodigoFact());
+					//		TiendaComp.getInstance().InsertarFact(factura);
 							factura.setPersona(TiendaComp.getInstance().PersonaLogg());
 							factura.setMisComponentes(null);
 						}
@@ -174,7 +175,7 @@ public class VentaCombo extends JDialog {
 	
 	public ArrayList<Combo> ComboFactura(String string) {
 		
-		ArrayList<Combo> comboFact = new ArrayList<Combo>();
+		//ArrayList<Combo> comboFact = new ArrayList<Combo>();
 		for(Combo combo : TiendaComp.getInstance().getcVendidos()) {
 			if(string.contains(combo.getNombre())) {
 				comboFact.add(combo);

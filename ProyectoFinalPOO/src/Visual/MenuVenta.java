@@ -40,7 +40,7 @@ public class MenuVenta extends JDialog {
 	private final JPanel contentPanel = new JPanel();
 	private Dimension dim; 
 	private JTextField textMonto;
-
+	private Factura factura;
 	/**
 	 * Launch the application.
 	 */
@@ -59,7 +59,8 @@ public class MenuVenta extends JDialog {
 	 */
 	public MenuVenta() {
 	//	factura = null;
-		Factura factura = new Factura (null, null, null, null);
+		factura = new Factura ((TiendaComp.getInstance().CrearCodigoFact()), null, null, null);
+		TiendaComp.getInstance().InsertarFact(factura);
 		setTitle("Menú de Ventas");
 	//	TiendaComp.getInstance().GenerarComponentes();
 		TiendaComp.getInstance().GenerarPersona();
@@ -441,11 +442,11 @@ public class MenuVenta extends JDialog {
 							dispose();
 						}
 						else if (factura.getcVendidos()==null) {
-							factura.setCodigo(TiendaComp.getInstance().CrearCodigoFact());
+						//	factura.setCodigo(TiendaComp.getInstance().CrearCodigoFact());
 							factura.setPersona(TiendaComp.getInstance().PersonaLogg());
 							factura.setMisComponentes(TiendaComp.getInstance().AgregarCompFact(TiendaComp.getInstance().Carrito));
 						//	factura.setcVendidos(null);
-							TiendaComp.getInstance().InsertarFact(factura);
+						//	TiendaComp.getInstance().InsertarFact(factura);
 							JOptionPane.showMessageDialog(null, "Compra Satisfactoria!", "Informacion", JOptionPane.INFORMATION_MESSAGE);
 							dispose();
 						}
